@@ -158,6 +158,7 @@ PACKAGECONFIG ??= " \
 PACKAGECONFIG[gtk] = "--enable-gtk , --disable-gtk, gtk+ cairo"
 PACKAGECONFIG[gtk3] = "--enable-gtk3 , --disable-gtk3, gtk+3 cairo"
 PACKAGECONFIG[avahi] = "--enable-avahi, --disable-avahi, avahi"
+PACKAGECONFIG[odk] = "--enable-odk, --disable-odk"
 
 PACKAGECONFIG[mariadb] = "--enable-ext-mariadb-connector --enable-bundle-mariadb --with-system-mariadb, --disable-ext-mariadb-connector --disable-bundle-mariadb, mariadb"
 PACKAGECONFIG[postgresql] = "--enable-postgresql-sdbc --with-system-postgresql, --disable-postgresql-sdbc, postgresql"
@@ -204,11 +205,11 @@ FILES_${PN} += " \
     \
 "
 
-PACKAGE_BEFORE_PN += "${PN}-sdk"
-FILES_${PN}-sdk = " \
+PACKAGE_BEFORE_PN += "${PN}-odk"
+FILES_${PN}-odk = " \
     ${libdir}/libreoffice/sdk \
 "
-INSANE_SKIP_${PN}-sdk += "dev-so staticdev"
+INSANE_SKIP_${PN}-odk += "dev-so staticdev"
 
 FILES_${PN}-dbg += " \
     ${libdir}/libreoffice/*/.debug \

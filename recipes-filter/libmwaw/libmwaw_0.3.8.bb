@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "a8364bf2e4ece2860ab96d6bee75f1d7"
-SRC_URI[sha256sum] = "fb3fcac71eefe4d80ea76c08d259109bb020836cbd9f8d73f06daed1801a637c"
+SRC_URI[md5sum] = "72ad446d76b157e30c1baf39bb288b99"
+SRC_URI[sha256sum] = "a59c5ffcbca0040d93a5b3cb00faf12659cf8b525f076081d1e7585d91d08eb5"
 
 inherit autotools pkgconfig
 

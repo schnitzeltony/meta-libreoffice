@@ -1,0 +1,58 @@
+From f443422e9f039b809bd4fcde21704b9d6503edfa Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 31 Jul 2016 12:57:24 +0200
+Subject: [PATCH] make nitpickickng gcc6 happy
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upsatream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/lib/FB2Parser.cpp | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/lib/FB2Parser.cpp b/src/lib/FB2Parser.cpp
+index 6442c70..1450087 100644
+--- a/src/lib/FB2Parser.cpp
++++ b/src/lib/FB2Parser.cpp
+@@ -103,7 +103,7 @@ private:
+   bool m_firstBody;
+ };
+ 
+-class StylesheetContext : public FB2NodeContextBase
++/*class StylesheetContext : public FB2NodeContextBase
+ {
+ public:
+   explicit StylesheetContext(FB2ParserContext *parentContext);
+@@ -112,7 +112,7 @@ private:
+   virtual FB2XMLParserContext *element(const FB2TokenData &name, const FB2TokenData &ns);
+   virtual void endOfElement();
+   virtual void attribute(const FB2TokenData &name, const FB2TokenData *ns, const char *value);
+-};
++};*/
+ 
+ }
+ 
+@@ -216,7 +216,7 @@ void FictionBookGathererContext::attribute(const FB2TokenData &, const FB2TokenD
+ {
+ }
+ 
+-StylesheetContext::StylesheetContext(FB2ParserContext *const parentContext)
++/*StylesheetContext::StylesheetContext(FB2ParserContext *const parentContext)
+   : FB2NodeContextBase(parentContext)
+ {
+ }
+@@ -253,7 +253,7 @@ void StylesheetContext::attribute(const FB2TokenData &name, const FB2TokenData *
+       break;
+     }
+   }
+-}
++}*/
+ 
+ DocumentContext::DocumentContext(FB2ContentMap &notes, FB2ContentMap &bitmaps, librevenge::RVNGTextInterface *const document)
+   : FB2ParserContext(0)
+-- 
+2.5.5
+

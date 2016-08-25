@@ -11,6 +11,8 @@ non-int/long/float/double argument case. So promote earlier to int so the
 abs<int> is called
 
 Change-Id: I882a27c5ec349f894c1c9f4857687360a46b55ae
+
+Upstream-Status: Backport
 ---
  sax/source/tools/converter.cxx | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

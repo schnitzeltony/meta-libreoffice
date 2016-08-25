@@ -25,4 +25,9 @@ EXTRA_OECONF += "--disable-introspection"
 # needed for m4 macros.
 DEPENDS += "gobject-introspection"
 
+do_configure_prepend() {
+    # align to native libtool
+    sed -i 's:libtool :${HOST_SYS}-libtool :g' ${S}/configure.ac
+}
+
 BBCLASSEXTEND = "native"

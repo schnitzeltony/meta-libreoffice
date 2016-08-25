@@ -166,7 +166,7 @@ PACKAGECONFIG[postgresql] = "--enable-postgresql-sdbc --with-system-postgresql, 
 do_configure() {
     olddir=`pwd`
     cd ${S}
-    aclocal --system-acdir=${B}/aclocal-copy/ -I ${S}/m4
+    aclocal --system-acdir=${WORKDIR}/aclocal-copy/ -I ${S}/m4
     gnu-configize
     autoconf
     cd $olddir

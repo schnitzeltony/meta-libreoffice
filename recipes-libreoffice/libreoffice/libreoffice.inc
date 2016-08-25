@@ -10,6 +10,7 @@ require libreoffice-version.inc
 
 SRC_URI += " \
     file://0001-update-ax_boost-scripts-to-fix-configure-with-system.patch \
+    file://0002-fix-gcc-build-error.patch \
 "
 
 inherit autotools-brokensep pkgconfig distutils-base perlnative

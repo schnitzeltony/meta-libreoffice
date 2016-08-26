@@ -26,8 +26,10 @@ EXTRA_OECONF += "--disable-introspection"
 DEPENDS += "gobject-introspection"
 
 do_configure_prepend() {
-    # align to native libtool
-    sed -i 's:libtool :${HOST_SYS}-libtool :g' ${S}/configure.ac
+    if ! grep -q ${HOST_SYS}-libtool ${S}/configure.ac; then
+        # align to native libtool
+        sed -i 's:libtool :${HOST_SYS}-libtool :g' ${S}/configure.ac
+    fi
 }
 
 BBCLASSEXTEND = "native"

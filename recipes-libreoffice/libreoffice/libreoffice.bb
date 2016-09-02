@@ -258,7 +258,7 @@ python lo_do_split_locales() {
     # en-US is fallback so it should be implemented everywhere (= folder created)
     langfallback = 'en-US'
     findCMD = 'find %s -name "*%s*"' % (dvar, langfallback)
-    fallbacksearchresult = subprocess.Popen(findCMD, stdout=subprocess.PIPE, shell=True).communicate()[0]
+    fallbacksearchresult = subprocess.Popen(findCMD, stdout=subprocess.PIPE, shell=True, universal_newlines=True).communicate()[0]
     # uncomment to see if we need more entries in LO_LANGUAGE_FILES
     # bb.note("fallbacksearchresult = %s" % fallbacksearchresult.replace(dvar, ''))
 

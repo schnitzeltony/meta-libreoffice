@@ -69,6 +69,7 @@ DEPENDS += " \
     mythes \
     hyphen \
     graphite2 \
+    liblangtag \
 "
 
 # necessary to let the call for python-config succeed
@@ -147,6 +148,7 @@ EXTRA_OECONF += " \
     --with-system-mythes \
     --with-system-altlinuxhyph \
     --with-system-graphite \
+    --with-system-liblangtag \
 "
 
 PACKAGECONFIG ??= " \

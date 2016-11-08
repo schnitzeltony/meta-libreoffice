@@ -196,7 +196,7 @@ do_install() {
 
     # unoconv
     install -d ${D}${bindir}
-    install -m 0755 ${WORKDIR}/git/unoconv ${D}/${bindir}
+    install -m 0755 ${WORKDIR}/git/unoconv/unoconv ${D}/${bindir}
 }
 
 

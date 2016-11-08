@@ -191,6 +191,10 @@ do_configure() {
 
 do_install() {
     make DESTDIR=${D} distro-pack-install
+
+    # unoconv
+    install -d ${D}${bindir}
+    install -m 0755 ${WORKDIR}/git/unoconv ${D}/${bindir}
 }
 
 

@@ -121,6 +121,7 @@ do_compile() {
     BUILDDIR=${B} oe_runmake Library_configmgr
     BUILDDIR=${B} oe_runmake Library_fwk
     BUILDDIR=${B} oe_runmake Library_i18npool
+    BUILDDIR=${B} oe_runmake Library_pyuno
 
     # BUILDDIR=${B} oe_runmake Module_external
 }
@@ -171,4 +172,8 @@ do_install() {
     # gengal script and binary to expected location
     install ${S}/svx/source/gengal/gengal.sh ${D}/${bindir}/gengal
     mv ${D}/${libdir}/gengal.bin ${D}/${bindir}
+
+    # unoconv
+    install -d ${D}${bindir}
+    install -m 0755 ${WORKDIR}/git/unoconv ${D}/${bindir}
 }

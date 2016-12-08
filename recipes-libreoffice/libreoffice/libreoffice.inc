@@ -12,8 +12,7 @@ SRC_URI += " \
     git://github.com/dagwieers/unoconv.git;destsuffix=git/unoconv;name=unoconv \
     file://0001-update-ax_boost-scripts-to-fix-configure-with-system.patch \
     file://0002-fix-gcc-build-error.patch \
-    file://0003-Werror-shift-negative-value-GCC-6.patch \
-    file://0004-upgrade-to-ICU-58.patch \
+    file://0003-upgrade-to-ICU-58.patch \
 "
 SRCREV_unoconv = "260b815bf2c57118df439f381974f3f0987222a1"
 

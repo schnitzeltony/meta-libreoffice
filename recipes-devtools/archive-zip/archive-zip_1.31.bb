@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "ede64f6c8ecad7360fe5d8b20379f8a09afe7e7ba5f39fa10e933e7985
 
 inherit cpan
 
-DEPENDS = "zlib"
+DEPENDS += "zlib"
 
 S = "${WORKDIR}/Archive-Zip-${PV}_${PATCHREV}"
 

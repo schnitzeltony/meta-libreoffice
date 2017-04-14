@@ -18,7 +18,14 @@ SRCREV_unoconv = "260b815bf2c57118df439f381974f3f0987222a1"
 
 inherit autotools-brokensep pkgconfig distutils-base perlnative
 
-DEPENDS = "python3-lxml-native ccache-native archive-zip-native gperf-native bison-native"
+DEPENDS += " \
+    python3-lxml-native \
+    ccache-native \
+    archive-zip-native \
+    gperf-native \
+    bison-native \
+    zip-native \
+"
 
 EXTRA_OECONF = " \
     --without-doxygen \

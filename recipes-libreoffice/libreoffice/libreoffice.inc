@@ -13,6 +13,7 @@ SRC_URI += " \
     file://0001-update-ax_boost-scripts-to-fix-configure-with-system.patch \
     file://0002-fix-gcc-build-error.patch \
     file://0003-upgrade-to-ICU-58.patch \
+    file://0004-remove-dictmgr.hxx-to-be-compatible-with-later-hunsp.patch \
 "
 SRCREV_unoconv = "260b815bf2c57118df439f381974f3f0987222a1"
 

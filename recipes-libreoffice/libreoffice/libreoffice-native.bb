@@ -33,6 +33,8 @@ DEPENDS += " \
     libvisio-native \
     libexttextcat-native \
     hyphen-native \
+    unzip-native \
+    neon-native \
 "
 
 SRC_URI += " \
@@ -78,6 +80,7 @@ EXTRA_OECONF += " \
     --with-system-libvisio \
     --with-system-libexttextcat \
     --with-system-altlinuxhyph \
+    --with-system-neon \
     \
     --without-boost-date-time \
     --without-boost-iostreams \

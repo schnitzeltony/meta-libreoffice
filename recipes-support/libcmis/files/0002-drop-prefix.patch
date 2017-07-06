@@ -1,0 +1,250 @@
+From 8b401fdea3f621101876f31f21aa98ffd60f5e91 Mon Sep 17 00:00:00 2001
+From: David Tardon <dtardon@redhat.com>
+Date: Tue, 16 May 2017 10:02:19 +0200
+Subject: [PATCH 1/3] drop :: prefix
+
+---
+ src/cmis-client.cxx             | 2 +-
+ src/libcmis/atom-object.cxx     | 2 +-
+ src/libcmis/document.hxx        | 2 +-
+ src/libcmis/folder.hxx          | 8 ++++----
+ src/libcmis/gdrive-folder.cxx   | 2 +-
+ src/libcmis/json-utils.cxx      | 2 +-
+ src/libcmis/oauth2-data.hxx     | 2 +-
+ src/libcmis/object-type.hxx     | 2 +-
+ src/libcmis/object.hxx          | 2 +-
+ src/libcmis/property-type.hxx   | 2 +-
+ src/libcmis/property.hxx        | 2 +-
+ src/libcmis/rendition.hxx       | 2 +-
+ src/libcmis/repository.hxx      | 2 +-
+ src/libcmis/session-factory.hxx | 4 ++--
+ src/libcmis/xml-utils.cxx       | 2 +-
+ 15 files changed, 19 insertions(+), 19 deletions(-)
+
+diff --git a/src/cmis-client.cxx b/src/cmis-client.cxx
+index 73c1b8e..d5c01e4 100644
+--- a/src/cmis-client.cxx
++++ b/src/cmis-client.cxx
+@@ -40,7 +40,7 @@
+ #include <libcmis/libcmis.hxx>
+ 
+ using namespace std;
+-using namespace ::boost::program_options;
++using namespace boost::program_options;
+ using libcmis::PropertyPtrMap;
+ 
+ namespace
+diff --git a/src/libcmis/atom-object.cxx b/src/libcmis/atom-object.cxx
+index 1eb33fa..01454a4 100644
+--- a/src/libcmis/atom-object.cxx
++++ b/src/libcmis/atom-object.cxx
+@@ -59,7 +59,7 @@ namespace
+                 // Some implementations (xcmis) put extra spaces into the type attribute
+                 // (e.g. "application/atom+xml; type=feed" instead of "application/atom+xml;type=feed")
+                 string linkType = link.getType( );
+-                linkType.erase( remove_if( linkType.begin(), linkType.end(), ::isspace ), linkType.end() );
++                linkType.erase( remove_if( linkType.begin(), linkType.end(), isspace ), linkType.end() );
+ 
+                 // Some implementation (SharePoint) are omitting the type attribute
+                 bool matchesType = m_type.empty( ) || linkType.empty() || ( linkType == m_type );
+diff --git a/src/libcmis/document.hxx b/src/libcmis/document.hxx
+index 0473012..a6736d7 100644
+--- a/src/libcmis/document.hxx
++++ b/src/libcmis/document.hxx
+@@ -140,7 +140,7 @@ namespace libcmis
+ 
+             virtual std::string toString( );
+     };
+-    typedef ::boost::shared_ptr< Document > DocumentPtr;
++    typedef boost::shared_ptr< Document > DocumentPtr;
+ }
+ 
+ #endif
+diff --git a/src/libcmis/folder.hxx b/src/libcmis/folder.hxx
+index e001541..b9d7c57 100644
+--- a/src/libcmis/folder.hxx
++++ b/src/libcmis/folder.hxx
+@@ -59,16 +59,16 @@ namespace libcmis
+ 
+             virtual std::vector< std::string > getPaths( );
+ 
+-            virtual ::boost::shared_ptr< Folder > getFolderParent( ) throw ( Exception );
++            virtual boost::shared_ptr< Folder > getFolderParent( ) throw ( Exception );
+             virtual std::vector< ObjectPtr > getChildren( ) throw ( Exception ) = 0;
+             virtual std::string getParentId( );
+             virtual std::string getPath( );
+ 
+             virtual bool isRootFolder( );
+ 
+-            virtual ::boost::shared_ptr< Folder > createFolder( const std::map< std::string, PropertyPtr >& properties )
++            virtual boost::shared_ptr< Folder > createFolder( const std::map< std::string, PropertyPtr >& properties )
+                 throw ( libcmis::Exception ) = 0;
+-            virtual ::boost::shared_ptr< Document > createDocument( const std::map< std::string, PropertyPtr >& properties,
++            virtual boost::shared_ptr< Document > createDocument( const std::map< std::string, PropertyPtr >& properties,
+                                     boost::shared_ptr< std::ostream > os, std::string contentType, std::string fileName ) throw ( Exception ) = 0;
+ 
+             virtual std::vector< std::string > removeTree( bool allVersion = true, UnfileObjects::Type unfile = UnfileObjects::Delete,
+@@ -76,7 +76,7 @@ namespace libcmis
+         
+             virtual std::string toString( );
+     };
+-    typedef ::boost::shared_ptr< Folder > FolderPtr;
++    typedef boost::shared_ptr< Folder > FolderPtr;
+ 
+ }
+ 
+diff --git a/src/libcmis/gdrive-folder.cxx b/src/libcmis/gdrive-folder.cxx
+index e5e14af..840539e 100644
+--- a/src/libcmis/gdrive-folder.cxx
++++ b/src/libcmis/gdrive-folder.cxx
+@@ -159,7 +159,7 @@ libcmis::DocumentPtr GDriveFolder::createDocument(
+     // parse the document
+     Json jsonRes = Json::parse( res );
+ 
+-    ::boost::shared_ptr< GDriveDocument >
++    boost::shared_ptr< GDriveDocument >
+       gDocument( new GDriveDocument( getSession( ), jsonRes ) );
+ 
+     // Upload stream
+diff --git a/src/libcmis/json-utils.cxx b/src/libcmis/json-utils.cxx
+index b4e037d..de78574 100644
+--- a/src/libcmis/json-utils.cxx
++++ b/src/libcmis/json-utils.cxx
+@@ -188,7 +188,7 @@ Json Json::parse( const string& str ) throw ( libcmis:: Exception )
+     {
+         try 
+         {
+-            ::property_tree::json_parser::read_json( ss, pTree );
++            property_tree::json_parser::read_json( ss, pTree );
+         }
+         catch ( boost::exception const& )
+         {
+diff --git a/src/libcmis/oauth2-data.hxx b/src/libcmis/oauth2-data.hxx
+index 000f939..dc8fb77 100644
+--- a/src/libcmis/oauth2-data.hxx
++++ b/src/libcmis/oauth2-data.hxx
+@@ -69,7 +69,7 @@ namespace libcmis
+             const std::string& getScope() { return m_scope; }
+             const std::string& getRedirectUri() { return m_redirectUri; }
+     };
+-    typedef ::boost::shared_ptr< OAuth2Data > OAuth2DataPtr;
++    typedef boost::shared_ptr< OAuth2Data > OAuth2DataPtr;
+ }
+ 
+ #endif //_LIBCMIS_OAUTH2_DATA_HXX_
+diff --git a/src/libcmis/object-type.hxx b/src/libcmis/object-type.hxx
+index 629663c..bfebc59 100644
+--- a/src/libcmis/object-type.hxx
++++ b/src/libcmis/object-type.hxx
+@@ -137,7 +137,7 @@ namespace libcmis
+             virtual std::string toString( );
+     };
+ 
+-    typedef ::boost::shared_ptr< ObjectType > ObjectTypePtr;
++    typedef boost::shared_ptr< ObjectType > ObjectTypePtr;
+ }
+ 
+ #endif
+diff --git a/src/libcmis/object.hxx b/src/libcmis/object.hxx
+index d7d3603..932bc60 100644
+--- a/src/libcmis/object.hxx
++++ b/src/libcmis/object.hxx
+@@ -214,7 +214,7 @@ namespace libcmis
+             void toXml( xmlTextWriterPtr writer );
+     };
+ 
+-    typedef ::boost::shared_ptr< Object > ObjectPtr;
++    typedef boost::shared_ptr< Object > ObjectPtr;
+ }
+ 
+ #endif
+diff --git a/src/libcmis/property-type.hxx b/src/libcmis/property-type.hxx
+index 56be223..0fb490e 100644
+--- a/src/libcmis/property-type.hxx
++++ b/src/libcmis/property-type.hxx
+@@ -119,7 +119,7 @@ namespace libcmis
+ 
+             void update( std::vector< ObjectTypePtr > typesDefs );
+     };
+-    typedef ::boost::shared_ptr< PropertyType > PropertyTypePtr;
++    typedef boost::shared_ptr< PropertyType > PropertyTypePtr;
+ }
+ 
+ #endif
+diff --git a/src/libcmis/property.hxx b/src/libcmis/property.hxx
+index aa65605..567cefb 100644
+--- a/src/libcmis/property.hxx
++++ b/src/libcmis/property.hxx
+@@ -79,7 +79,7 @@ namespace libcmis
+ 
+             std::string toString( );
+     };
+-    typedef ::boost::shared_ptr< Property > PropertyPtr;
++    typedef boost::shared_ptr< Property > PropertyPtr;
+     typedef std::map< std::string, libcmis::PropertyPtr > PropertyPtrMap;
+ 
+     PropertyPtr parseProperty( xmlNodePtr node, boost::shared_ptr< ObjectType > objectType );
+diff --git a/src/libcmis/rendition.hxx b/src/libcmis/rendition.hxx
+index 2e38651..f8c23b4 100644
+--- a/src/libcmis/rendition.hxx
++++ b/src/libcmis/rendition.hxx
+@@ -81,7 +81,7 @@ namespace libcmis
+             std::string toString( );
+     };
+ 
+-    typedef ::boost::shared_ptr< Rendition > RenditionPtr;
++    typedef boost::shared_ptr< Rendition > RenditionPtr;
+ }
+ 
+ #endif
+diff --git a/src/libcmis/repository.hxx b/src/libcmis/repository.hxx
+index a4435d8..320cbb4 100644
+--- a/src/libcmis/repository.hxx
++++ b/src/libcmis/repository.hxx
+@@ -111,7 +111,7 @@ namespace libcmis
+             static std::map< Capability, std::string > parseCapabilities( xmlNodePtr node );
+     };
+     
+-    typedef ::boost::shared_ptr< Repository > RepositoryPtr;
++    typedef boost::shared_ptr< Repository > RepositoryPtr;
+ }
+ 
+ #endif
+diff --git a/src/libcmis/session-factory.hxx b/src/libcmis/session-factory.hxx
+index 9349b1c..8cc1f26 100644
+--- a/src/libcmis/session-factory.hxx
++++ b/src/libcmis/session-factory.hxx
+@@ -57,7 +57,7 @@ namespace libcmis
+               */
+             virtual bool authenticationQuery( std::string& username, std::string& password ) = 0;
+     };
+-    typedef ::boost::shared_ptr< AuthProvider > AuthProviderPtr;
++    typedef boost::shared_ptr< AuthProvider > AuthProviderPtr;
+   
+     /** Handler class used to request user input when an invalid SSL certificate is encountered.
+      */ 
+@@ -77,7 +77,7 @@ namespace libcmis
+                */
+              virtual bool validateCertificate( std::vector< std::string > certificatesChain ) = 0;
+     };
+-    typedef ::boost::shared_ptr< CertValidationHandler > CertValidationHandlerPtr;
++    typedef boost::shared_ptr< CertValidationHandler > CertValidationHandlerPtr;
+ 
+     class SessionFactory
+     {
+diff --git a/src/libcmis/xml-utils.cxx b/src/libcmis/xml-utils.cxx
+index 7070067..599edf2 100644
+--- a/src/libcmis/xml-utils.cxx
++++ b/src/libcmis/xml-utils.cxx
+@@ -551,7 +551,7 @@ namespace libcmis
+         string lower( sText );
+         for ( size_t i = 0; i < sText.size(); ++i )
+         {
+-            lower[i] = ::tolower( sText[i] );
++            lower[i] = tolower( sText[i] );
+         }
+         return lower;
+     }
+-- 
+2.9.4
+

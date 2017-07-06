@@ -1,0 +1,127 @@
+From ca381ff4586c9fc1190d285137ba8f67b102d600 Mon Sep 17 00:00:00 2001
+From: David Tardon <dtardon@redhat.com>
+Date: Tue, 16 May 2017 11:52:43 +0200
+Subject: [PATCH 2/3] do not reinvent the wheel
+
+---
+ configure.ac                        |  1 +
+ src/libcmis/atom-session.cxx        |  3 ++-
+ src/libcmis/property.cxx            |  4 +++-
+ src/libcmis/ws-relatedmultipart.cxx |  2 +-
+ src/libcmis/xml-utils.cxx           | 11 -----------
+ src/libcmis/xml-utils.hxx           |  2 --
+ 6 files changed, 7 insertions(+), 16 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 41b7a62..ae1eddb 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -167,6 +167,7 @@ m4_pattern_allow([^BOOST_])
+ BOOST_REQUIRE([1.36])
+ BOOST_DATE_TIME
+ BOOST_SMART_PTR
++BOOST_STRING_ALGO
+ BOOST_UUID
+ 
+ AS_IF([test "x$enable_client" != "xno"], [
+diff --git a/src/libcmis/atom-session.cxx b/src/libcmis/atom-session.cxx
+index 5772efc..c263f58 100644
+--- a/src/libcmis/atom-session.cxx
++++ b/src/libcmis/atom-session.cxx
+@@ -27,6 +27,7 @@
+  */
+ #include <string>
+ 
++#include <boost/algorithm/string.hpp>
+ #include <boost/shared_ptr.hpp>
+ 
+ #include <libxml/parser.h>
+@@ -127,7 +128,7 @@ void AtomPubSession::parseServiceDocument( const string& buf ) throw ( libcmis::
+                             m_repositoryId = ws->getId( );
+ 
+                         // SharePoint is case insensitive for the id...
+-                        if ( libcmis::tolower( ws->getId( ) ) == libcmis::tolower( m_repositoryId ) )
++                        if ( boost::to_lower_copy( ws->getId( ) ) == boost::to_lower_copy( m_repositoryId ) )
+                             m_repository = ws;
+ 
+                         m_repositories.push_back( ws );
+diff --git a/src/libcmis/property.cxx b/src/libcmis/property.cxx
+index e0249a5..b303fe5 100644
+--- a/src/libcmis/property.cxx
++++ b/src/libcmis/property.cxx
+@@ -26,6 +26,8 @@
+  * instead of those above.
+  */
+ 
++#include <boost/algorithm/string.hpp>
++
+ #include "object-type.hxx"
+ #include "property.hxx"
+ #include "xml-utils.hxx"
+@@ -191,7 +193,7 @@ namespace libcmis
+                     size_t pos = xmlType.find( propStr );
+                     if ( pos == 0 ) {
+                         xmlType = xmlType.substr( propStr.length( ) );
+-                        xmlType = libcmis::tolower( xmlType );
++                        boost::to_lower( xmlType );
+                     }
+ 
+                     propType.reset( new PropertyType( xmlType, propDefinitionId,
+diff --git a/src/libcmis/ws-relatedmultipart.cxx b/src/libcmis/ws-relatedmultipart.cxx
+index df2471a..3b31634 100644
+--- a/src/libcmis/ws-relatedmultipart.cxx
++++ b/src/libcmis/ws-relatedmultipart.cxx
+@@ -179,7 +179,7 @@ RelatedMultipart::RelatedMultipart( const string& body, const string& contentTyp
+                     size_t colonPos = line.find( ":" );
+                     string headerName = line.substr( 0, colonPos );
+                     string headerValue = line.substr( colonPos + 1 );
+-                    if ( libcmis::tolower( headerName ) == libcmis::tolower( "Content-Id" ) )
++                    if ( boost::to_lower_copy( headerName ) == "content-id" )
+                     {
+                         cid = libcmis::trim( headerValue );
+                         // Remove the '<' '>' around the id if any
+diff --git a/src/libcmis/xml-utils.cxx b/src/libcmis/xml-utils.cxx
+index 599edf2..d20ff47 100644
+--- a/src/libcmis/xml-utils.cxx
++++ b/src/libcmis/xml-utils.cxx
+@@ -26,7 +26,6 @@
+  * instead of those above.
+  */
+ 
+-#include <cctype>
+ #include <errno.h>
+ #include <sstream>
+ #include <stdlib.h>
+@@ -546,16 +545,6 @@ namespace libcmis
+         return out.str();
+     }
+ 
+-    string tolower( string sText )
+-    {
+-        string lower( sText );
+-        for ( size_t i = 0; i < sText.size(); ++i )
+-        {
+-            lower[i] = tolower( sText[i] );
+-        }
+-        return lower;
+-    }
+-
+     int stringstream_write_callback( void * context, const char * s, int len )
+     {
+         stringstream * ss=static_cast< stringstream * >( context );
+diff --git a/src/libcmis/xml-utils.hxx b/src/libcmis/xml-utils.hxx
+index 58e9e8d..3bb21bb 100644
+--- a/src/libcmis/xml-utils.hxx
++++ b/src/libcmis/xml-utils.hxx
+@@ -156,8 +156,6 @@ namespace libcmis
+ 
+     std::string sha1( const std::string& str );
+ 
+-    std::string tolower( std::string sText );
+-
+     int stringstream_write_callback(void * context, const char * s, int len);
+ 
+     std::string escape( std::string str );
+-- 
+2.9.4
+

@@ -10,6 +10,9 @@ LIC_FILES_CHKSUM = " \
 SRC_URI = " \
     https://github.com/tdf/libcmis/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
     file://0001-Avoid-cross-compile-unsafe-paths.patch \
+    file://0002-drop-prefix.patch \
+    file://0003-do-not-reinvent-the-wheel.patch \
+    file://0004-fix-build-error-with-gcc-std-c-98.patch \
 "
 
 SRC_URI[md5sum] = "3270154f0f40d86fce849b161f914101"
@@ -21,6 +24,7 @@ DEPENDS = "curl libxml2 cppunit boost"
 
 EXTRA_OECONF = " \
     --without-man \
+    --disable-werror \
 "
 
 do_configure_prepend() {

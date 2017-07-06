@@ -1,0 +1,600 @@
+From aa17a93b9af37825009490855df9ab4f83c43ec2 Mon Sep 17 00:00:00 2001
+From: osnola <alonso@loria.fr>
+Date: Mon, 3 Jul 2017 12:22:52 +0200
+Subject: [PATCH 2/2] Rename FALLTHROUGH in MWAW_FALLTHROUGH + simplify code...
+
+---
+ src/lib/BeagleWksDBParser.cxx        |  2 +-
+ src/lib/ClarisDrawText.cxx           |  4 ++--
+ src/lib/ClarisWksText.cxx            |  4 ++--
+ src/lib/HanMacWrdKGraph.cxx          |  2 +-
+ src/lib/HanMacWrdKParser.cxx         |  2 +-
+ src/lib/MWAWChart.cxx                |  2 +-
+ src/lib/MWAWGraphicListener.cxx      |  4 ++--
+ src/lib/MWAWGraphicShape.cxx         |  2 +-
+ src/lib/MWAWPageSpan.cxx             |  2 +-
+ src/lib/MWAWPresentationListener.cxx |  4 ++--
+ src/lib/MWAWSpreadsheetListener.cxx  |  8 ++++----
+ src/lib/MWAWTextListener.cxx         | 10 +++++-----
+ src/lib/MacDraft5Parser.cxx          |  2 +-
+ src/lib/MacDrawProParser.cxx         |  4 ++--
+ src/lib/MacDrawProStyleManager.cxx   |  4 ++--
+ src/lib/MarinerWrtGraph.cxx          |  4 ++--
+ src/lib/MarinerWrtText.cxx           |  2 +-
+ src/lib/MoreText.cxx                 |  2 +-
+ src/lib/MsWksDBParser.cxx            |  2 +-
+ src/lib/MsWksGraph.cxx               |  4 ++--
+ src/lib/MsWksSSParser.cxx            |  2 +-
+ src/lib/PowerPoint3Parser.cxx        |  2 +-
+ src/lib/RagTimeSpreadsheet.cxx       |  8 ++++----
+ src/lib/WriterPlsParser.cxx          |  2 +-
+ src/lib/ZWrtText.cxx                 |  2 +-
+ src/lib/libmwaw_internal.cxx         | 10 +++++-----
+ src/lib/libmwaw_internal.hxx         | 17 ++++++++---------
+ 27 files changed, 56 insertions(+), 57 deletions(-)
+
+diff --git a/src/lib/BeagleWksDBParser.cxx b/src/lib/BeagleWksDBParser.cxx
+index efaf283..04f9b31 100644
+--- a/src/lib/BeagleWksDBParser.cxx
++++ b/src/lib/BeagleWksDBParser.cxx
+@@ -1009,7 +1009,7 @@ bool BeagleWksDBParser::readRow()
+         if (fSz>20) break;
+         val=static_cast<int>(input->readULong(2));
+         if (val) f << "g0=" << std::hex << val << std::dec << ",";
+-        FALLTHROUGH;
++        MWAW_FALLTHROUGH;
+       case BeagleWksDBParserInternal::Cell::Memo: // memoId
+       case BeagleWksDBParserInternal::Cell::Picture: // pictId
+       case BeagleWksDBParserInternal::Cell::Number:
+diff --git a/src/lib/ClarisDrawText.cxx b/src/lib/ClarisDrawText.cxx
+index f032414..80f9ee0 100644
+--- a/src/lib/ClarisDrawText.cxx
++++ b/src/lib/ClarisDrawText.cxx
+@@ -520,7 +520,7 @@ shared_ptr<ClarisWksStruct::DSET> ClarisDrawText::readDSETZone(ClarisWksStruct::
+       textZone->m_position = ClarisWksStruct::DSET::P_Main;
+       break;
+     }
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   default:
+     MWAW_DEBUG_MSG(("ClarisDrawText::readDSETZone: find unknown position %d\n", (textZone->m_textType >> 4)));
+     f << "#position="<< (textZone->m_textType >> 4) << ",";
+@@ -1358,7 +1358,7 @@ bool ClarisDrawText::sendText(ClarisDrawTextInternal::DSET const &zone, int subZ
+         }
+         MWAW_DEBUG_MSG(("ClarisDrawText::sendText: Find unexpected char 1\n"));
+         f << "###";
+-        FALLTHROUGH;
++        MWAW_FALLTHROUGH;
+       case 0xb: // page break
+         MWAW_DEBUG_MSG(("ClarisDrawText::sendText: Find unexpected page break\n"));
+         f << "###pb";
+diff --git a/src/lib/ClarisWksText.cxx b/src/lib/ClarisWksText.cxx
+index 41bf87d..8a9e262 100644
+--- a/src/lib/ClarisWksText.cxx
++++ b/src/lib/ClarisWksText.cxx
+@@ -754,7 +754,7 @@ shared_ptr<ClarisWksStruct::DSET> ClarisWksText::readDSETZone(ClarisWksStruct::D
+       textZone->m_position = ClarisWksStruct::DSET::P_Main;
+       break;
+     }
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   default:
+     MWAW_DEBUG_MSG(("ClarisWksText::readDSETZone: find unknown position %d\n", (textZone->m_textType >> 4)));
+     f << "#position="<< (textZone->m_textType >> 4) << ",";
+@@ -1788,7 +1788,7 @@ bool ClarisWksText::sendText(ClarisWksTextInternal::Zone const &zone, MWAWListen
+         }
+         MWAW_DEBUG_MSG(("ClarisWksText::sendText: Find unexpected char 1\n"));
+         f << "###";
+-        FALLTHROUGH;
++        MWAW_FALLTHROUGH;
+       case 0xb: // page break
+         numSectionInPage = 0;
+         if (main)
+diff --git a/src/lib/HanMacWrdKGraph.cxx b/src/lib/HanMacWrdKGraph.cxx
+index fe4a3e2..b9a4c56 100644
+--- a/src/lib/HanMacWrdKGraph.cxx
++++ b/src/lib/HanMacWrdKGraph.cxx
+@@ -1260,7 +1260,7 @@ bool HanMacWrdKGraph::sendFrame(HanMacWrdKGraphInternal::Frame const &frame, MWA
+         return true;
+       }
+     }
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 10:
+     return sendTextBox(static_cast<HanMacWrdKGraphInternal::TextBox const &>(frame), pos);
+   case 6: {
+diff --git a/src/lib/HanMacWrdKParser.cxx b/src/lib/HanMacWrdKParser.cxx
+index ef9bd88..0df5d4f 100644
+--- a/src/lib/HanMacWrdKParser.cxx
++++ b/src/lib/HanMacWrdKParser.cxx
+@@ -507,7 +507,7 @@ bool HanMacWrdKParser::readZone(shared_ptr<HanMacWrdKZone> zone)
+   case 0xc:
+     if (readZonec(zone))
+       return true;
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 0xd:
+     if (m_graphParser->readPicture(zone))
+       return true;
+diff --git a/src/lib/MWAWChart.cxx b/src/lib/MWAWChart.cxx
+index c9b6e6d..67bd706 100644
+--- a/src/lib/MWAWChart.cxx
++++ b/src/lib/MWAWChart.cxx
+@@ -624,7 +624,7 @@ std::ostream &operator<<(std::ostream &o, MWAWChart::TextZone const &zone)
+   switch (zone.m_type) {
+   case MWAWChart::TextZone::T_SubTitle:
+     o << "sub";
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case MWAWChart::TextZone::T_Title:
+     o << "title";
+     if (zone.m_contentType==MWAWChart::TextZone::C_Cell)
+diff --git a/src/lib/MWAWGraphicListener.cxx b/src/lib/MWAWGraphicListener.cxx
+index 6b723e8..50c7857 100644
+--- a/src/lib/MWAWGraphicListener.cxx
++++ b/src/lib/MWAWGraphicListener.cxx
+@@ -1480,7 +1480,7 @@ void MWAWGraphicListener::_handleFrameParameters(librevenge::RVNGPropertyList &l
+     switch (pos.m_yPos) {
+     case MWAWPosition::YFull:
+       list.insert("svg:height", double(h), unit);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case MWAWPosition::YTop:
+       if (origin[1] < 0 || origin[1] > 0) {
+         list.insert("style:vertical-pos", "from-top");
+@@ -1522,7 +1522,7 @@ void MWAWGraphicListener::_handleFrameParameters(librevenge::RVNGPropertyList &l
+     switch (pos.m_xPos) {
+     case MWAWPosition::XFull:
+       list.insert("svg:width", double(w), unit);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case MWAWPosition::XLeft:
+       if (origin[0] < 0 || origin[0] > 0) {
+         list.insert("style:horizontal-pos", "from-left");
+diff --git a/src/lib/MWAWGraphicShape.cxx b/src/lib/MWAWGraphicShape.cxx
+index f1e7418..375899a 100644
+--- a/src/lib/MWAWGraphicShape.cxx
++++ b/src/lib/MWAWGraphicShape.cxx
+@@ -596,7 +596,7 @@ std::vector<MWAWGraphicShape::PathData> MWAWGraphicShape::getPath(bool forTransf
+   switch (m_type) {
+   case Measure:
+     MWAW_DEBUG_MSG(("MWAWGraphicShape::getPath: called on a measure, transform it in line\n"));
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case Line:
+   case Polygon: {
+     size_t n=m_vertices.size();
+diff --git a/src/lib/MWAWPageSpan.cxx b/src/lib/MWAWPageSpan.cxx
+index b1064c4..7302e05 100644
+--- a/src/lib/MWAWPageSpan.cxx
++++ b/src/lib/MWAWPageSpan.cxx
+@@ -226,7 +226,7 @@ void MWAWPageSpan::setHeaderFooter(MWAWHeaderFooter const &hF)
+   switch (hF.m_occurrence) {
+   case MWAWHeaderFooter::NEVER:
+     removeHeaderFooter(type, MWAWHeaderFooter::ALL);
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case MWAWHeaderFooter::ALL:
+     removeHeaderFooter(type, MWAWHeaderFooter::ODD);
+     removeHeaderFooter(type, MWAWHeaderFooter::EVEN);
+diff --git a/src/lib/MWAWPresentationListener.cxx b/src/lib/MWAWPresentationListener.cxx
+index 23542cd..cb0c699 100644
+--- a/src/lib/MWAWPresentationListener.cxx
++++ b/src/lib/MWAWPresentationListener.cxx
+@@ -1489,7 +1489,7 @@ void MWAWPresentationListener::_handleFrameParameters(librevenge::RVNGPropertyLi
+     switch (pos.m_yPos) {
+     case MWAWPosition::YFull:
+       list.insert("svg:height", double(h), unit);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case MWAWPosition::YTop:
+       if (origin[1] < 0 || origin[1] > 0) {
+         list.insert("style:vertical-pos", "from-top");
+@@ -1531,7 +1531,7 @@ void MWAWPresentationListener::_handleFrameParameters(librevenge::RVNGPropertyLi
+     switch (pos.m_xPos) {
+     case MWAWPosition::XFull:
+       list.insert("svg:width", double(w), unit);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case MWAWPosition::XLeft:
+       if (origin[0] < 0 || origin[0] > 0) {
+         list.insert("style:horizontal-pos", "from-left");
+diff --git a/src/lib/MWAWSpreadsheetListener.cxx b/src/lib/MWAWSpreadsheetListener.cxx
+index f454fb8..c441434 100644
+--- a/src/lib/MWAWSpreadsheetListener.cxx
++++ b/src/lib/MWAWSpreadsheetListener.cxx
+@@ -1054,7 +1054,7 @@ void MWAWSpreadsheetListener::insertShape
+   default:
+ #endif
+     MWAW_DEBUG_MSG(("MWAWSpreadsheetListener::insertShape: UNKNOWN position, insert as char position\n"));
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case MWAWPosition::CharBaseLine:
+   case MWAWPosition::Char:
+     if (m_ps->m_isSpanOpened)
+@@ -1171,7 +1171,7 @@ bool MWAWSpreadsheetListener::openFrame(MWAWPosition const &pos, MWAWGraphicStyl
+     break;
+   case MWAWPosition::Unknown:
+     MWAW_DEBUG_MSG(("MWAWSpreadsheetListener::openFrame: UNKNOWN position, insert as char position\n"));
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case MWAWPosition::CharBaseLine:
+   case MWAWPosition::Char:
+     if (m_ps->m_isSpanOpened)
+@@ -1346,7 +1346,7 @@ void MWAWSpreadsheetListener::_handleFrameParameters
+     switch (pos.m_yPos) {
+     case MWAWPosition::YFull:
+       propList.insert("svg:height", double(h), unit);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case MWAWPosition::YTop:
+       if (origin[1] < 0 || origin[1] > 0) {
+         propList.insert("style:vertical-pos", "from-top");
+@@ -1388,7 +1388,7 @@ void MWAWSpreadsheetListener::_handleFrameParameters
+     switch (pos.m_xPos) {
+     case MWAWPosition::XFull:
+       propList.insert("svg:width", double(w), unit);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case MWAWPosition::XLeft:
+       if (origin[0] < 0 || origin[0] > 0) {
+         propList.insert("style:horizontal-pos", "from-left");
+diff --git a/src/lib/MWAWTextListener.cxx b/src/lib/MWAWTextListener.cxx
+index 151f64a..40606e6 100644
+--- a/src/lib/MWAWTextListener.cxx
++++ b/src/lib/MWAWTextListener.cxx
+@@ -1139,7 +1139,7 @@ void MWAWTextListener::insertShape
+   default:
+ #endif
+     MWAW_DEBUG_MSG(("MWAWTextListener::insertShape: UNKNOWN position, insert as char position\n"));
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case MWAWPosition::CharBaseLine:
+   case MWAWPosition::Char:
+     if (m_ps->m_isSpanOpened)
+@@ -1255,7 +1255,7 @@ bool MWAWTextListener::openFrame(MWAWPosition const &pos, MWAWGraphicStyle const
+     break;
+   case MWAWPosition::Unknown:
+     MWAW_DEBUG_MSG(("MWAWTextListener::openFrame: UNKNOWN position, insert as char position\n"));
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case MWAWPosition::CharBaseLine:
+   case MWAWPosition::Char:
+     if (m_ps->m_isSpanOpened)
+@@ -1339,7 +1339,7 @@ bool MWAWTextListener::openGroup(MWAWPosition const &pos)
+   default:
+ #endif
+     MWAW_DEBUG_MSG(("MWAWTextListener::openGroup: UNKNOWN position, insert as char position\n"));
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case MWAWPosition::CharBaseLine:
+   case MWAWPosition::Char:
+     if (m_ps->m_isSpanOpened)
+@@ -1490,7 +1490,7 @@ void MWAWTextListener::_handleFrameParameters
+     switch (pos.m_yPos) {
+     case MWAWPosition::YFull:
+       propList.insert("svg:height", double(h), unit);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case MWAWPosition::YTop:
+       if (origin[1] < 0 || origin[1] > 0) {
+         propList.insert("style:vertical-pos", "from-top");
+@@ -1532,7 +1532,7 @@ void MWAWTextListener::_handleFrameParameters
+     switch (pos.m_xPos) {
+     case MWAWPosition::XFull:
+       propList.insert("svg:width", double(w), unit);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case MWAWPosition::XLeft:
+       if (origin[0] < 0 || origin[0] > 0) {
+         propList.insert("style:horizontal-pos", "from-left");
+diff --git a/src/lib/MacDraft5Parser.cxx b/src/lib/MacDraft5Parser.cxx
+index 6c11d41..e3ea4dd 100644
+--- a/src/lib/MacDraft5Parser.cxx
++++ b/src/lib/MacDraft5Parser.cxx
+@@ -1473,7 +1473,7 @@ bool MacDraft5Parser::readObject(MacDraft5ParserInternal::Layout &layout)
+         shape->m_shape=MWAWGraphicShape::rectangle(MWAWBox2f(listPts[0], listPts[2]), corner);
+         break;
+       }
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 0x3:
+     case 0x4: {
+       rotation=0;
+diff --git a/src/lib/MacDrawProParser.cxx b/src/lib/MacDrawProParser.cxx
+index 91c70fa..cf6e68d 100644
+--- a/src/lib/MacDrawProParser.cxx
++++ b/src/lib/MacDrawProParser.cxx
+@@ -1310,7 +1310,7 @@ int MacDrawProParser::readObject()
+       f << "bitmap,";
+       break;
+     }
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   default:
+     MWAW_DEBUG_MSG(("MacDrawProParser::readObject: find unknown type %d\n", val));
+     f << "###type=" << std::hex << val << std::dec << ",";
+@@ -2230,7 +2230,7 @@ bool MacDrawProParser::readGeometryShapeData(MacDrawProParserInternal::Shape &sh
+         shape.m_shape.m_path.push_back(MWAWGraphicShape::PathData('L', listVertices.back()));
+       break;
+     }
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 9: { // spline
+     if (remain<=2) {
+       MWAW_DEBUG_MSG(("MacDrawProParser::readGeometryShapeData: can not read compute the number of point in spline\n"));
+diff --git a/src/lib/MacDrawProStyleManager.cxx b/src/lib/MacDrawProStyleManager.cxx
+index 9fa242b..f670a57 100644
+--- a/src/lib/MacDrawProStyleManager.cxx
++++ b/src/lib/MacDrawProStyleManager.cxx
+@@ -2442,7 +2442,7 @@ bool MacDrawProStyleManager::readGradientMap(MWAWEntry const &entry, int N, int
+       break;
+     case 1:
+       gradient.m_type = MWAWGraphicStyle::G_Radial;
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 2: {
+       if (type==2) gradient.m_type = MWAWGraphicStyle::G_Rectangular;
+       int dim[4]; // square which defined the center rectangle
+@@ -2554,7 +2554,7 @@ bool MacDrawProStyleManager::readGradientPalette(MWAWEntry const &entry, int fie
+       break;
+     case 1:
+       f << "concentric,";
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 2: {
+       if (type==2) f << "radial,";
+       int dim[4]; // square which defined the center rectangle
+diff --git a/src/lib/MarinerWrtGraph.cxx b/src/lib/MarinerWrtGraph.cxx
+index fc9ecd0..ce26ac7 100644
+--- a/src/lib/MarinerWrtGraph.cxx
++++ b/src/lib/MarinerWrtGraph.cxx
+@@ -130,7 +130,7 @@ struct Token {
+       switch (m_pictBorderType[i]) {
+       case 1: // single[w=0.5]
+         border.m_width = 0.5;
+-        FALLTHROUGH;
++        MWAW_FALLTHROUGH;
+       case 2:
+         border.m_style = MWAWBorder::Simple;
+         break;
+@@ -1024,7 +1024,7 @@ bool MarinerWrtGraph::readTokenBlock0(MarinerWrtStruct const &data, MarinerWrtGr
+   case 0x18:
+     val = input->readLong(2);
+     if (val) f << "f0=" << val << ","; // fieldType?
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 0x19:
+   case 0x1e:
+   case 0x1f:
+diff --git a/src/lib/MarinerWrtText.cxx b/src/lib/MarinerWrtText.cxx
+index 6d2e097..987fed7 100644
+--- a/src/lib/MarinerWrtText.cxx
++++ b/src/lib/MarinerWrtText.cxx
+@@ -235,7 +235,7 @@ MWAWBorder Paragraph::BorderFill::getBorder(int i) const
+     break;
+   case 1: // single[w=0.5]
+     res.m_width = 0.5;
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 2:
+     res.m_style = MWAWBorder::Simple;
+     break;
+diff --git a/src/lib/MoreText.cxx b/src/lib/MoreText.cxx
+index c70fc77..bf61ee0 100644
+--- a/src/lib/MoreText.cxx
++++ b/src/lib/MoreText.cxx
+@@ -2050,7 +2050,7 @@ bool MoreText::readTabs(MWAWEntry const &entry, MoreTextInternal::Paragraph &par
+       break;
+     case 3: // more large space
+       f2 << "dot[large],";
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 2:
+       tab.m_leaderCharacter = '.';
+       break;
+diff --git a/src/lib/MsWksDBParser.cxx b/src/lib/MsWksDBParser.cxx
+index 1e67458..1ff5fd6 100644
+--- a/src/lib/MsWksDBParser.cxx
++++ b/src/lib/MsWksDBParser.cxx
+@@ -1143,7 +1143,7 @@ bool MsWksDBParser::readFormTypes(MsWksDBParserInternal::Form &form)
+         visible = MsWksDBParserInternal::V_HEADER;
+         break;
+       }
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     default:
+       f << "##unkn[visible]=" << hiFlag << ",";
+       break;
+diff --git a/src/lib/MsWksGraph.cxx b/src/lib/MsWksGraph.cxx
+index bb70d52..76b99df 100644
+--- a/src/lib/MsWksGraph.cxx
++++ b/src/lib/MsWksGraph.cxx
+@@ -1227,7 +1227,7 @@ bool MsWksGraph::readPictHeader(MsWksGraphInternal::Zone &pict)
+   switch (lineFlags&3) {
+   case 2:
+     style.m_arrows[0]=MWAWGraphicStyle::Arrow::plain();
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 1:
+     style.m_arrows[1]=MWAWGraphicStyle::Arrow::plain();
+     break;
+@@ -1989,7 +1989,7 @@ bool MsWksGraph::readRB(MWAWInputStreamPtr input, MWAWEntry const &entry, int ki
+   case 2:
+     if (input->readLong(1)!=3) return false;
+     f << "id=" << input->readLong(1) << ",";
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 1: {
+     unsigned long dSz=input->readULong(4);
+     beginRB=input->tell();
+diff --git a/src/lib/MsWksSSParser.cxx b/src/lib/MsWksSSParser.cxx
+index 271a5c7..d9aba6f 100644
+--- a/src/lib/MsWksSSParser.cxx
++++ b/src/lib/MsWksSSParser.cxx
+@@ -933,7 +933,7 @@ bool MsWksSSParser::readCell(int sz, MWAWVec2i const &cellPos, MsWksSSParserInte
+     break;
+   case 3:
+     f << "type" << type << ",";
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 2: //number general
+     format.m_format=MWAWCell::F_NUMBER;
+     content.m_contentType=MWAWCellContent::C_FORMULA;
+diff --git a/src/lib/PowerPoint3Parser.cxx b/src/lib/PowerPoint3Parser.cxx
+index 81b15f2..6bdfe49 100644
+--- a/src/lib/PowerPoint3Parser.cxx
++++ b/src/lib/PowerPoint3Parser.cxx
+@@ -2952,7 +2952,7 @@ bool PowerPoint3Parser::readParagraph(MWAWParagraph &para, PowerPoint3ParserInte
+         }
+         val &= 0xbf;
+       }
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     default:
+       if (val)
+         f << std::hex << val << std::dec << ",";
+diff --git a/src/lib/RagTimeSpreadsheet.cxx b/src/lib/RagTimeSpreadsheet.cxx
+index 2f22f2b..4210358 100644
+--- a/src/lib/RagTimeSpreadsheet.cxx
++++ b/src/lib/RagTimeSpreadsheet.cxx
+@@ -1415,9 +1415,9 @@ bool RagTimeSpreadsheet::readSpreadsheetCellContent(RagTimeSpreadsheetInternal::
+     break;
+   case 0x81:
+     f << "float81,";
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 3:
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 1: {
+     if (type==3) {
+       format.m_format=MWAWCell::F_DATE; // we need the format to choose between date and time
+@@ -1444,7 +1444,7 @@ bool RagTimeSpreadsheet::readSpreadsheetCellContent(RagTimeSpreadsheetInternal::
+   }
+   case 0x24:
+     f << "text2,";
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 4: {
+     format.m_format=MWAWCell::F_TEXT;
+     content.m_textEntry.setBegin(input->tell());
+@@ -1483,7 +1483,7 @@ bool RagTimeSpreadsheet::readSpreadsheetCellContent(RagTimeSpreadsheetInternal::
+   }
+   case 0x51:
+     f << "long51,";
+-    FALLTHROUGH;
++    MWAW_FALLTHROUGH;
+   case 0x11: // or 2 int?
+     if (pos+5>endPos) {
+       ok=false;
+diff --git a/src/lib/WriterPlsParser.cxx b/src/lib/WriterPlsParser.cxx
+index 4568236..4207223 100644
+--- a/src/lib/WriterPlsParser.cxx
++++ b/src/lib/WriterPlsParser.cxx
+@@ -1084,7 +1084,7 @@ bool WriterPlsParser::sendWindow(int zone, MWAWVec2i limits)
+             listener->insertBreak(MWAWTextListener::ColumnBreak);
+           }
+         }
+-        FALLTHROUGH;
++        MWAW_FALLTHROUGH;
+       case 0:
+       case 2:
+         ok = readText(pInfo);
+diff --git a/src/lib/ZWrtText.cxx b/src/lib/ZWrtText.cxx
+index ea26c05..5d910da 100644
+--- a/src/lib/ZWrtText.cxx
++++ b/src/lib/ZWrtText.cxx
+@@ -791,7 +791,7 @@ bool ZWrtText::sendHeaderFooter(bool header)
+           break;
+       }
+       input->seek(actPos+1, librevenge::RVNG_SEEK_SET);
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     default:
+       listener->insertCharacter(static_cast<unsigned char>(c), input, endPos);
+       break;
+diff --git a/src/lib/libmwaw_internal.cxx b/src/lib/libmwaw_internal.cxx
+index f4d45f5..2a879e3 100644
+--- a/src/lib/libmwaw_internal.cxx
++++ b/src/lib/libmwaw_internal.cxx
+@@ -339,14 +339,14 @@ bool convertDTFormat(std::string const &dtFormat, librevenge::RVNGPropertyListVe
+     switch (ch) {
+     case 'Y':
+       list.insert("number:style", "long");
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 'y':
+       list.insert("librevenge:value-type", "year");
+       propVect.append(list);
+       break;
+     case 'B':
+       list.insert("number:style", "long");
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 'b':
+     case 'h':
+       list.insert("librevenge:value-type", "month");
+@@ -359,14 +359,14 @@ bool convertDTFormat(std::string const &dtFormat, librevenge::RVNGPropertyListVe
+       break;
+     case 'e':
+       list.insert("number:style", "long");
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 'd':
+       list.insert("librevenge:value-type", "day");
+       propVect.append(list);
+       break;
+     case 'A':
+       list.insert("number:style", "long");
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 'a':
+       list.insert("librevenge:value-type", "day-of-week");
+       propVect.append(list);
+@@ -374,7 +374,7 @@ bool convertDTFormat(std::string const &dtFormat, librevenge::RVNGPropertyListVe
+ 
+     case 'H':
+       list.insert("number:style", "long");
+-      FALLTHROUGH;
++      MWAW_FALLTHROUGH;
+     case 'I':
+       list.insert("librevenge:value-type", "hours");
+       propVect.append(list);
+diff --git a/src/lib/libmwaw_internal.hxx b/src/lib/libmwaw_internal.hxx
+index 317cbfa..4c9580d 100644
+--- a/src/lib/libmwaw_internal.hxx
++++ b/src/lib/libmwaw_internal.hxx
+@@ -116,21 +116,20 @@ struct MWAW_shared_ptr_noop_deleter {
+ #  define LIBMWAW_ATTRIBUTE_PRINTF(fmt, arg)
+ #endif
+ 
++/** fall through attributes */
++#define MWAW_FALLTHROUGH
+ #if defined(__clang__)
+-#  if __has_cpp_attribute(clang::fallthrough)
+-#    define FALLTHROUGH [[clang::fallthrough]]
+-#  else
+-#    define FALLTHROUGH
++#  if defined(__has_cpp_attribute) && __has_cpp_attribute(clang::fallthrough)
++#    undef MWAW_FALLTHROUGH
++#    define MWAW_FALLTHROUGH [[clang::fallthrough]]
+ #  endif
+ #elif defined(__GNUC__)
+ #  if __GNUC__>=7
+-#    define FALLTHROUGH [[fallthrough]]
+-#  else
+-#    define FALLTHROUGH
++#    undef MWAW_FALLTHROUGH
++#    define MWAW_FALLTHROUGH __attribute__ ((fallthrough))
+ #  endif
+-#else
+-#  define FALLTHROUGH
+ #endif
++
+ /* ---------- debug  --------------- */
+ #ifdef DEBUG
+ namespace libmwaw
+-- 
+2.9.4
+

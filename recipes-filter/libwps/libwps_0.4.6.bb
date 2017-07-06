@@ -12,6 +12,6 @@ SRC_URI = " \
 SRC_URI[md5sum] = "b04428f208e2eb31adcba5a53dec62c2"
 SRC_URI[sha256sum] = "e48a7c2fd20048a0a8eaf69bad972575f8b9f06e7497c787463f127d332fccd0"
 
-inherit autotools pkgconfig
+inherit autotools-brokensep pkgconfig
 
 DEPENDS = "librevenge"

@@ -1,0 +1,29 @@
+From 3ca26ac9c7d3ff28e7687215115fa832f43ca06a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 6 Jul 2017 14:58:15 +0200
+Subject: [PATCH] packedpixeliterator.hxx: fix typo detected by gcc7
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ include/basebmp/packedpixeliterator.hxx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/basebmp/packedpixeliterator.hxx b/include/basebmp/packedpixeliterator.hxx
+index 1b99bf9..d3d9ad2 100644
+--- a/include/basebmp/packedpixeliterator.hxx
++++ b/include/basebmp/packedpixeliterator.hxx
+@@ -603,7 +603,7 @@ public:
+ 
+     value_type get(difference_type const & d) const
+     {
+-        const int remainder( x(d.x) % num_intraword_positions );
++        const int remainder( (x + d.x) % num_intraword_positions );
+ 
+         return (unsigned_cast<value_type>(*current(d.x,d.y) &
+                                           get_mask<value_type, bits_per_pixel, MsbFirst>(remainder))
+-- 
+2.9.4
+

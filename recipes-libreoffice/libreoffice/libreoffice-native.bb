@@ -47,8 +47,6 @@ SRC_URI += " \
 "
 
 EXTRA_OECONF += " \
-    --enable-verbose \
-    \
     --enable-python=system \
     --without-x \
     --without-java \

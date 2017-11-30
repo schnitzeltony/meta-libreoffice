@@ -9,8 +9,8 @@ SRC_URI = " \
     http://kohei.us/files/mdds/src/mdds-${PV}.tar.bz2 \
     file://0001-configure.ac-remove-fixed-paths-causing-trouble-when.patch \
 "
-SRC_URI[md5sum] = "c300541adac09008aa4a305eacd1dca6"
-SRC_URI[sha256sum] = "4253ab93fe8bb579321a50e247f1f800191ab99fe2d8c6c181741b8bd3fb161f"
+SRC_URI[md5sum] = "913ef8b1680ad8b8407c3a4bb0c82634"
+SRC_URI[sha256sum] = "dcb8cd2425567a5a5ec164afea475bce57784bca3e352ad4cbdd3d1a7e08e5a1"
 
 S = "${WORKDIR}/mdds-${PV}"
 

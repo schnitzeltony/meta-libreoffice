@@ -32,6 +32,7 @@ DEPENDS += " \
 EXTRA_OECONF = " \
     --without-doxygen \
     --enable-release-build \
+    --disable-verbose \
     --with-parallelism=${@oe.utils.cpu_count()} \
     \
     --with-system-librevenge \
@@ -40,5 +41,3 @@ EXTRA_OECONF = " \
     --with-system-libebook \
     --with-system-libfreehand \
 "
-
-#    --enable-verbose

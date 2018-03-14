@@ -11,19 +11,11 @@ SRC_URI = " \
     https://bitbucket.org/tagoh/${BPN}/downloads/${BPN}-${PV}.tar.bz2 \
     file://0001-configure.ac-add-missing-HAVE_INTROSPECTION-check.patch \
     file://0002-configure.ac-remove-untranslated-AX_CHECK_ENABLE_DEB.patch \
-    file://0003-move-_lt_tag_filter_t-after-neum-to-fix-build.patch \
 "
-SRC_URI[md5sum] = "dcd7a845a8a9b57ca96eb04a29083246"
-SRC_URI[sha256sum] = "df84efd7e3e67cc8a38ece1e23f080c70ea29b26590ee324d03f1df37bf46576"
+SRC_URI[md5sum] = "284f120247323a35122ab32b4b359c45"
+SRC_URI[sha256sum] = "d6242790324f1432fb0a6fae71b6851f520b2c5a87675497cf8ea14c2924d52e"
 
-inherit autotools pkgconfig
-
-# broken
-EXTRA_OECONF += "--disable-introspection"
-
-# Even though introspection is disabled , gobject-introspection package is still
-# needed for m4 macros.
-DEPENDS += "gobject-introspection"
+inherit autotools pkgconfig gobject-introspection
 
 do_configure_prepend() {
     if ! grep -q ${HOST_SYS}-libtool ${S}/configure.ac; then
@@ -31,5 +23,7 @@ do_configure_prepend() {
         sed -i 's:libtool :${HOST_SYS}-libtool :g' ${S}/configure.ac
     fi
 }
+
+export GIR_EXTRA_LIBS_PATH="${B}/liblangtag/.libs"
 
 BBCLASSEXTEND = "native"

@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.MPL;md5=815ca599c9df247a0c7f619bab123dad \
 "
 
-SRC_URI = "http://dev-www.libreoffice.org/src/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "79b56bcc349264d686a67994506ad199"
-SRC_URI[sha256sum] = "efc20361d6e43f9ff74de5f4d86c2ce9c677693f5da08b0a88d603b7475a508d"
+SRC_URI = "http://dev-www.libreoffice.org/src/${BPN}-${PV}.tar.xz"
+SRC_URI[md5sum] = "50d575509d68c940e566c4a0581cd61a"
+SRC_URI[sha256sum] = "323f68beaf4f35e5a4d7daffb4703d0566698280109210fa4eaa90dea27d6610"
 
 inherit autotools pkgconfig perlnative
 

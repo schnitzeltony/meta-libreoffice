@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "http://dev-www.libreoffice.org/src/${BPN}/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "6be55a46078b593ec20cad9bb8730c3e"
-SRC_URI[sha256sum] = "cfc698c2dd4ab592138a941ae26e2e18c3dac69bc196b5167df7f5eb88fc217e"
+SRC_URI[md5sum] = "201f477df7ea90d362c389c145c0f352"
+SRC_URI[sha256sum] = "0b72944d5af81dda0a5c5803ee84cbac4b81441a4d767aa57029adc6744c2485"
 
 inherit autotools pkgconfig
 

@@ -1,0 +1,31 @@
+From 6012d11ddeca960938f0c6f65692e2e42c874039 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 14 Mar 2018 23:30:45 +0100
+Subject: [PATCH] Define GLM_ENABLE_EXPERIMENTAL to make use of mandatory
+ glm/gtx headers
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.ac | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configure.ac b/configure.ac
+index e9d5020..f2daa42 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -62,6 +62,7 @@ AC_SUBST([EPOXY_LIBS])
+ # =========
+ # Find glm
+ # =========
++AC_DEFINE([GLM_ENABLE_EXPERIMENTAL], [1], [Later versions of glm need this for gtx headers])
+ AC_LANG_PUSH([C++])
+ save_CPPFLAGS=$CPPFLAGS
+ CPPFLAGS="$CPPFLAGS $GLM_CFLAGS"
+-- 
+2.14.3
+

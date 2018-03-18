@@ -1,0 +1,50 @@
+From c317f7f33ecc275f4e39dae1dcdfc444b99b1d9f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 18 Mar 2018 17:06:55 +0100
+Subject: [PATCH] Fix build with poppler >= 0.62.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+see [1] for further details
+
+[1] https://bugs.freedesktop.org/attachment.cgi?id=135409
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx b/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx
+index b7c47d8..e505a43 100644
+--- a/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx
++++ b/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx
+@@ -34,7 +34,10 @@
+ // sigh, UTF8.h was removed in poppler-0.21.0 and put back in 0.21.1
+ // FIXME: we can't use #if POPPLER_CHECK_VERSION(0, 21, 0) && !POPPLER_CHECK_VERSION(0, 21, 1)
+ //        because the internal poppler does not provide poppler-version.h and the macro always returns 0
+-#if POPPLER_CHECK_VERSION(0, 21, 1)
++// Maybe change cam in earlier but meta-oe is going to jump to 0.62.0
++#if POPPLER_CHECK_VERSION(0, 62, 0)
++#include "UnicodeMapFuncs.h"
++#elif POPPLER_CHECK_VERSION(0, 21, 1)
+ #include "UTF8.h"
+ #elif POPPLER_CHECK_VERSION(0, 21, 0)
+ #include "UTF.h"
+@@ -916,7 +919,11 @@ void PDFOutDev::drawChar(GfxState *state, double x, double y,
+             );
+ 
+     // silence spurious warning
++#if POPPLER_CHECK_VERSION(0, 62, 0)
++    (void)&mapUTF16;
++#else
+     (void)&mapUCS2;
++#endif
+ 
+     char buf[9];
+     for( int i=0; i<uLen; ++i )
+-- 
+2.14.3
+

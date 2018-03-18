@@ -13,6 +13,7 @@ SRC_URI += " \
     file://0007-Package.mk-workaround-icu-missing-error-for-without-.patch \
     file://0008-configure.ac-avoid-finding-calling-pg_config.patch \
     file://0009-avoid-downloading-by-git-submodules.patch \
+    file://0010-Fix-build-with-poppler-0.62.0.patch \
 "
 
 SRC_URI[translations.md5sum] = "644f33f2bc84fe9ffd8a4c09b41a36fc"

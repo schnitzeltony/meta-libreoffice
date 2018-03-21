@@ -29,8 +29,8 @@ index f06ef8e..66a11a9 100644
 -ICU_MAJOR=54
 +ICU_MAJOR=58
  ICU_MINOR=1
+ ICU_RECLASSIFIED_CLOSE_PARENTHESIS="TRUE"
  ICU_RECLASSIFIED_PREPEND_SET_EMPTY="TRUE"
- ICU_RECLASSIFIED_CONDITIONAL_JAPANESE_STARTER="TRUE"
 diff --git a/download.lst b/download.lst
 index 4571338..0770a4d 100644
 --- a/i18npool/source/breakiterator/breakiterator_unicode.cxx
@@ -145,7 +145,7 @@ index bcc7cef..ff201a6 100644
 --- a/svx/source/dialog/charmap.cxx
 +++ b/svx/source/dialog/charmap.cxx
 @@ -1594,6 +1594,41 @@ void SubsetMap::InitList()
-                     aAllSubsets.push_back( Subset( 0x1D800, 0x1DAAF, RID_SUBSETSTR_SUTTON_SIGNWRITING ) );
+                 case UBLOCK_SUTTON_SIGNWRITING:
                      break;
  #endif
 +#if (U_ICU_VERSION_MAJOR_NUM >= 58)
@@ -192,7 +192,7 @@ index 06630cc..a7765c3 100644
 +++ b/svx/source/dialog/ucsubset.src
 @@ -1079,6 +1079,50 @@ Resource RID_SUBSETMAP
      {
-         Text [ en-US ] = "Sutton Signwriting";
+         Text [ en-US ] = "Warang Citi";
      };
 +    String RID_SUBSETSTR_ADLAM
 +    {

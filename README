@@ -12,4 +12,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-offi
 
 When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-office][PATCH'
 
-Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
+Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>

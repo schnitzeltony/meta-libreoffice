@@ -19,7 +19,9 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  i18npool/source/ordinalsuffix/ordinalsuffix.cxx      |  2 +-
  i18nutil/source/utility/unicode.cxx                  |  6 +++---
  vcl/generic/glyphs/scrptrun.h                        |  2 +-
- 8 files changed, 25 insertions(+), 24 deletions(-)
+ opencl/source/openclconfig.cxx                       | 2 +-
+ lotuswordpro/source/filter/localtime.cxx             | 2 +-
+ 10 files changed, 27 insertions(+), 24 deletions(-)
 
 diff --git a/basegfx/source/range/b2drangeclipper.cxx b/basegfx/source/range/b2drangeclipper.cxx
 index edbb128..ceb9e11 100644
@@ -245,6 +247,32 @@ index 625ca7b..2b8ce0b 100644
  public:
      ScriptRun();
  
+diff --git a/opencl/source/openclconfig.cxx b/opencl/source/openclconfig.cxx
+index 688dab1..aa1f913 100644
+--- a/opencl/source/openclconfig.cxx
++++ b/opencl/source/openclconfig.cxx
+@@ -121,7 +121,7 @@ bool match(const OUString& rPattern, const OUString& rInput)
+     UErrorCode nIcuError(U_ZERO_ERROR);
+     icu::UnicodeString sIcuPattern(reinterpret_cast<const UChar*>(rPattern.getStr()), rPattern.getLength());
+     icu::UnicodeString sIcuInput(reinterpret_cast<const UChar*>(rInput.getStr()), rInput.getLength());
+-    RegexMatcher aMatcher(sIcuPattern, sIcuInput, 0, nIcuError);
++    icu::RegexMatcher aMatcher(sIcuPattern, sIcuInput, 0, nIcuError);
+ 
+     if (U_SUCCESS(nIcuError) && aMatcher.matches(nIcuError) && U_SUCCESS(nIcuError))
+         return true;
+diff --git a/lotuswordpro/source/filter/localtime.cxx b/lotuswordpro/source/filter/localtime.cxx
+index f8af7e6..73903c8 100644
+--- a/lotuswordpro/source/filter/localtime.cxx
++++ b/lotuswordpro/source/filter/localtime.cxx
+@@ -176,7 +176,7 @@ bool LtgLocalTime(long rtime,LtTm& rtm)
+ 
+     if ((rtime > 3 * DAY_SEC)&&(rtime < LONG_MAX - 3 * DAY_SEC))
+     {
+-        TimeZone* pLocalZone = TimeZone::createDefault();
++        icu::TimeZone* pLocalZone = icu::TimeZone::createDefault();
+         long offset = (pLocalZone->getRawOffset())/1000;
+         delete pLocalZone;
+         long ltime = rtime + offset;
 -- 
 2.14.3
 

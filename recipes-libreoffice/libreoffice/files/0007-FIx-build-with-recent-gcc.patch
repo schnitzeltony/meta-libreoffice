@@ -1,0 +1,53 @@
+From 575a48e4a1683b30a8171225b7484a8c7ab6f94b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 8 Jun 2018 19:47:11 +0200
+Subject: [PATCH 2/3] FIx build with recent gcc
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Change-Id: Ic7f8aa08c8268ecc51abb7710e4a91b9ed892ee7
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx | 4 ++--
+ sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.hxx | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx b/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx
+index e505a43..db5f361 100644
+--- a/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx
++++ b/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx
+@@ -456,7 +456,7 @@ int PDFOutDev::parseFont( long long nNewId, GfxFont* gfxFont, GfxState* state )
+     FontAttributes aNewFont;
+     int nSize = 0;
+ 
+-    GooString* pFamily = gfxFont->getName();
++    const GooString* pFamily = gfxFont->getName();
+     if( pFamily )
+     {
+         aNewFont.familyName.clear();
+@@ -753,7 +753,7 @@ void PDFOutDev::updateFont(GfxState *state)
+         FontAttributes aFont;
+         int nEmbedSize=0;
+ 
+-        Ref* pID = gfxFont->getID();
++        const Ref* pID = gfxFont->getID();
+         // TODO(Q3): Portability problem
+         long long fontID = (long long)pID->gen << 32 | (long long)pID->num;
+         std::unordered_map< long long, FontAttributes >::const_iterator it =
+diff --git a/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.hxx b/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.hxx
+index b5dd4e4..f6cefda 100644
+--- a/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.hxx
++++ b/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.hxx
+@@ -237,7 +237,7 @@ namespace pdfi
+                               double dx, double dy,
+                               double originX, double originY,
+                               CharCode code, int nBytes, Unicode *u, int uLen) SAL_OVERRIDE;
+-        virtual void drawString(GfxState *state, GooString *s) SAL_OVERRIDE;
++        virtual void drawString(GfxState *state, GooString *s);
+         virtual void endTextObject(GfxState *state) SAL_OVERRIDE;
+ 
+         //----- image drawing
+-- 
+2.14.3
+

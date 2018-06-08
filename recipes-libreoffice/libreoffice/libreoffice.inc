@@ -15,6 +15,7 @@ SRC_URI += " \
     file://0003-upgrade-to-ICU-58.patch \
     file://0004-remove-dictmgr.hxx-to-be-compatible-with-later-hunsp.patch \
     file://0005-packedpixeliterator.hxx-fix-typo-detected-by-gcc7.patch \
+    file://0006-Fix-build-with-recent-icu.patch \
 "
 SRCREV_unoconv = "260b815bf2c57118df439f381974f3f0987222a1"
 

@@ -1,0 +1,250 @@
+From 99dd8e29764156b0d7ac53044f393efd8b6555ee Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 8 Jun 2018 15:10:50 +0200
+Subject: [PATCH] Fix build with recent icu
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Change-Id: I0ce2494a3994155ad0949a17aa71da51891200a7
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ basegfx/source/range/b2drangeclipper.cxx             |  1 +
+ i18npool/inc/collator_unicode.hxx                    |  2 +-
+ .../source/breakiterator/breakiterator_unicode.cxx   | 20 ++++++++++----------
+ i18npool/source/collator/collator_unicode.cxx        | 14 +++++++-------
+ i18npool/source/collator/gencoll_rule.cxx            |  2 +-
+ i18npool/source/ordinalsuffix/ordinalsuffix.cxx      |  2 +-
+ i18nutil/source/utility/unicode.cxx                  |  6 +++---
+ vcl/generic/glyphs/scrptrun.h                        |  2 +-
+ 8 files changed, 25 insertions(+), 24 deletions(-)
+
+diff --git a/basegfx/source/range/b2drangeclipper.cxx b/basegfx/source/range/b2drangeclipper.cxx
+index edbb128..ceb9e11 100644
+--- a/basegfx/source/range/b2drangeclipper.cxx
++++ b/basegfx/source/range/b2drangeclipper.cxx
+@@ -31,6 +31,7 @@
+ #include <o3tl/vector_pool.hxx>
+ #include <boost/bind.hpp>
+ #include <boost/utility.hpp>
++#include <boost/next_prior.hpp>
+ 
+ #include <algorithm>
+ #include <deque>
+diff --git a/i18npool/inc/collator_unicode.hxx b/i18npool/inc/collator_unicode.hxx
+index 951de9c..c12213a 100644
+--- a/i18npool/inc/collator_unicode.hxx
++++ b/i18npool/inc/collator_unicode.hxx
+@@ -69,7 +69,7 @@ public:
+ protected:
+     const sal_Char *implementationName;
+ private:
+-    RuleBasedCollator *uca_base, *collator;
++    icu::RuleBasedCollator *uca_base, *collator;
+ #ifndef DISABLE_DYNLOADING
+     oslModule hModule;
+ #endif
+diff --git a/i18npool/source/breakiterator/breakiterator_unicode.cxx b/i18npool/source/breakiterator/breakiterator_unicode.cxx
+index c68b860..6b10960 100644
+--- a/i18npool/source/breakiterator/breakiterator_unicode.cxx
++++ b/i18npool/source/breakiterator/breakiterator_unicode.cxx
+@@ -61,7 +61,7 @@ BreakIterator_Unicode::~BreakIterator_Unicode()
+     Wrapper class to provide public access to the RuleBasedBreakIterator's
+     setbreakType method.
+ */
+-class OOoRuleBasedBreakIterator : public RuleBasedBreakIterator
++class OOoRuleBasedBreakIterator : public icu::RuleBasedBreakIterator
+ {
+     public:
+ #if (U_ICU_VERSION_MAJOR_NUM < 58)
+@@ -224,7 +224,7 @@ sal_Int32 SAL_CALL BreakIterator_Unicode::nextCharacters( const OUString& Text,
+         loadICUBreakIterator(rLocale, LOAD_CHARACTER_BREAKITERATOR, 0, "char", Text);
+         for (nDone = 0; nDone < nCount; nDone++) {
+             nStartPos = character.aBreakIterator->following(nStartPos);
+-            if (nStartPos == BreakIterator::DONE)
++            if (nStartPos == icu::BreakIterator::DONE)
+                 return Text.getLength();
+         }
+     } else { // for CHARACTER mode
+@@ -243,7 +243,7 @@ sal_Int32 SAL_CALL BreakIterator_Unicode::previousCharacters( const OUString& Te
+         loadICUBreakIterator(rLocale, LOAD_CHARACTER_BREAKITERATOR, 0, "char", Text);
+         for (nDone = 0; nDone < nCount; nDone++) {
+             nStartPos = character.aBreakIterator->preceding(nStartPos);
+-            if (nStartPos == BreakIterator::DONE)
++            if (nStartPos == icu::BreakIterator::DONE)
+                 return 0;
+         }
+     } else { // for BS to delete one char and CHARACTER mode.
+@@ -260,7 +260,7 @@ Boundary SAL_CALL BreakIterator_Unicode::nextWord( const OUString& Text, sal_Int
+     loadICUBreakIterator(rLocale, LOAD_WORD_BREAKITERATOR, rWordType, NULL, Text);
+ 
+     result.startPos = icuBI->aBreakIterator->following(nStartPos);
+-    if( result.startPos >= Text.getLength() || result.startPos == BreakIterator::DONE )
++    if( result.startPos >= Text.getLength() || result.startPos == icu::BreakIterator::DONE )
+         result.endPos = result.startPos;
+     else {
+         if ( (rWordType == WordType::ANYWORD_IGNOREWHITESPACES ||
+@@ -269,7 +269,7 @@ Boundary SAL_CALL BreakIterator_Unicode::nextWord( const OUString& Text, sal_Int
+             result.startPos = icuBI->aBreakIterator->following(result.startPos);
+ 
+         result.endPos = icuBI->aBreakIterator->following(result.startPos);
+-        if(result.endPos == BreakIterator::DONE)
++        if(result.endPos == icu::BreakIterator::DONE)
+             result.endPos = result.startPos;
+     }
+     return result;
+@@ -282,7 +282,7 @@ Boundary SAL_CALL BreakIterator_Unicode::previousWord(const OUString& Text, sal_
+     loadICUBreakIterator(rLocale, LOAD_WORD_BREAKITERATOR, rWordType, NULL, Text);
+ 
+     result.startPos = icuBI->aBreakIterator->preceding(nStartPos);
+-    if( result.startPos < 0 || result.startPos == BreakIterator::DONE)
++    if( result.startPos < 0 || result.startPos == icu::BreakIterator::DONE)
+         result.endPos = result.startPos;
+     else {
+         if ( (rWordType == WordType::ANYWORD_IGNOREWHITESPACES ||
+@@ -291,7 +291,7 @@ Boundary SAL_CALL BreakIterator_Unicode::previousWord(const OUString& Text, sal_
+             result.startPos = icuBI->aBreakIterator->preceding(result.startPos);
+ 
+         result.endPos = icuBI->aBreakIterator->following(result.startPos);
+-        if(result.endPos == BreakIterator::DONE)
++        if(result.endPos == icu::BreakIterator::DONE)
+             result.endPos = result.startPos;
+     }
+     return result;
+@@ -322,9 +322,9 @@ Boundary SAL_CALL BreakIterator_Unicode::getWordBoundary( const OUString& Text,
+             result.endPos = icuBI->aBreakIterator->following(nPos);
+         }
+     }
+-    if (result.startPos == BreakIterator::DONE)
++    if (result.startPos == icu::BreakIterator::DONE)
+         result.startPos = result.endPos;
+-    else if (result.endPos == BreakIterator::DONE)
++    else if (result.endPos == icu::BreakIterator::DONE)
+         result.endPos = result.startPos;
+ 
+     return result;
+@@ -388,7 +388,7 @@ LineBreakResults SAL_CALL BreakIterator_Unicode::getLineBreak(
+             lbr.breakIndex = nStartPos;
+             lbr.breakType = BreakType::WORDBOUNDARY;
+         } else if (hOptions.rHyphenator.is()) { //Hyphenation break
+-            sal_Int32 boundary_with_punctuation = (line.aBreakIterator->next() != BreakIterator::DONE) ? line.aBreakIterator->current() : 0;
++            sal_Int32 boundary_with_punctuation = (line.aBreakIterator->next() != icu::BreakIterator::DONE) ? line.aBreakIterator->current() : 0;
+             line.aBreakIterator->preceding(nStartPos + 1); // reset to check correct hyphenation of "word-word"
+ 
+             sal_Int32 nStartPosWordEnd = nStartPos;
+diff --git a/i18npool/source/collator/collator_unicode.cxx b/i18npool/source/collator/collator_unicode.cxx
+index 9ef6548..978aa04 100644
+--- a/i18npool/source/collator/collator_unicode.cxx
++++ b/i18npool/source/collator/collator_unicode.cxx
+@@ -138,7 +138,7 @@ Collator_Unicode::loadCollatorAlgorithm(const OUString& rAlgorithm, const lang::
+         UErrorCode status = U_ZERO_ERROR;
+         OUString rule = LocaleDataImpl().getCollatorRuleByAlgorithm(rLocale, rAlgorithm);
+         if (!rule.isEmpty()) {
+-            collator = new RuleBasedCollator(reinterpret_cast<const UChar *>(rule.getStr()), status);   // UChar != sal_Unicode in MinGW
++            collator = new icu::RuleBasedCollator(reinterpret_cast<const UChar *>(rule.getStr()), status);   // UChar != sal_Unicode in MinGW
+             if (! U_SUCCESS(status)) throw RuntimeException();
+         }
+         if (!collator && OUString(LOCAL_RULE_LANGS).indexOf(rLocale.Language) >= 0) {
+@@ -355,11 +355,11 @@ Collator_Unicode::loadCollatorAlgorithm(const OUString& rAlgorithm, const lang::
+                 // The default collator of the en-US locale would also fulfill
+                 // the requirement. The collator of the actual locale or the
+                 // NULL (default) locale does not.
+-                uca_base = static_cast<RuleBasedCollator*>(icu::Collator::createInstance(
++                uca_base = static_cast<icu::RuleBasedCollator*>(icu::Collator::createInstance(
+                             icu::Locale::getRoot(), status));
+ #endif
+                 if (! U_SUCCESS(status)) throw RuntimeException();
+-                collator = new RuleBasedCollator(
++                collator = new icu::RuleBasedCollator(
+                         reinterpret_cast<const uint8_t*>(ruleImage), ruleImageSize, uca_base, status);
+                 if (! U_SUCCESS(status)) throw RuntimeException();
+             }
+@@ -373,17 +373,17 @@ Collator_Unicode::loadCollatorAlgorithm(const OUString& rAlgorithm, const lang::
+             */
+             icu::Locale icuLocale( LanguageTagIcu::getIcuLocale( LanguageTag( rLocale), rAlgorithm));
+             // load ICU collator
+-            collator = static_cast<RuleBasedCollator*>( icu::Collator::createInstance(icuLocale, status) );
++            collator = static_cast<icu::RuleBasedCollator*>( icu::Collator::createInstance(icuLocale, status) );
+             if (! U_SUCCESS(status)) throw RuntimeException();
+         }
+     }
+ 
+     if (options & CollatorOptions::CollatorOptions_IGNORE_CASE_ACCENT)
+-        collator->setStrength(Collator::PRIMARY);
++        collator->setStrength(icu::Collator::PRIMARY);
+     else if (options & CollatorOptions::CollatorOptions_IGNORE_CASE)
+-        collator->setStrength(Collator::SECONDARY);
++        collator->setStrength(icu::Collator::SECONDARY);
+     else
+-        collator->setStrength(Collator::TERTIARY);
++        collator->setStrength(icu::Collator::TERTIARY);
+ 
+     return 0;
+ }
+diff --git a/i18npool/source/collator/gencoll_rule.cxx b/i18npool/source/collator/gencoll_rule.cxx
+index 201170a..9b8c1b6 100644
+--- a/i18npool/source/collator/gencoll_rule.cxx
++++ b/i18npool/source/collator/gencoll_rule.cxx
+@@ -112,7 +112,7 @@ SAL_IMPLEMENT_MAIN_WITH_ARGS(argc, argv)
+     //UCollator *coll = ucol_openRules(Obuf.getStr(), Obuf.getLength(), UCOL_OFF,
+     //        UCOL_DEFAULT_STRENGTH, &parseError, &status);
+ 
+-    RuleBasedCollator *coll = new RuleBasedCollator(reinterpret_cast<const UChar *>(Obuf.getStr()), status);    // UChar != sal_Unicode in MinGW
++    icu::RuleBasedCollator *coll = new icu::RuleBasedCollator(reinterpret_cast<const UChar *>(Obuf.getStr()), status);    // UChar != sal_Unicode in MinGW
+ 
+     if (U_SUCCESS(status)) {
+         std::vector<uint8_t> data;
+diff --git a/i18npool/source/ordinalsuffix/ordinalsuffix.cxx b/i18npool/source/ordinalsuffix/ordinalsuffix.cxx
+index 17546ef..eb45ebd 100644
+--- a/i18npool/source/ordinalsuffix/ordinalsuffix.cxx
++++ b/i18npool/source/ordinalsuffix/ordinalsuffix.cxx
+@@ -79,7 +79,7 @@ uno::Sequence< OUString > SAL_CALL OrdinalSuffixService::getOrdinalSuffix( sal_I
+     if (!U_SUCCESS(nCode))
+         return retValue;
+ 
+-    boost::scoped_ptr<NumberFormat> xNumberFormat(icu::NumberFormat::createInstance(aIcuLocale, nCode));
++    boost::scoped_ptr<icu::NumberFormat> xNumberFormat(icu::NumberFormat::createInstance(aIcuLocale, nCode));
+     if (!U_SUCCESS(nCode))
+         return retValue;
+ 
+diff --git a/i18nutil/source/utility/unicode.cxx b/i18nutil/source/utility/unicode.cxx
+index 6766a6b..01fae9b 100644
+--- a/i18nutil/source/utility/unicode.cxx
++++ b/i18nutil/source/utility/unicode.cxx
+@@ -1004,15 +1004,15 @@ OUString SAL_CALL unicode::formatPercent(double dNumber,
+ 
+     icu::Locale aLocale = LanguageTagIcu::getIcuLocale(aLangTag);
+ 
+-    boost::scoped_ptr<NumberFormat> xF(
+-        NumberFormat::createPercentInstance(aLocale, errorCode));
++    boost::scoped_ptr<icu::NumberFormat> xF(
++        icu::NumberFormat::createPercentInstance(aLocale, errorCode));
+     if(U_FAILURE(errorCode))
+     {
+         SAL_WARN("i18n", "NumberFormat::createPercentInstance failed");
+         return OUString::number(dNumber) + "%";
+     }
+ 
+-    UnicodeString output;
++    icu::UnicodeString output;
+     xF->format(dNumber/100, output);
+     OUString aRet(reinterpret_cast<const sal_Unicode *>(output.getBuffer()),
+         output.length());
+diff --git a/vcl/generic/glyphs/scrptrun.h b/vcl/generic/glyphs/scrptrun.h
+index 625ca7b..2b8ce0b 100644
+--- a/vcl/generic/glyphs/scrptrun.h
++++ b/vcl/generic/glyphs/scrptrun.h
+@@ -65,7 +65,7 @@ struct ParenStackEntry
+     }
+ };
+ 
+-class ScriptRun : public UObject {
++class ScriptRun : public icu::UObject {
+ public:
+     ScriptRun();
+ 
+-- 
+2.14.3
+

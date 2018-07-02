@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/libwpd/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "731fd5e5513c55ed64458a0a8c33a830"
-SRC_URI[sha256sum] = "03b210ab44f05e38091508cdca6ba0ff73de3ea8a168f849b8f1c5059c20b9e9"
+SRC_URI[md5sum] = "ec7ce6c69aac83f8a9e6280d919b3cad"
+SRC_URI[sha256sum] = "323e491f956c8ca2abb12c998e350670930a32317bf9662b0615dd4b3922b831"
 
 inherit autotools pkgconfig perlnative
 

@@ -1,0 +1,58 @@
+From 090c85c00f9985f67000cf4d6a9544ce4c30ca43 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 2 Jul 2018 14:18:37 +0200
+Subject: [PATCH] Fix build with gcc8
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/lib/RVNGHTMLTextTableStyle.cpp | 2 +-
+ src/lib/RVNGHTMLTextTextStyle.cpp  | 2 +-
+ src/lib/RVNGZipStream.cpp          | 1 +
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/lib/RVNGHTMLTextTableStyle.cpp b/src/lib/RVNGHTMLTextTableStyle.cpp
+index 719ec6a..cca62c8 100644
+--- a/src/lib/RVNGHTMLTextTableStyle.cpp
++++ b/src/lib/RVNGHTMLTextTableStyle.cpp
+@@ -169,7 +169,7 @@ std::string RVNGHTMLTextTableStyleManager::getCellContent(RVNGPropertyList const
+ 	if (pList["fo:background-color"])
+ 		s << "\tbackground-color:" << pList["fo:background-color"]->getStr().cstr() << ";\n";
+ 
+-	static char const *(type[]) = {"border", "border-left", "border-top", "border-right", "border-bottom" };
++	static char const *type[] = {"border", "border-left", "border-top", "border-right", "border-bottom" };
+ 	for (int i = 0; i < 5; i++)
+ 	{
+ 		std::string field("fo:");
+diff --git a/src/lib/RVNGHTMLTextTextStyle.cpp b/src/lib/RVNGHTMLTextTextStyle.cpp
+index 5dc7d62..1622572 100644
+--- a/src/lib/RVNGHTMLTextTextStyle.cpp
++++ b/src/lib/RVNGHTMLTextTextStyle.cpp
+@@ -281,7 +281,7 @@ std::string RVNGHTMLTextParagraphStyleManager::getContent(RVNGPropertyList const
+ 
+ void RVNGHTMLTextParagraphStyleManager::parseBorders(RVNGPropertyList const &pList, std::ostream &out) const
+ {
+-	static char const *(type[]) = {"border", "border-left", "border-top", "border-right", "border-bottom" };
++	static char const *type[] = {"border", "border-left", "border-top", "border-right", "border-bottom" };
+ 	for (int i = 0; i < 5; i++)
+ 	{
+ 		std::string field("fo:");
+diff --git a/src/lib/RVNGZipStream.cpp b/src/lib/RVNGZipStream.cpp
+index b15eac5..42be5eb 100644
+--- a/src/lib/RVNGZipStream.cpp
++++ b/src/lib/RVNGZipStream.cpp
+@@ -478,6 +478,7 @@ RVNGInputStream *RVNGZipStream::getSubstream(RVNGInputStream *input, const char
+ 			// TODO: return partial result on Z_BUF_ERROR/Z_DATA_ERROR?
+ 			default:
+ 				data.clear();
++				__attribute__((fallthrough));
+ 			// fall-through intended
+ 			case Z_STREAM_END:
+ 				done = true;
+-- 
+2.14.4
+

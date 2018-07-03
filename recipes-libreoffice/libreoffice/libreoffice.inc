@@ -17,6 +17,7 @@ SRC_URI += " \
     file://0005-packedpixeliterator.hxx-fix-typo-detected-by-gcc7.patch \
     file://0006-Fix-build-with-recent-icu.patch \
     file://0007-fix-build-with-poppler-0.64.patch \
+    file://0008-Make-virtual-ScValidationDlg-non-inline.patch \
 "
 SRCREV_unoconv = "260b815bf2c57118df439f381974f3f0987222a1"
 

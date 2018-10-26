@@ -13,6 +13,7 @@ SRC_URI = " \
     file://0002-drop-prefix.patch \
     file://0003-do-not-reinvent-the-wheel.patch \
     file://0004-fix-build-error-with-gcc-std-c-98.patch \
+    file://0005-Fix-build-with-boost-1.68.0.patch \
 "
 
 SRC_URI[md5sum] = "3270154f0f40d86fce849b161f914101"

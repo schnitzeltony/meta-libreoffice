@@ -1,0 +1,36 @@
+From c780138f9e56499d0cfd5954506fc665e42e7e3e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 26 Oct 2018 22:57:36 +0200
+Subject: [PATCH] Fix build with boost >= 1.68.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/libcmis/xml-utils.cxx | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/libcmis/xml-utils.cxx b/src/libcmis/xml-utils.cxx
+index e72567a..9620a26 100644
+--- a/src/libcmis/xml-utils.cxx
++++ b/src/libcmis/xml-utils.cxx
+@@ -30,7 +30,13 @@
+ #include <sstream>
+ #include <stdlib.h>
+ 
++#include <boost/version.hpp>
++
++#if BOOST_VERSION >= 106800
++#include <boost/uuid/detail/sha1.hpp>
++#else
+ #include <boost/uuid/sha1.hpp>
++#endif
+ #include <curl/curl.h>
+ 
+ #include "xml-utils.hxx"
+-- 
+2.14.4
+

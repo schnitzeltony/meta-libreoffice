@@ -231,7 +231,6 @@ LO_LANGUAGE_FILES = " \
     ${libdir}/libreoffice/program/resource/*%{1}.res \
     ${libdir}/libreoffice/share/config/soffice.cfg/modules/*/ui/res/%{1}.zip \
     ${libdir}/libreoffice/share/config/soffice.cfg/*/ui/res/%{1}.zip \
-    ${libdir}/libreoffice/share/template/%{1} \
     ${libdir}/libreoffice/share/registry/Langpack-%{1}.xcd \
     ${libdir}/libreoffice/share/registry/res/registry_%{1}.xcd \
     ${libdir}/libreoffice/share/registry/res/fcfg_langpack_%{1}.xcd \

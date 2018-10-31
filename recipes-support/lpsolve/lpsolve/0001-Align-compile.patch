@@ -1,0 +1,130 @@
+From f7506e802901dc7cbd9d91be60576e4f60da1e45 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 31 Oct 2018 22:59:02 +0100
+Subject: [PATCH] Align compile
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Parts taken from [1]
+
+[1] https://src.fedoraproject.org/cgit/rpms/lpsolve.git/tree/lpsolve-5.5.0.11.cflags.patch
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ lp_solve/ccc  | 37 ++-----------------------------------
+ lpsolve55/ccc | 47 ++++-------------------------------------------
+ 2 files changed, 6 insertions(+), 78 deletions(-)
+
+diff --git a/lp_solve/ccc b/lp_solve/ccc
+index 35b89fb..051a8e6 100644
+--- a/lp_solve/ccc
++++ b/lp_solve/ccc
+@@ -1,41 +1,8 @@
+ :
+ src='../lp_MDO.c ../shared/commonlib.c ../colamd/colamd.c ../shared/mmio.c ../shared/myblas.c ../ini.c ../fortify.c ../lp_rlp.c ../lp_crash.c ../bfp/bfp_LUSOL/lp_LUSOL.c ../bfp/bfp_LUSOL/LUSOL/lusol.c ../lp_Hash.c ../lp_lib.c ../lp_wlp.c ../lp_matrix.c ../lp_mipbb.c ../lp_MPS.c ../lp_params.c ../lp_presolve.c ../lp_price.c ../lp_pricePSE.c ../lp_report.c ../lp_scale.c ../lp_simplex.c lp_solve.c ../lp_SOS.c ../lp_utils.c ../yacc_read.c'
+-c=cc
+ 
+-#determine platform (32/64 bit)
+->/tmp/platform.c
+-echo '#include <stdlib.h>'>>/tmp/platform.c
+-echo '#include <stdio.h>'>>/tmp/platform.c
+-echo 'main(){printf("ux%d", (int) (sizeof(void *)*8));}'>>/tmp/platform.c
+-$c /tmp/platform.c -o /tmp/platform
+-PLATFORM=`/tmp/platform`
+-rm /tmp/platform /tmp/platform.c >/dev/null 2>&1
+-
+-mkdir bin bin/$PLATFORM >/dev/null 2>&1
++mkdir bin >/dev/null 2>&1
+ 
+ math=-lm
+ 
+-#check if this system has the isnan function
+->/tmp/isnan.c
+-echo '#include <stdio.h>'>>/tmp/isnan.c
+-echo '#include <stdlib.h>'>>/tmp/isnan.c
+-echo '#include <math.h>'>>/tmp/isnan.c
+-echo 'main(){isnan(0);}'>>/tmp/isnan.c
+-$c /tmp/isnan.c -o /tmp/isnan $math >/dev/null 2>&1
+-if [ $? = 0 ]
+-then NOISNAN=
+-else NOISNAN=-DNOISNAN
+-fi
+-rm /tmp/isnan.c /tmp/isnan >/dev/null 2>&1
+-
+-opts='-O3'
+-
+-def=
+-if [ "$PLATFORM" = "SCO_UNIX" ]
+-then opts='-O0'
+-     def='-dy -K PIC -DLLONG=long'
+-     dl=-ldl
+-else dl=-ldl
+-fi
+-
+-$c -I.. -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd -I../shared $opts $def $NOISNAN -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src -o bin/$PLATFORM/lp_solve $math $dl
++$CC $CFLAGS $LDFLAGS -I.. -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd -I../shared -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src -o bin/lp_solve $math -ldl
+diff --git a/lpsolve55/ccc b/lpsolve55/ccc
+index 4afb1bf..995b0d9 100644
+--- a/lpsolve55/ccc
++++ b/lpsolve55/ccc
+@@ -1,50 +1,11 @@
+ :
+ src='../lp_MDO.c ../shared/commonlib.c ../shared/mmio.c ../shared/myblas.c ../ini.c ../fortify.c ../colamd/colamd.c ../lp_rlp.c ../lp_crash.c ../bfp/bfp_LUSOL/lp_LUSOL.c ../bfp/bfp_LUSOL/LUSOL/lusol.c ../lp_Hash.c ../lp_lib.c ../lp_wlp.c ../lp_matrix.c ../lp_mipbb.c ../lp_MPS.c ../lp_params.c ../lp_presolve.c ../lp_price.c ../lp_pricePSE.c ../lp_report.c ../lp_scale.c ../lp_simplex.c ../lp_SOS.c ../lp_utils.c ../yacc_read.c'
+-c=cc
+ 
+-#determine platform (32/64 bit)
+->/tmp/platform.c
+-echo '#include <stdlib.h>'>>/tmp/platform.c
+-echo '#include <stdio.h>'>>/tmp/platform.c
+-echo 'main(){printf("ux%d", (int) (sizeof(void *)*8));}'>>/tmp/platform.c
+-$c /tmp/platform.c -o /tmp/platform
+-PLATFORM=`/tmp/platform`
+-rm /tmp/platform /tmp/platform.c >/dev/null 2>&1
++mkdir bin >/dev/null 2>&1
+ 
+-mkdir bin bin/$PLATFORM >/dev/null 2>&1
++$CC $CFLAGS -fPIC -c -I.. -I../shared -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src
+ 
+-#check if this system has the isnan function
+->/tmp/isnan.c
+-echo '#include <stdio.h>'>>/tmp/isnan.c
+-echo '#include <stdlib.h>'>>/tmp/isnan.c
+-echo '#include <math.h>'>>/tmp/isnan.c
+-echo 'main(){isnan(0);}'>>/tmp/isnan.c
+-$c /tmp/isnan.c -o /tmp/isnan $math >/dev/null 2>&1
+-if [ $? = 0 ]
+-then NOISNAN=
+-else NOISNAN=-DNOISNAN
+-fi
+-rm /tmp/isnan.c /tmp/isnan >/dev/null 2>&1
+-
+-def=
+-so=
+-if [ "$PLATFORM" = "SCO_UNIX" ]
+-then def='-dy -K PIC -DNOLONGLONG'
+-     dl=-lc
+-else dl=-ldl
+-     so=y
+-fi
+-
+-opts='-O3'
+-
+-$c -s -c -I.. -I../shared -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd $opts $def $NOISNAN -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src
+-ar rv bin/$PLATFORM/liblpsolve55.a `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'`
+-ranlib bin/$PLATFORM/liblpsolve55.a
+-
+-if [ "$so" != "" ]
+-then
+-  $c -fpic -s -c -I.. -I../shared -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd -I. $opts $NOISNAN -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src
+-  $c -shared -Wl,-Bsymbolic -Wl,-soname,liblpsolve55.so -o bin/$PLATFORM/liblpsolve55.so `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'` -lc -lm -ldl
+-fi
++$CC $CFLAGS fPIC -c -I.. -I../shared -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd -I. -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src
++$CC $LDFLAGS -shared -Wl,-Bsymbolic -Wl,-soname,liblpsolve55.so -o bin/$PLATFORM/liblpsolve55.so `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'` -lc -lm -ldl
+ 
+ rm *.o 2>/dev/null
+-- 
+2.14.4
+

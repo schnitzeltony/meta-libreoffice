@@ -72,6 +72,7 @@ DEPENDS += " \
     hyphen \
     graphite2 \
     liblangtag \
+    lpsolve \
 "
 
 # necessary to let the call for python-config succeed
@@ -151,6 +152,7 @@ EXTRA_OECONF += " \
     --with-system-altlinuxhyph \
     --with-system-graphite \
     --with-system-liblangtag \
+    --with-system-lpsolve \
 "
 
 PACKAGECONFIG ??= " \

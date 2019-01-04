@@ -36,7 +36,7 @@ EXTRA_OECONF = " \
     --without-doxygen \
     --enable-release-build \
     --disable-verbose \
-    --with-parallelism=${@oe.utils.cpu_count()} \
+    ${@oe.utils.parallel_make_argument(d, '--with-parallelism=%d')} \
     \
     --with-system-librevenge \
     --with-system-libabw \

@@ -21,8 +21,9 @@ inherit cmake
 
 DEPENDS = "boost zlib"
 
-EXTRA_OECMAKE = "-DENABLE_COMPILE_TESTS=OFF -DBUILD_CONTRIBS_LIB=ON"
-
-FILES_${PN}-dev += "${libdir}/cmake"
+EXTRA_OECMAKE = " \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+    -DENABLE_COMPILE_TESTS=OFF \
+    -DBUILD_CONTRIBS_LIB=ON"
 
 BBCLASSEXTEND = "native"

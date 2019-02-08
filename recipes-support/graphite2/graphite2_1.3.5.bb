@@ -10,3 +10,7 @@ DEPENDS += "freetype"
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/silgraphite/${BPN}/${BPN}-${PV}.tgz"
 SRC_URI[md5sum] = "5b8d22a8bbf031838e31432868c0109c"
 SRC_URI[sha256sum] = "f4712626eda0a1804367133460770560b545bbe75b1c4aab480c9b8e4e1c64bd"
+
+EXTRA_OECMAKE += " \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+"

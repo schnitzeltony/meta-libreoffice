@@ -155,6 +155,8 @@ EXTRA_OECONF += " \
     --with-system-lpsolve \
 "
 
+CXXFLAGS += "-DGLM_ENABLE_EXPERIMENTAL=1"
+
 PACKAGECONFIG ??= " \
     gtk \
     mariadb \

@@ -12,4 +12,6 @@ SRC_URI[sha256sum] = "d1cc7297ed1921aa969e26413b4c4e18afc882ce4d2f5a2aa2a2905706
 
 inherit autotools pkgconfig
 
+CXXFLAGS += "-DGLM_ENABLE_EXPERIMENTAL=1"
+
 DEPENDS = "glew glm boost"

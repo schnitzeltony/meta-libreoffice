@@ -245,15 +245,15 @@ LO_LANGUAGE_FILES = " \
 python lo_do_split_locales() {
     import glob, subprocess
 
-    packages = (d.getVar('PACKAGES', True) or "").split()
+    packages = (d.getVar('PACKAGES') or "").split()
 
-    datadir = d.getVar('datadir', True)
+    datadir = d.getVar('datadir')
     if not datadir:
         bb.note("datadir not defined")
         return
 
-    dvar = d.getVar('PKGD', True)
-    pn = d.getVar('LOCALEBASEPN', True)
+    dvar = d.getVar('PKGD')
+    pn = d.getVar('LOCALEBASEPN')
 
     if pn + '-locale' in packages:
         packages.remove(pn + '-locale')
@@ -261,9 +261,9 @@ python lo_do_split_locales() {
     # extract locales from translation source path
     # this won't add en-US which comes with base sources
     locales = []
-    transpaths = glob.glob('%s/translations/source/*' % d.getVar('S', True))
+    transpaths = glob.glob('%s/translations/source/*' % d.getVar('S'))
     for l in transpaths:
-        locale = l.replace('%s/translations/source/' % d.getVar('S', True), '')
+        locale = l.replace('%s/translations/source/' % d.getVar('S'), '')
         if not locale in locales:
             locales.append(locale)
 
@@ -277,7 +277,7 @@ python lo_do_split_locales() {
 
     # check for files matching at each location / language
     langfiles = dict()
-    for transvar in d.getVar('LO_LANGUAGE_FILES', True).split():
+    for transvar in d.getVar('LO_LANGUAGE_FILES').split():
         filesfound = 0
         for locale in sorted(locales):
             pattern = transvar.replace('%{1}', locale)
@@ -295,13 +295,13 @@ python lo_do_split_locales() {
             if translocation in fallbacksearchresult:
                 fallbacksearchresult.replace(translocation, '')
         else:
-            bb.warn('%s language file pattern not found:  %s' % (d.getVar('PN', True), transvar))
+            bb.warn('%s language file pattern not found:  %s' % (d.getVar('PN'), transvar))
 
     # setup packages for locales with files found
-    summary = d.getVar('SUMMARY', True) or pn
-    description = d.getVar('DESCRIPTION', True) or ""
-    locale_section = d.getVar('LOCALE_SECTION', True)
-    mlprefix = d.getVar('MLPREFIX', True) or ""
+    summary = d.getVar('SUMMARY') or pn
+    description = d.getVar('DESCRIPTION') or ""
+    locale_section = d.getVar('LOCALE_SECTION')
+    mlprefix = d.getVar('MLPREFIX') or ""
     for locale in locales:
         if locale in langfiles:
             ln = legitimize_package_name(locale)

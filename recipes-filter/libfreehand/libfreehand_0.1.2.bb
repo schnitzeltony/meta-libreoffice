@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = " \
 SRC_URI = " \
     http://dev-www.libreoffice.org/src/${BPN}/${BPN}-${PV}.tar.xz \
     file://0001-WaE-unnecessary-parentheses-in-declaration-of-paddin.patch \
+    file://0002-Fix-build-with-gcc-9.patch \
 "
 SRC_URI[md5sum] = "c3788f5686839fd097bd77d8f51c3d04"
 SRC_URI[sha256sum] = "0e422d1564a6dbf22a9af598535425271e583514c0f7ba7d9091676420de34ac"

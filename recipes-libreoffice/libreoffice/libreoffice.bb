@@ -19,8 +19,8 @@ SRC_URI += " \
     file://0013-sdext-fix-build-with-poppler-0.73.patch \
 "
 
-SRC_URI[translations.md5sum] = "644f33f2bc84fe9ffd8a4c09b41a36fc"
-SRC_URI[translations.sha256sum] = "0c79245cbab70e4f785dd226888ee1c3e8d359f73b345a90eebd8d1bd23c2947"
+SRC_URI[translations.md5sum] = "686ce1682614d4bdcaf4bedc37129aec"
+SRC_URI[translations.sha256sum] = "9d0d0a63366b86ec4360fff7ae7c620ddcfe54c2290b9189c927a0af0e385e58"
 
 DEPENDS += " \
     ${BPN}-native \

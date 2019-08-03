@@ -12,3 +12,5 @@ SRC_URI[sha256sum] = "323f68beaf4f35e5a4d7daffb4703d0566698280109210fa4eaa90dea2
 inherit autotools pkgconfig perlnative
 
 DEPENDS = "librevenge"
+
+BBCLASSEXTEND = "native"

@@ -13,3 +13,5 @@ inherit autotools pkgconfig
 
 DEPENDS = "librevenge libwpd zlib"
 RDEPENDS_${PN} = "perl"
+
+BBCLASSEXTEND = "native"

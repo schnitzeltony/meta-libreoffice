@@ -40,6 +40,10 @@ DEPENDS += " \
     unzip-native \
     neon-native \
     liblangtag-native \
+    lpsolve-native \
+    libwpd-native \
+    libwpg-native \
+    libwps-native \
 "
 
 SRC_URI += " \

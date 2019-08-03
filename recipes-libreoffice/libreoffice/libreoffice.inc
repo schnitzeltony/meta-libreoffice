@@ -73,5 +73,9 @@ EXTRA_OECONF = " \
     --with-system-libfreehand \
     --with-system-liblangtag \
     --with-system-zlib \
+    --with-system-lpsolve \
+    --with-system-libwpd \
+    --with-system-libwpg \
+    --with-system-libwps \
 "
 

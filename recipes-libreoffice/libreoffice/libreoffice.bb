@@ -124,9 +124,6 @@ EXTRA_OECONF += " \
     --with-system-mdds \
     --with-system-redland \
     --with-system-libabw \
-    --with-system-libwps \
-    --with-system-libwpg \
-    --with-system-libwpd \
     --with-system-libcdr \
     --with-system-libcmis \
     --with-system-libebook \
@@ -142,7 +139,6 @@ EXTRA_OECONF += " \
     --with-system-vigra \
     --with-system-mythes \
     --with-system-altlinuxhyph \
-    --with-system-lpsolve \
 "
 
 CXXFLAGS += "-DGLM_ENABLE_EXPERIMENTAL=1"

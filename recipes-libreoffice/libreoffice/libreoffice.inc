@@ -79,3 +79,5 @@ EXTRA_OECONF = " \
     --with-system-libwps \
 "
 
+# TODO mdds
+

@@ -47,7 +47,6 @@ DEPENDS += " \
     cups \
     gstreamer1.0-plugins-base \
     \
-    mdds \
     glm \
     redland \
     libabw \
@@ -121,7 +120,6 @@ EXTRA_OECONF += " \
     \
     --with-system-cppunit \
     --with-system-glm \
-    --with-system-mdds \
     --with-system-redland \
     --with-system-libabw \
     --with-system-libcdr \

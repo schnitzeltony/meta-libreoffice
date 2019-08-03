@@ -97,7 +97,6 @@ EXTRA_OECONF += " \
     --without-java \
     --with-lang=ALL \
     \
-    --disable-collada \
     --disable-coinmp \
     --with-tls=nss \
     --without-galleries \
@@ -110,7 +109,6 @@ EXTRA_OECONF += " \
     --with-system-icu \
     --with-system-expat \
     --with-system-curl \
-    --with-system-glew \
     --with-system-openssl \
     \
     --with-system-cppunit \
@@ -123,10 +121,8 @@ EXTRA_OECONF += " \
     --with-system-libvisio \
     --with-system-libpagemaker \
     --with-system-libodfgen \
-    --with-system-libgltf \
     --with-system-libexttextcat \
     --with-system-clucene \
-    --with-system-vigra \
     --with-system-mythes \
     --with-system-altlinuxhyph \
 "
@@ -144,7 +140,7 @@ PACKAGECONFIG[gtk3] = "--enable-gtk3 , --disable-gtk3, gtk+3 cairo"
 PACKAGECONFIG[avahi] = "--enable-avahi, --disable-avahi, avahi"
 PACKAGECONFIG[odk] = "--enable-odk, --disable-odk"
 
-PACKAGECONFIG[mariadb] = "--enable-ext-mariadb-connector --with-system-mariadb, --disable-ext-mariadb-connector, mariadb"
+PACKAGECONFIG[mariadb] = "--with-system-mariadb, --disable-ext-mariadb-connector, mariadb"
 PACKAGECONFIG[postgresql] = "--enable-postgresql-sdbc --with-system-postgresql, --disable-postgresql-sdbc, postgresql"
 
 do_configure() {
@@ -154,8 +150,8 @@ do_configure() {
     gnu-configize
     autoconf
     cd $olddir
-    export PYTHON_CFLAGS=-I${STAGING_INCDIR}/${PYTHON_DIR}
-    export PYTHON_LIBS="-L${STAGING_LIBDIR} -lpython${PYTHON_BASEVERSION}"
+    export PYTHON_CFLAGS=-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}
+    export PYTHON_LIBS="-L${STAGING_LIBDIR} -lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
     oe_runconf
 
     mkdir -p ${B}/workdir/Executable

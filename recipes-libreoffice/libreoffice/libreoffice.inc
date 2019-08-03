@@ -77,6 +77,9 @@ EXTRA_OECONF = " \
     --with-system-libwpd \
     --with-system-libwpg \
     --with-system-libwps \
+    --with-system-libcdr \
+    --with-system-libmspub \
+    --with-system-libmwaw \
 "
 
 # TODO mdds

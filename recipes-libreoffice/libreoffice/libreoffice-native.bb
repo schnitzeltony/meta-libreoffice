@@ -44,6 +44,10 @@ DEPENDS += " \
     libwpd-native \
     libwpg-native \
     libwps-native \
+    libcdr-native \
+    libmspub-native \
+    libmwaw-native \
+    libodfgen-native \
 "
 
 SRC_URI += " \

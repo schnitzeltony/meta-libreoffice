@@ -9,14 +9,9 @@ SRC_URI += " \
     file://0003-remove-paths-for-gb_Executable_get_command.patch \
     file://0004-ensure-that-native-gendict-build-by-libreoffice-is-u.patch \
     file://0005-add-a-new-gb_Rdb_get_target_for_build_native-and-use.patch \
-    file://0006-make-sure-that-gengal-uses-native-libraries.patch \
     file://0007-Package.mk-workaround-icu-missing-error-for-without-.patch \
     file://0008-configure.ac-avoid-finding-calling-pg_config.patch \
     file://0009-avoid-downloading-by-git-submodules.patch \
-    file://0010-Fix-build-with-poppler-0.62.0.patch \
-    file://0011-pdfioutdev_gpl-Fix-build-with-poppler-0.70.0.patch \
-    file://0012-Fix-build-with-poppler-0.72.patch \
-    file://0013-sdext-fix-build-with-poppler-0.73.patch \
 "
 
 SRC_URI[translations.md5sum] = "686ce1682614d4bdcaf4bedc37129aec"

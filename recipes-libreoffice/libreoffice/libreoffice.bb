@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-inherit gtk-icon-cache pythonnative
+inherit gtk-icon-cache
 
 SRC_URI += " \
     http://download.documentfoundation.org/libreoffice/src/${DIRV}/${BPN}-translations-${PV}.tar.xz;name=translations \
@@ -105,26 +105,17 @@ EXTRA_OECONF += " \
     \
     --disable-collada \
     --disable-coinmp \
-    --enable-python=system \
     --with-tls=nss \
     --without-galleries \
     \
     --with-system-poppler \
     --with-system-openldap \
-    --with-system-zlib \
-    --with-system-jpeg \
-    --with-system-neon \
-    --with-system-libpng \
-    --with-system-nss \
     --with-system-apr \
     --with-system-serf \
     --with-system-libatomic_ops \
-    --with-system-lcms2 \
-    --with-system-libxml \
     --with-system-icu \
     --with-system-expat \
     --with-system-curl \
-    --with-system-harfbuzz \
     --with-system-glew \
     --with-system-openssl \
     \
@@ -149,10 +140,8 @@ EXTRA_OECONF += " \
     --with-system-libexttextcat \
     --with-system-clucene \
     --with-system-vigra \
-    --with-system-hunspell \
     --with-system-mythes \
     --with-system-altlinuxhyph \
-    --with-system-graphite \
     --with-system-liblangtag \
     --with-system-lpsolve \
 "
@@ -160,7 +149,7 @@ EXTRA_OECONF += " \
 CXXFLAGS += "-DGLM_ENABLE_EXPERIMENTAL=1"
 
 PACKAGECONFIG ??= " \
-    gtk \
+    gtk3 \
     mariadb \
     postgresql \
 "

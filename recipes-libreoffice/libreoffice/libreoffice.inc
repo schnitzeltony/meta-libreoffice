@@ -10,20 +10,11 @@ require libreoffice-version.inc
 
 SRC_URI += " \
     git://github.com/dagwieers/unoconv.git;destsuffix=git/unoconv;name=unoconv \
-    file://0001-update-ax_boost-scripts-to-fix-configure-with-system.patch \
-    file://0002-fix-gcc-build-error.patch \
-    file://0003-upgrade-to-ICU-58.patch \
-    file://0004-remove-dictmgr.hxx-to-be-compatible-with-later-hunsp.patch \
-    file://0005-packedpixeliterator.hxx-fix-typo-detected-by-gcc7.patch \
-    file://0006-Fix-build-with-recent-icu.patch \
-    file://0007-fix-build-with-poppler-0.64.patch \
-    file://0008-Make-virtual-ScValidationDlg-non-inline.patch \
-    file://0009-Fix-build-with-boost-1.69.0.patch \
-    file://0010-poppler-dropped-GBool-since-0.71.patch \
+    file://0001-Workaround-boost-library-detection-failures.patch \
 "
 SRCREV_unoconv = "260b815bf2c57118df439f381974f3f0987222a1"
 
-inherit autotools-brokensep pkgconfig distutils-base perlnative
+inherit autotools pkgconfig python3native distutils3-base perlnative
 
 DEPENDS += " \
     python3-lxml-native \
@@ -37,12 +28,49 @@ DEPENDS += " \
 EXTRA_OECONF = " \
     --without-doxygen \
     --enable-release-build \
-    --disable-verbose \
+    --enable-python=system \
     ${@oe.utils.parallel_make_argument(d, '--with-parallelism=%d')} \
     \
+    --with-system-boost \
+    --with-boost-date-time=boost_date_time \
+    --with-boost-filesystem=boost_filesystem \
+    --with-boost-locale=boost_locale\
+    --with-boost-iostreams=boost_iostreams\
+    --with-boost-system=boost_system\
+    \
+    --with-system-cairo \
+    --with-system-epoxy \
+    --with-system-curl \
+    --with-system-libpng \
+    --with-system-jpeg \
+    --with-system-libxml \
+    --with-system-graphite \
+    --with-system-harfbuzz \
+    --with-system-icu \
+    --with-system-expat \
+    --with-system-lcms2 \
+    --with-system-nss \
+    --with-system-cppunit \
+    --with-system-libabw \
+    --with-system-libcdr \
+    --with-system-libebook \
+    --with-system-libfreehand \
+    --with-system-hunspell \
+    --with-system-mythes \
+    --with-system-clucene \
+    --with-system-libcmis \
+    --with-system-libpagemaker \
+    --with-system-glm \
+    --with-system-libetonyek \
+    --with-system-libvisio \
+    --with-system-libexttextcat \
+    --with-system-altlinuxhyph \
+    --with-system-neon \
     --with-system-librevenge \
     --with-system-libabw \
     --with-system-libcdr \
     --with-system-libebook \
     --with-system-libfreehand \
+    --with-system-zlib \
 "
+

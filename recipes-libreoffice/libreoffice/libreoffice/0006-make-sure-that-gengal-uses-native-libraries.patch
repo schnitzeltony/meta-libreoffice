@@ -1,5 +1,5 @@
 From 8f21c644930042bca1725b9547f4a4585fe79784 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Wed, 9 Dec 2015 23:20:14 +0100
 Subject: [PATCH] make sure that gengal uses native libraries
 MIME-Version: 1.0
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [cross specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  solenv/gbuild/Gallery.mk | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

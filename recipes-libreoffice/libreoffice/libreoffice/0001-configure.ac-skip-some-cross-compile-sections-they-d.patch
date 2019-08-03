@@ -1,5 +1,5 @@
 From 8407698e81ad907287a87bbc561544c0a84ae3c4 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Wed, 21 Oct 2015 23:27:01 +0200
 Subject: [PATCH] configure.ac: skip some cross-compile sections - they do not
  work for oe-environment
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [configuration]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  configure.ac | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)

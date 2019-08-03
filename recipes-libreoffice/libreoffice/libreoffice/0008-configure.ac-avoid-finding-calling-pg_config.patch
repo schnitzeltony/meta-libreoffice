@@ -1,5 +1,5 @@
 From a3d541ac396929b6ab78fcd5d8e8ccc85a6b3a2d Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Thu, 28 Jan 2016 00:49:41 +0100
 Subject: [PATCH] configure.ac: avoid finding/calling pg_config
 MIME-Version: 1.0
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [cross compiling specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  configure.ac | 8 ++------
  1 file changed, 2 insertions(+), 6 deletions(-)

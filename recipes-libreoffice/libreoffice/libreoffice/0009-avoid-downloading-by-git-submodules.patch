@@ -1,5 +1,5 @@
 From f52d4fea70f71b844b4ad757df61423e08366083 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Sun, 31 Jan 2016 21:10:32 +0100
 Subject: [PATCH] avoid downloading by git submodules
 MIME-Version: 1.0
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [configuration]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  configure.ac | 3 +++
  1 file changed, 3 insertions(+)

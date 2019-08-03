@@ -1,12 +1,12 @@
 From d15275f988ea61b7ef128ac52f55906500728d7a Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Wed, 20 Jan 2016 20:51:02 +0100
 Subject: [PATCH] add gengal debug information
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  svx/source/gengal/gengal.sh | 5 +++++
  1 file changed, 5 insertions(+)

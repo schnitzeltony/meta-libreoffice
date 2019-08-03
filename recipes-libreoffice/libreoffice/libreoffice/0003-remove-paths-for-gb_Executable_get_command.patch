@@ -1,5 +1,5 @@
 From 502ff5208fc4326960b9d1e9f25642046dc64a28 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Sat, 21 Nov 2015 23:56:19 +0100
 Subject: [PATCH] remove paths for gb_Executable_get_command
 MIME-Version: 1.0
@@ -10,7 +10,7 @@ use binaries found in our native sysroot
 
 Upstream-Status: Inappropriate [oe specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  solenv/gbuild/TargetLocations.mk | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

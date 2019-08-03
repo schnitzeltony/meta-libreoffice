@@ -4,14 +4,19 @@ FILESEXTRAPATHS =. "${FILE_DIRNAME}/${PN}:"
 
 inherit native
 
+# TODO
+# boost / mariadb
+
 DEPENDS += " \
+    cairo-native \
+    libepoxy-native \
     curl-native \
     gconf-native \
     libpng-native \
     jpeg-native \
     libxml2-native \
+    graphite2-native \
     harfbuzz-native \
-    boost-native \
     icu-native \
     expat-native \
     lcms-native \
@@ -25,7 +30,6 @@ DEPENDS += " \
     mythes-native \
     clucene-core-native \
     libcmis-native \
-    mdds-native \
     libpagemaker-native \
     glm-native \
     libetonyek-native \
@@ -39,62 +43,22 @@ DEPENDS += " \
 
 SRC_URI += " \
     file://0001-saxparser-output-calling-parametrs-for-debug.patch \
-    file://0002-cppumaker-output-more-detailed-error-message.patch \
-    file://0003-cppuhelper-defaultbootstrap-output-debug-information.patch \
-    file://0004-fix-build-for-x-less-cairp-less-build.patch \
-    file://0005-add-gengal-debug-information.patch \
-    file://0006-gengal-fix-path-to-redirectrc.patch \
+    file://0002-cppuhelper-defaultbootstrap-output-debug-information.patch \
+    file://0003-add-gengal-debug-information.patch \
+    file://0004-gengal-fix-path-to-redirectrc.patch \
 "
 
 EXTRA_OECONF += " \
-    --enable-python=system \
-    --without-x \
     --without-java \
     \
-    --with-system-curl \
-    --with-system-libpng \
-    --with-system-jpeg \
-    --with-system-libxml \
-    --with-system-harfbuzz \
-    --with-system-boost \
-    --with-system-icu \
-    --with-system-expat \
-    --with-system-lcms2 \
-    --with-system-nss \
-    --with-system-cppunit \
-    --with-system-libabw \
-    --with-system-libcdr \
-    --with-system-libebook \
-    --with-system-libfreehand \
-    --with-system-hunspell \
-    --with-system-mythes \
-    --with-system-clucene \
-    --with-system-libcmis \
-    --with-system-mdds \
-    --with-system-libpagemaker \
-    --with-system-glm \
-    --with-system-libetonyek \
-    --with-system-vigra \
-    --with-system-libvisio \
-    --with-system-libexttextcat \
-    --with-system-altlinuxhyph \
-    --with-system-neon \
-    \
-    --without-boost-date-time \
-    --without-boost-iostreams \
-    --without-boost-system \
+    --disable-gui \
     --disable-postgresql-sdbc \
     --disable-lotuswordpro \
     --disable-firebird-sdbc \
-    --disable-liblangtag \
     --disable-openssl \
-    --disable-gltf \
-    --disable-collada \
     --disable-scripting-beanshell \
     --disable-scripting-javascript \
-    --disable-graphite \
     --disable-pdfimport \
-    --disable-orcus \
     --disable-coinmp \
 "
 
@@ -105,28 +69,48 @@ do_configure() {
     gnu-configize
     autoconf
     cd $olddir
-    PYTHON_CFLAGS=-I${STAGING_INCDIR_NATIVE}/${PYTHON_DIR} PYTHON_LIBS="-L${STAGING_LIBDIR_NATIVE} -lpython${PYTHON_BASEVERSION}" oe_runconf
+    PYTHON_CFLAGS=-I${STAGING_INCDIR_NATIVE}/${PYTHON_DIR}${PYTHON_ABI} PYTHON_LIBS="-L${STAGING_LIBDIR_NATIVE} -lpython${PYTHON_BASEVERSION}${PYTHON_ABI}" oe_runconf
 }
 
 # for debugging - we can as we're native
 CXXFLAGS += "-g -O0 -DSAL_LOG_INFO -DSAL_LOG_WARN"
 LDFLAGS += "-g"
 
+# these seem to get lost in our tailored build
+LDFLAGS += "-ldl"
+
+
 do_compile() {
-    # inspired by ${B}/Makefile
-    BUILDDIR=${B} oe_runmake -f ${S}/Makefile.gbuild build-tools
-    # gengal was not designed for build on its own - we need to add dependencies
-    BUILDDIR=${B} oe_runmake Executable_gengal
+    # see pre_BuildTools.mk
+    BUILDDIR=${B} oe_runmake Executable_bestreversemap
     BUILDDIR=${B} oe_runmake Executable_cfgex
+    BUILDDIR=${B} oe_runmake Executable_cpp
+    BUILDDIR=${B} oe_runmake Executable_gendict
+    BUILDDIR=${B} oe_runmake Executable_gencoll_rule
+    BUILDDIR=${B} oe_runmake Executable_genconv_dict
+    BUILDDIR=${B} oe_runmake Executable_gengal
+    BUILDDIR=${B} oe_runmake Executable_genindex_data
+    BUILDDIR=${B} oe_runmake Executable_helpex
+    BUILDDIR=${B} oe_runmake Executable_idxdict
+    BUILDDIR=${B} oe_runmake Executable_makedepend
+    BUILDDIR=${B} oe_runmake Executable_propex
+    BUILDDIR=${B} oe_runmake Executable_saxparser
+    BUILDDIR=${B} oe_runmake Executable_svidl
+    BUILDDIR=${B} oe_runmake Executable_treex
+    BUILDDIR=${B} oe_runmake Executable_ulfex
+    BUILDDIR=${B} oe_runmake Executable_uiex
+    BUILDDIR=${B} oe_runmake Executable_unoidl-check
+    BUILDDIR=${B} oe_runmake Executable_unoidl-write
+    BUILDDIR=${B} oe_runmake Executable_xrmex
     BUILDDIR=${B} oe_runmake Library_ucb1
     BUILDDIR=${B} oe_runmake Library_configmgr
     BUILDDIR=${B} oe_runmake Library_fwk
     BUILDDIR=${B} oe_runmake Library_i18npool
     BUILDDIR=${B} oe_runmake Library_pyuno
-
-    # BUILDDIR=${B} oe_runmake Module_external
 }
 
+#    rsc 
+#    transex3 
 LOBUILDTOOLS = " \
     bestreversemap \
     cfgex \
@@ -136,13 +120,10 @@ LOBUILDTOOLS = " \
     genindex_data \
     idxdict \
     propex \
-    rsc \
     saxparser \
     svidl \
-    transex3 \
     ulfex \
     uiex \
-    unoidl-check \
     unoidl-write \
     xrmex \
 "

@@ -1,5 +1,5 @@
 From d194f5aef8bf1c16097729d448b34316d621e557 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Sun, 24 Jan 2016 16:55:11 +0100
 Subject: [PATCH] Package.mk: workaround icu missing error for
  --without-galleries
@@ -7,7 +7,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  solenv/gbuild/Package.mk | 1 -
  1 file changed, 1 deletion(-)

@@ -71,6 +71,7 @@ EXTRA_OECONF = " \
     --with-system-libcdr \
     --with-system-libebook \
     --with-system-libfreehand \
+    --with-system-liblangtag \
     --with-system-zlib \
 "
 

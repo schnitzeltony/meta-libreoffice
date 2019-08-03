@@ -39,6 +39,7 @@ DEPENDS += " \
     hyphen-native \
     unzip-native \
     neon-native \
+    liblangtag-native \
 "
 
 SRC_URI += " \
@@ -98,7 +99,6 @@ do_compile() {
     BUILDDIR=${B} oe_runmake Executable_svidl
     BUILDDIR=${B} oe_runmake Executable_treex
     BUILDDIR=${B} oe_runmake Executable_ulfex
-    BUILDDIR=${B} oe_runmake Executable_uiex
     BUILDDIR=${B} oe_runmake Executable_unoidl-check
     BUILDDIR=${B} oe_runmake Executable_unoidl-write
     BUILDDIR=${B} oe_runmake Executable_xrmex
@@ -111,6 +111,7 @@ do_compile() {
 
 #    rsc 
 #    transex3 
+#    uiex 
 LOBUILDTOOLS = " \
     bestreversemap \
     cfgex \
@@ -123,7 +124,6 @@ LOBUILDTOOLS = " \
     saxparser \
     svidl \
     ulfex \
-    uiex \
     unoidl-write \
     xrmex \
 "
@@ -147,9 +147,9 @@ do_install() {
     done
 
     # move saxparser.rdb to libdir - we'll need it for cross building
-    cp -rf ${B}/workdir/Rdb/saxparser.rdb ${D}/${libdir}
+    #cp -rf ${B}/workdir/Rdb/saxparser.rdb ${D}/${libdir}
     # fix library path - otherwise cross lib is pulled for native saxparse
-    sed -i 's:LO_LIB_DIR:URE_INTERNAL_LIB_DIR:g' ${D}/${libdir}/saxparser.rdb
+    #sed -i 's:LO_LIB_DIR:URE_INTERNAL_LIB_DIR:g' ${D}/${libdir}/saxparser.rdb
 
     # gengal script and binary to expected location
     install ${S}/svx/source/gengal/gengal.sh ${D}/${bindir}/gengal

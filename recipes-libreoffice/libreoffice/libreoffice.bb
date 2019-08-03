@@ -142,7 +142,6 @@ EXTRA_OECONF += " \
     --with-system-vigra \
     --with-system-mythes \
     --with-system-altlinuxhyph \
-    --with-system-liblangtag \
     --with-system-lpsolve \
 "
 

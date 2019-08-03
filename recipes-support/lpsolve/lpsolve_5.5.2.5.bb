@@ -32,3 +32,5 @@ do_install() {
 
 FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/liblpsolve55.so"
+
+BBCLASSEXTEND = "native"

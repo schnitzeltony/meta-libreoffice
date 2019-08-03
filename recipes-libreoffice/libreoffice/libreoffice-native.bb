@@ -115,6 +115,8 @@ do_compile() {
     BUILDDIR=${B} oe_runmake Library_fwk
     BUILDDIR=${B} oe_runmake Library_i18npool
     BUILDDIR=${B} oe_runmake Library_pyuno
+    BUILDDIR=${B} oe_runmake Library_expwrap
+    BUILDDIR=${B} oe_runmake Library_sax
 }
 
 #    rsc 

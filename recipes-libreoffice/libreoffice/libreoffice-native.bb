@@ -79,6 +79,10 @@ do_configure() {
     autoconf
     cd $olddir
     PYTHON_CFLAGS=-I${STAGING_INCDIR_NATIVE}/${PYTHON_DIR}${PYTHON_ABI} PYTHON_LIBS="-L${STAGING_LIBDIR_NATIVE} -lpython${PYTHON_BASEVERSION}${PYTHON_ABI}" oe_runconf
+    # fake for cross-toolset
+    cp -f ${B}/config_host.mk ${B}/config_build.mk
+    cp -f ${B}/config_host_lang.mk ${B}/config_build_lang.mk
+    cp -rf ${B}/config_host ${B}/config_build
 }
 
 # for debugging - we can as we're native
@@ -90,33 +94,14 @@ LDFLAGS += "-ldl"
 
 
 do_compile() {
-    # see pre_BuildTools.mk
-    BUILDDIR=${B} oe_runmake Executable_bestreversemap
-    BUILDDIR=${B} oe_runmake Executable_cfgex
-    BUILDDIR=${B} oe_runmake Executable_cpp
-    BUILDDIR=${B} oe_runmake Executable_gendict
-    BUILDDIR=${B} oe_runmake Executable_gencoll_rule
-    BUILDDIR=${B} oe_runmake Executable_genconv_dict
+    BUILDDIR=${B} oe_runmake cross-toolset
+    # gengal was not designed for build - we need to add it and it's dependencies
     BUILDDIR=${B} oe_runmake Executable_gengal
-    BUILDDIR=${B} oe_runmake Executable_genindex_data
-    BUILDDIR=${B} oe_runmake Executable_helpex
-    BUILDDIR=${B} oe_runmake Executable_idxdict
-    BUILDDIR=${B} oe_runmake Executable_makedepend
-    BUILDDIR=${B} oe_runmake Executable_propex
-    BUILDDIR=${B} oe_runmake Executable_saxparser
-    BUILDDIR=${B} oe_runmake Executable_svidl
-    BUILDDIR=${B} oe_runmake Executable_treex
-    BUILDDIR=${B} oe_runmake Executable_ulfex
-    BUILDDIR=${B} oe_runmake Executable_unoidl-check
-    BUILDDIR=${B} oe_runmake Executable_unoidl-write
-    BUILDDIR=${B} oe_runmake Executable_xrmex
     BUILDDIR=${B} oe_runmake Library_ucb1
     BUILDDIR=${B} oe_runmake Library_configmgr
     BUILDDIR=${B} oe_runmake Library_fwk
     BUILDDIR=${B} oe_runmake Library_i18npool
     BUILDDIR=${B} oe_runmake Library_pyuno
-    BUILDDIR=${B} oe_runmake Library_expwrap
-    BUILDDIR=${B} oe_runmake Library_sax
 }
 
 #    rsc 
@@ -157,9 +142,9 @@ do_install() {
     done
 
     # move saxparser.rdb to libdir - we'll need it for cross building
-    #cp -rf ${B}/workdir/Rdb/saxparser.rdb ${D}/${libdir}
+    cp -rf ${B}/workdir/Rdb/saxparser.rdb ${D}/${libdir}
     # fix library path - otherwise cross lib is pulled for native saxparse
-    #sed -i 's:LO_LIB_DIR:URE_INTERNAL_LIB_DIR:g' ${D}/${libdir}/saxparser.rdb
+    sed -i 's:LO_LIB_DIR:URE_INTERNAL_LIB_DIR:g' ${D}/${libdir}/saxparser.rdb
 
     # gengal script and binary to expected location
     install ${S}/svx/source/gengal/gengal.sh ${D}/${bindir}/gengal

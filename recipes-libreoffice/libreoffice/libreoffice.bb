@@ -169,6 +169,9 @@ do_configure() {
 
     # ensure gengal loads native libraries
     sed -i 's:%STAGING_LIBDIR_NATIVE%:${STAGING_LIBDIR_NATIVE}:g' ${S}/solenv/gbuild/Gallery.mk
+
+    # adjust gpgme++ path
+    sed -i 's:-I${includedir}/gpgme++:-I${STAGING_INCDIR}/gpgme++:g' ${B}/config_host.mk
 }
 
 do_install() {

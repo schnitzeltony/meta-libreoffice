@@ -69,6 +69,7 @@ DEPENDS += " \
     graphite2 \
     liblangtag \
     lpsolve \
+    gpgme \
 "
 
 # necessary to let the call for python-config succeed
@@ -125,6 +126,7 @@ EXTRA_OECONF += " \
     --with-system-clucene \
     --with-system-mythes \
     --with-system-altlinuxhyph \
+    --with-system-gpgmepp \
 "
 
 CXXFLAGS += "-DGLM_ENABLE_EXPERIMENTAL=1"

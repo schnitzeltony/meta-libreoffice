@@ -1,7 +1,7 @@
 SUMMARY = "Font rendering capabilities for complex non-Roman writing systems"
 HOMEPAGE = "http://sourceforge.net/projects/silgraphite"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=acba2ba259d936c324b90ab679e6b901"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b0452d508cc4eb104de0226a5b0c8786"
 
 inherit cmake
 

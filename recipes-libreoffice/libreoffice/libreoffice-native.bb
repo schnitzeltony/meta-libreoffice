@@ -4,9 +4,6 @@ FILESEXTRAPATHS =. "${FILE_DIRNAME}/${PN}:"
 
 inherit native
 
-# TODO
-# boost / mariadb
-
 DEPENDS += " \
     cairo-native \
     libepoxy-native \
@@ -104,9 +101,6 @@ do_compile() {
     BUILDDIR=${B} oe_runmake Library_pyuno
 }
 
-#    rsc 
-#    transex3 
-#    uiex 
 LOBUILDTOOLS = " \
     bestreversemap \
     cfgex \

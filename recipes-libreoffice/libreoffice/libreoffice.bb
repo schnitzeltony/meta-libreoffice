@@ -191,7 +191,10 @@ FILES_${PN} += " \
     ${datadir}/appdata \
     ${datadir}/mime-info \
     ${datadir}/mime/packages \
-    \
+"
+
+FILES_${PN}-dev += "\
+    ${datadir}/gir-1.0 \
 "
 
 PACKAGE_BEFORE_PN += "${PN}-odk"
@@ -199,12 +202,6 @@ FILES_${PN}-odk = " \
     ${libdir}/libreoffice/sdk \
 "
 INSANE_SKIP_${PN}-odk += "dev-so staticdev"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/libreoffice/*/.debug \
-    ${libdir}/libreoffice/*/*/.debug \
-    ${libdir}/libreoffice/*/*/*/.debug \
-"
 
 # based http://pkgs.fedoraproject.org/cgit/rpms/libreoffice.git/tree/libreoffice.spec
 LO_LANGUAGE_FILES = " \

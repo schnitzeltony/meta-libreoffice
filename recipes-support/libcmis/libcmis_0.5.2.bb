@@ -10,14 +10,10 @@ LIC_FILES_CHKSUM = " \
 SRC_URI = " \
     https://github.com/tdf/libcmis/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
     file://0001-Avoid-cross-compile-unsafe-paths.patch \
-    file://0002-drop-prefix.patch \
-    file://0003-do-not-reinvent-the-wheel.patch \
-    file://0004-fix-build-error-with-gcc-std-c-98.patch \
-    file://0005-Fix-build-with-boost-1.68.0.patch \
 "
 
-SRC_URI[md5sum] = "3270154f0f40d86fce849b161f914101"
-SRC_URI[sha256sum] = "6acbdf22ecdbaba37728729b75bfc085ee5a4b49a6024757cfb86ccd3da27b0e"
+SRC_URI[md5sum] = "e3ebb4f603e62e748685b6376d5719d9"
+SRC_URI[sha256sum] = "ed6f681a48abbf3c2324564b17a180d21fa9503230e8708825e1ad80daee4f81"
 
 inherit autotools pkgconfig
 
@@ -25,7 +21,6 @@ DEPENDS = "curl libxml2 cppunit boost"
 
 EXTRA_OECONF = " \
     --without-man \
-    --disable-werror \
 "
 
 do_configure_prepend() {

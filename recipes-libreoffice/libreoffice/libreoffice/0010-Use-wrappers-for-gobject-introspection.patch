@@ -1,0 +1,41 @@
+From ed13bcd91383a5edcf2010953cf3287b8b26de9a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 5 Aug 2019 21:37:07 +0200
+Subject: [PATCH] Use wrappers for gobject-introspection
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+With INTROSPECTION_COMPILER not set by configure it is:
+
+Upstream-Status: Inaprropriate [oe-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ sysui/desktop/share/create_tree.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/sysui/desktop/share/create_tree.sh b/sysui/desktop/share/create_tree.sh
+index 9fc2b99..c49b0b6 100755
+--- a/sysui/desktop/share/create_tree.sh
++++ b/sysui/desktop/share/create_tree.sh
+@@ -86,7 +86,7 @@ cp "${APPDATA_SOURCE_DIR}/org.libreoffice.kde.metainfo.xml" "${DESTDIR}/${PREFIX
+ # Generate gobject-introspection files
+ if [ -n "$INTROSPECTION_SCANNER" ]; then
+     mkdir -p "${DESTDIR}/${PREFIXDIR}/share/gir-1.0"
+-    g-ir-scanner "${SRCDIR}/include/LibreOfficeKit/LibreOfficeKitGtk.h" "${SRCDIR}/libreofficekit/source/gtk/lokdocview.cxx" \
++    ${INTROSPECTION_SCANNER} "${SRCDIR}/include/LibreOfficeKit/LibreOfficeKitGtk.h" "${SRCDIR}/libreofficekit/source/gtk/lokdocview.cxx" \
+                  `${PKG_CONFIG} --cflags gobject-introspection-1.0 gtk+-3.0` -I"${SRCDIR}/include/" \
+                  --include=GLib-2.0 --include=GObject-2.0 --include=Gio-2.0 \
+                  --library=libreofficekitgtk --library-path="${INSTDIR}/program" \
+@@ -95,6 +95,6 @@ if [ -n "$INTROSPECTION_SCANNER" ]; then
+                  --output="${DESTDIR}/${PREFIXDIR}/share/gir-1.0/LOKDocView-0.1.gir" --warn-all --no-libtool
+ 
+     mkdir -p "${DESTDIR}/${LIBDIR}/girepository-1.0"
+-    g-ir-compiler "${DESTDIR}/${PREFIXDIR}/share/gir-1.0/LOKDocView-0.1.gir" \
++    ${INTROSPECTION_COMPILER} "${DESTDIR}/${PREFIXDIR}/share/gir-1.0/LOKDocView-0.1.gir" \
+                   --output="${DESTDIR}/${LIBDIR}/girepository-1.0/LOKDocView-0.1.typelib"
+ fi
+-- 
+2.21.0
+

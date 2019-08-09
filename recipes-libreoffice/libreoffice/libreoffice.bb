@@ -12,6 +12,7 @@ SRC_URI += " \
     file://0007-Package.mk-workaround-icu-missing-error-for-without-.patch \
     file://0008-configure.ac-avoid-finding-calling-pg_config.patch \
     file://0009-avoid-downloading-by-git-submodules.patch \
+    file://0010-Use-wrappers-for-gobject-introspection.patch \
 "
 
 SRC_URI[translations.md5sum] = "21459291d488ecd7e4e8fb0fdcc55aca"
@@ -175,7 +176,13 @@ do_configure() {
 }
 
 do_install() {
+    # INTROSPECTION_SCANNER is exprted but INTROSPECTION_COMPILER is not. This
+    # caused silent 'Permission denied' errors. So give a little help:
+    export INTROSPECTION_COMPILER=${STAGING_BINDIR}/g-ir-compiler-wrapper
+
     make DESTDIR=${D} distro-pack-install
+
+    chown -R root:root ${D}${libdir}/girepository-1.0
 
     # unoconv
     install -d ${D}${bindir}

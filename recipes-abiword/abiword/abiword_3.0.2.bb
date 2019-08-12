@@ -16,7 +16,7 @@ DEPENDS  = " \
     asio \
     evolution-data-server \
     libxslt \
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)} \
+    redland rasqal \
 "
 RDEPENDS_${PN}_append_libc-glibc = " \
     glibc-gconv-ibm850 glibc-gconv-cp1252 \
@@ -44,7 +44,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 PACKAGECONFIG ??= " \
     collab-backend-xmpp collab-backend-tcp \
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'libical', '', d)} \
+    libical \
 "
 PACKAGECONFIG[libical] = "--with-libical,--without-libical,libical raptor2"
 PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"

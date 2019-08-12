@@ -16,7 +16,7 @@ DEPENDS  = " \
     asio \
     evolution-data-server \
     libxslt \
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)} \
+    redland rasqal \
 "
 RDEPENDS_${PN}_append_libc-glibc = " \
     glibc-gconv-ibm850 glibc-gconv-cp1252 \
@@ -27,6 +27,7 @@ RCONFLICTS_${PN} = "${PN}-embedded"
 SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
            file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
            file://0001-Bug-13770-Require-C-11-from-now-on.patch \
+           file://libical3.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
@@ -43,7 +44,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 PACKAGECONFIG ??= " \
     collab-backend-xmpp collab-backend-tcp \
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'libical', '', d)} \
+    libical \
 "
 PACKAGECONFIG[libical] = "--with-libical,--without-libical,libical raptor2"
 PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"

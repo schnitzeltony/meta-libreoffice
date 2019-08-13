@@ -8,7 +8,7 @@ Content-Transfer-Encoding: 8bit
 
 With INTROSPECTION_COMPILER not set by configure it is:
 
-Upstream-Status: Inaprropriate [oe-specific]
+Upstream-Status: Inappropriate [oe-specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---

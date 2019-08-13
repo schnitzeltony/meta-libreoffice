@@ -7,6 +7,8 @@ Subject: [PATCH] t1lib: add 5.1.2
 # Patch managed by http://www.holgerschurig.de/patcher.html
 #
 
+Upstream-Status: Inappropriate [oe-specific]
+
 ---
  configure.in | 95 ++++++++++++++++++++++++------------------------------------
  1 file changed, 38 insertions(+), 57 deletions(-)

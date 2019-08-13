@@ -7,6 +7,8 @@ Subject: [PATCH] t1lib: add 5.1.2
 # Patch managed by http://www.holgerschurig.de/patcher.html
 #
 
+Upstream-Status: Pending
+
 ---
  Makefile.in           | 5 +++--
  examples/Makefile.in  | 5 +++--

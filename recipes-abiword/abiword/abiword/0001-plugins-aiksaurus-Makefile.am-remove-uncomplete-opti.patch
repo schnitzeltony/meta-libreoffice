@@ -1,5 +1,5 @@
 From c646159ce817506131b58fdab1cdc1cd6364df7a Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Sun, 7 Feb 2016 21:45:20 +0100
 Subject: [PATCH] plugins/aiksaurus/Makefile.am: remove uncomplete options
  WITH_BUILTIN_AIKSAURUS_GTK
@@ -14,7 +14,7 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Pending
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  plugins/aiksaurus/Makefile.am | 4 ----
  1 file changed, 4 deletions(-)

@@ -24,11 +24,12 @@ RDEPENDS_${PN}_append_libc-glibc = " \
 "
 RCONFLICTS_${PN} = "${PN}-embedded"
 
-SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
-           file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
-           file://0001-Bug-13770-Require-C-11-from-now-on.patch \
-           file://libical3.patch \
-           "
+SRC_URI = " \
+    http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
+    file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
+    file://0001-Bug-13770-Require-C-11-from-now-on.patch \
+    file://libical3.patch \
+"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
 
@@ -54,13 +55,14 @@ PACKAGECONFIG[collab-backend-service] = "--enable-collab-backend-service,--disab
 PACKAGECONFIG[collab-backend-telepathy] = "--enable-collab-backend-telepathy,--disable-collab-backend-telepathy,libgsf libxml2 telepathy-glib telepathy-mission-control"
 PACKAGECONFIG[collab-backend-sugar] = "--enable-collab-backend-sugar,--disable-collab-backend-sugar,libgsf libxml2 dbus-glib"
 
-EXTRA_OECONF = " --disable-static  \
-                 --enable-plugins \
-                 --enable-clipart \
-                 --enable-templates \
-                 --without-gnomevfs \
-                 --with-gtk2 \
-                 --with-libwmf-config=${STAGING_DIR} \
+EXTRA_OECONF = " \
+    --disable-static  \
+    --enable-plugins \
+    --enable-clipart \
+    --enable-templates \
+    --without-gnomevfs \
+    --with-gtk2 \
+    --with-libwmf-config=${STAGING_DIR} \
 "
 
 LDFLAGS += "-lgmodule-2.0"
@@ -76,39 +78,38 @@ do_compile() {
 PACKAGES += " ${PN}-clipart ${PN}-strings ${PN}-systemprofiles ${PN}-templates "
 
 FILES_${PN} += " \
-                ${libdir}/lib${PN}-*.so \
-                ${datadir}/mime-info \
-                ${datadir}/icons/* \
-                ${datadir}/${PN}-${SHRT_VER}/glade \
-                ${datadir}/${PN}-${SHRT_VER}/scripts \
-                ${datadir}/${PN}-${SHRT_VER}/system.profile-en \
-                ${datadir}/${PN}-${SHRT_VER}/system.profile-en_GB \
-                ${datadir}/${PN}-${SHRT_VER}/templates/normal.awt \
-                ${datadir}/${PN}-${SHRT_VER}/templates/normal.awt-en_GB \
-                ${datadir}/${PN}-${SHRT_VER}/templates/Employee-Directory.awt \
-                ${datadir}/${PN}-${SHRT_VER}/templates/Business-Report.awt \
-                ${datadir}/${PN}-${SHRT_VER}/templates/Fax-Coversheet.awt \
-                ${datadir}/${PN}-${SHRT_VER}/templates/Resume.awt \
-                ${datadir}/${PN}-${SHRT_VER}/templates/Two-Columns.awt \
-                ${datadir}/${PN}-${SHRT_VER}/templates/Memo.awt \
-                ${datadir}/${PN}-${SHRT_VER}/templates/Press-Release.awt \
-                ${datadir}/${PN}-${SHRT_VER}/certs \
-                ${datadir}/${PN}-${SHRT_VER}/ui \
-                ${datadir}/${PN}-${SHRT_VER}/xsl* \
-                ${datadir}/${PN}-${SHRT_VER}/mime-info \
-                ${datadir}/${PN}-${SHRT_VER}/Pr*.xml \
+    ${libdir}/lib${PN}-*.so \
+    ${datadir}/mime-info \
+    ${datadir}/icons/* \
+    ${datadir}/${PN}-${SHRT_VER}/glade \
+    ${datadir}/${PN}-${SHRT_VER}/scripts \
+    ${datadir}/${PN}-${SHRT_VER}/system.profile-en \
+    ${datadir}/${PN}-${SHRT_VER}/system.profile-en_GB \
+    ${datadir}/${PN}-${SHRT_VER}/templates/normal.awt \
+    ${datadir}/${PN}-${SHRT_VER}/templates/normal.awt-en_GB \
+    ${datadir}/${PN}-${SHRT_VER}/templates/Employee-Directory.awt \
+    ${datadir}/${PN}-${SHRT_VER}/templates/Business-Report.awt \
+    ${datadir}/${PN}-${SHRT_VER}/templates/Fax-Coversheet.awt \
+    ${datadir}/${PN}-${SHRT_VER}/templates/Resume.awt \
+    ${datadir}/${PN}-${SHRT_VER}/templates/Two-Columns.awt \
+    ${datadir}/${PN}-${SHRT_VER}/templates/Memo.awt \
+    ${datadir}/${PN}-${SHRT_VER}/templates/Press-Release.awt \
+    ${datadir}/${PN}-${SHRT_VER}/certs \
+    ${datadir}/${PN}-${SHRT_VER}/ui \
+    ${datadir}/${PN}-${SHRT_VER}/xsl* \
+    ${datadir}/${PN}-${SHRT_VER}/mime-info \
+    ${datadir}/${PN}-${SHRT_VER}/Pr*.xml \
 "
 
 # don't steal /usr/lib/libabiword-3.0.so from ${PN}
 # in this case it's needed in ${PN}
 FILES_${PN}-dev = " \
-                  ${includedir} \
-                  ${libdir}/pkgconfig \
-                  ${libdir}/${PN}*.la \
-                  ${libdir}/lib${PN}*.la \
-                  ${libdir}/${PN}-${SHRT_VER}/plugins/*.la \
+    ${includedir} \
+    ${libdir}/pkgconfig \
+    ${libdir}/${PN}*.la \
+    ${libdir}/lib${PN}*.la \
+    ${libdir}/${PN}-${SHRT_VER}/plugins/*.la \
 "
-FILES_${PN}-dbg += "${libdir}/${PN}-${SHRT_VER}/plugins/.debug"
 FILES_${PN}-doc += "${datadir}/${PN}-*/readme*"
 
 FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/strings"

@@ -1,5 +1,5 @@
 From 9c226fbc6a42540cb492fcfcb81ff16fffb086d6 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Tue, 30 Aug 2016 23:24:53 +0200
 Subject: [PATCH] configure.ac: header detection of hash_map is broken - pin to
  correct implementation
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Pending
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  configure.ac | 31 ++++---------------------------
  1 file changed, 4 insertions(+), 27 deletions(-)

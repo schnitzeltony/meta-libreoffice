@@ -5,12 +5,9 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.MPL;md5=815ca599c9df247a0c7f619bab123dad \
 "
 
-SRC_URI = " \
-    http://dev-www.libreoffice.org/src/${BPN}/${BPN}-${PV}.tar.xz \
-    file://0001-Fix-build-with-gcc-9.patch \
-"
-SRC_URI[md5sum] = "201f477df7ea90d362c389c145c0f352"
-SRC_URI[sha256sum] = "0b72944d5af81dda0a5c5803ee84cbac4b81441a4d767aa57029adc6744c2485"
+SRC_URI = "http://dev-www.libreoffice.org/src/${BPN}/${BPN}-${PV}.tar.xz"
+SRC_URI[md5sum] = "0ec0331abbbf653f08eecceb1fb787a0"
+SRC_URI[sha256sum] = "e763a9dc21c3d2667402d66e202e3f8ef4db51b34b79ef41f56cacb86dcd6eed"
 
 inherit autotools pkgconfig
 

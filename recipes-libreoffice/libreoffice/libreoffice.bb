@@ -15,8 +15,8 @@ SRC_URI += " \
     file://0010-Use-wrappers-for-gobject-introspection.patch \
 "
 
-SRC_URI[translations.md5sum] = "21459291d488ecd7e4e8fb0fdcc55aca"
-SRC_URI[translations.sha256sum] = "090098f72f2c153ee361e9a01f7b2593b0447e93bf4d694a130b803c0577601c"
+SRC_URI[translations.md5sum] = "953b77768301d9f0c7e2da2aa9afe74e"
+SRC_URI[translations.sha256sum] = "1c7f4f1412351c1d9d87d346097c730aeed61595450d5e875a8d9120765cd993"
 
 DEPENDS += " \
     ${BPN}-native \

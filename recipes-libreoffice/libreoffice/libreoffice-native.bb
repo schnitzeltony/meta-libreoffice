@@ -8,7 +8,6 @@ DEPENDS += " \
     cairo-native \
     libepoxy-native \
     curl-native \
-    gconf-native \
     libpng-native \
     jpeg-native \
     libxml2-native \

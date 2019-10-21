@@ -213,9 +213,7 @@ INSANE_SKIP_${PN}-odk += "dev-so staticdev"
 # based http://pkgs.fedoraproject.org/cgit/rpms/libreoffice.git/tree/libreoffice.spec
 LO_LANGUAGE_FILES = " \
     ${libdir}/libreoffice/share/autocorr/*%{1}.dat \
-    ${libdir}/libreoffice/program/resource/*%{1}.res \
-    ${libdir}/libreoffice/share/config/soffice.cfg/modules/*/ui/res/%{1}.zip \
-    ${libdir}/libreoffice/share/config/soffice.cfg/*/ui/res/%{1}.zip \
+    ${libdir}/libreoffice/program/resource/*%{1}/LC_MESSAGES \
     ${libdir}/libreoffice/share/registry/Langpack-%{1}.xcd \
     ${libdir}/libreoffice/share/registry/res/registry_%{1}.xcd \
     ${libdir}/libreoffice/share/registry/res/fcfg_langpack_%{1}.xcd \

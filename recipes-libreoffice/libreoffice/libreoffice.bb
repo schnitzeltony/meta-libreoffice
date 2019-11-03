@@ -13,6 +13,7 @@ SRC_URI += " \
     file://0008-configure.ac-avoid-finding-calling-pg_config.patch \
     file://0009-avoid-downloading-by-git-submodules.patch \
     file://0010-Use-wrappers-for-gobject-introspection.patch \
+    file://0011-Fix-build-with-poppler-0.82.patch \
 "
 
 SRC_URI[translations.md5sum] = "fcaa3bf5996b0c3cb3e92884b601da54"

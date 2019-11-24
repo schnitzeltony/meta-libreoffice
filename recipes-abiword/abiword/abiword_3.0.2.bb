@@ -39,7 +39,7 @@ SRC_URI[sha256sum] = "afbfd458fd02989d8b0c6362ba8a4c14686d89666f54cfdb5501bd2090
 #want 3.x from 3.x.y for the installation directory
 SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 
-inherit distro_features_check autotools-brokensep pkgconfig
+inherit features_check autotools-brokensep pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11"
 

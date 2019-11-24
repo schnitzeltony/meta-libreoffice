@@ -18,7 +18,7 @@ SRC_URI = " \
 SRCREV = "0bc2cfa0a47aed2c8a63abd989cb8da4dcceb2ec"
 S = "${WORKDIR}/git"
 
-inherit distro_features_check autotools pkgconfig
+inherit features_check autotools pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11"
 

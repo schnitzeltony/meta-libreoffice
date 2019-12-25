@@ -13,11 +13,10 @@ SRC_URI += " \
     file://0008-configure.ac-avoid-finding-calling-pg_config.patch \
     file://0009-avoid-downloading-by-git-submodules.patch \
     file://0010-Use-wrappers-for-gobject-introspection.patch \
-    file://0011-Fix-build-with-poppler-0.82.patch \
 "
 
-SRC_URI[translations.md5sum] = "fcaa3bf5996b0c3cb3e92884b601da54"
-SRC_URI[translations.sha256sum] = "721b760b7a9dc88e7d278dab89a2148a4e9239047f7b8f9ee6741c0f8f84b2fb"
+SRC_URI[translations.md5sum] = "586c89a3b60bbc90b3a32f870a05cca6"
+SRC_URI[translations.sha256sum] = "74a11926ba96ad2fa373a3231ad2e283d95e2ba4a1458c4c625686569f6f5fe9"
 
 DEPENDS += " \
     ${BPN}-native \

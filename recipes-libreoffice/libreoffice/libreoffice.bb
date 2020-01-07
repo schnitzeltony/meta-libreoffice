@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-inherit gobject-introspection bash-completion gtk-icon-cache
+inherit gobject-introspection bash-completion gtk-icon-cache mime
 
 SRC_URI += " \
     http://download.documentfoundation.org/libreoffice/src/${DIRV}/${BPN}-translations-${PV}.tar.xz;name=translations \

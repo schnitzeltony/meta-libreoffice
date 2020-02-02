@@ -8,6 +8,6 @@ inherit cmake
 #DEPENDS += "freetype"
 
 SRC_URI = "git://github.com/tfussell/xlnt.git"
-SRCREV = "f30260153fcee7e1f775f25ff0cb2750e7826296"
+SRCREV = "e2262a0c65384416c8fb9263a057e7d0d3e381f6"
 S = "${WORKDIR}/git"
-PV = "1.3.0+git${SRCPV}"
+PV = "1.4.0+git${SRCPV}"

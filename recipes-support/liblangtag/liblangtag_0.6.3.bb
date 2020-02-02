@@ -12,8 +12,8 @@ SRC_URI = " \
     file://0001-configure.ac-add-missing-HAVE_INTROSPECTION-check.patch \
     file://0002-configure.ac-remove-untranslated-AX_CHECK_ENABLE_DEB.patch \
 "
-SRC_URI[md5sum] = "284f120247323a35122ab32b4b359c45"
-SRC_URI[sha256sum] = "d6242790324f1432fb0a6fae71b6851f520b2c5a87675497cf8ea14c2924d52e"
+SRC_URI[md5sum] = "015274eb284b1dc82bf7af1d1774ec64"
+SRC_URI[sha256sum] = "1f12a20a02ec3a8d22e54dedb8b683a43c9c160bda1ba337bf1060607ae733bd"
 
 inherit autotools pkgconfig gobject-introspection
 

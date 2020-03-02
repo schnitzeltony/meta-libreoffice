@@ -80,7 +80,5 @@ EXTRA_OECONF = " \
     --with-system-libcdr \
     --with-system-libmspub \
     --with-system-libmwaw \
+    --with-system-mdds \
 "
-
-# TODO mdds
-

@@ -11,15 +11,15 @@ SRC_URI += " \
     file://0003-remove-paths-for-gb_Executable_get_command.patch \
     file://0004-ensure-that-native-gendict-build-by-libreoffice-is-u.patch \
     file://0005-add-a-new-gb_Rdb_get_target_for_build_native-and-use.patch \
-    file://0007-Package.mk-workaround-icu-missing-error-for-without-.patch \
-    file://0008-configure.ac-avoid-finding-calling-pg_config.patch \
-    file://0009-avoid-downloading-by-git-submodules.patch \
-    file://0010-Use-wrappers-for-gobject-introspection.patch \
-    file://0011-Fix-build-with-poppler-0.83.patch \
+    file://0006-Package.mk-workaround-icu-missing-error-for-without-.patch \
+    file://0007-configure.ac-avoid-finding-calling-pg_config.patch \
+    file://0008-avoid-downloading-by-git-submodules.patch \
+    file://0009-Use-wrappers-for-gobject-introspection.patch \
+    file://0010-Support-install-to-find-bash-completion.in.patch \
 "
 
-SRC_URI[translations.md5sum] = "586c89a3b60bbc90b3a32f870a05cca6"
-SRC_URI[translations.sha256sum] = "74a11926ba96ad2fa373a3231ad2e283d95e2ba4a1458c4c625686569f6f5fe9"
+SRC_URI[translations.md5sum] = "a2233b0924a3034249f75179a147ef35"
+SRC_URI[translations.sha256sum] = "f60b2cacd10b30e141d8cafe405404d475ffc505e8ca0f9aa0a9af4e3a8e4309"
 
 DEPENDS += " \
     ${BPN}-native \
@@ -74,6 +74,7 @@ DEPENDS += " \
     liblangtag \
     lpsolve \
     gpgme \
+    mdds-1.5 \
 "
 
 # necessary to let the call for python-config succeed
@@ -85,18 +86,12 @@ export STAGING_INCDIR
 # Notes:
 #
 # 1. By default many many sources are downloaded from libreoffice mirrors.
-# This can be avoided by --with-system-.. To see what's still loaded check
-# log.do_compile.
-#
-# 2. problems during configure detected for (TBD?)
-# * boost: 'configure: error: Could not find a version of the library!'
-#
-# 3. in case of trouble in do_compile: configure with --enable-verbose might
-# help detecting culprit
-#
-# 5. --enable-scripting-javascript / rhino meta-java
-# 6. Libreoffice Base embedded db / hsqldb meta-java
-# 7. galleries fail to build / prebuild from external sources?
+#    This can be avoided by --with-system-.. To see what's still loaded check
+#    log.do_compile.
+# 2. in case of trouble in do_compile: configure with --enable-verbose might
+#    help detecting culprit
+# 3. --enable-scripting-javascript / rhino meta-java
+# 4. Libreoffice Base embedded db / hsqldb meta-java
 
 EXTRA_OECONF += " \
     --without-java \
@@ -133,19 +128,15 @@ EXTRA_OECONF += " \
     --with-system-gpgmepp \
 "
 
-CXXFLAGS += "-DGLM_ENABLE_EXPERIMENTAL=1"
-
 PACKAGECONFIG ??= " \
     gtk3 \
     mariadb \
     postgresql \
 "
 
-PACKAGECONFIG[gtk] = "--enable-gtk , --disable-gtk, gtk+ cairo"
 PACKAGECONFIG[gtk3] = "--enable-gtk3 , --disable-gtk3, gtk+3 cairo"
 PACKAGECONFIG[avahi] = "--enable-avahi, --disable-avahi, avahi"
 PACKAGECONFIG[odk] = "--enable-odk, --disable-odk"
-
 PACKAGECONFIG[mariadb] = "--with-system-mariadb, --disable-ext-mariadb-connector, mariadb"
 PACKAGECONFIG[postgresql] = "--enable-postgresql-sdbc --with-system-postgresql, --disable-postgresql-sdbc, postgresql"
 
@@ -178,40 +169,53 @@ do_configure() {
     sed -i 's:-I${includedir}/gpgme++:-I${STAGING_INCDIR}/gpgme++:g' ${B}/config_host.mk
 }
 
-do_install() {
+do_compile_prepend() {
     # INTROSPECTION_SCANNER is exprted but INTROSPECTION_COMPILER is not. This
-    # caused silent 'Permission denied' errors. So give a little help:
+    # caused 'Permission denied' errors. So give a little help:
     export INTROSPECTION_COMPILER=${STAGING_BINDIR}/g-ir-compiler-wrapper
+}
 
+do_install() {
     make DESTDIR=${D} distro-pack-install
 
-    chown -R root:root ${D}${libdir}/girepository-1.0
+    # install LibreOfficeKit (gobject-introspection) manually - became necessary since 6.4.x
+    install -m 0755 -d ${D}${libdir}/girepository-1.0
+    install -m 0644 ${B}/workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.typelib ${D}${libdir}/girepository-1.0/
+    install -m 0755 -d ${D}${libdir}/gir-1.0
+    install -m 0644 ${B}/workdir/CustomTarget/sysui/share/libreoffice/LOKDocView-0.1.gir ${D}${libdir}/gir-1.0/
+    install -m 0755 ${B}/instdir/program/liblibreofficekitgtk.so ${D}${libdir}/
+    # install LibreOfficeKit headers
+    install -m 0755 -d ${D}${includedir}/LibreOfficeKit
+    install -m 0644 ${S}/include/LibreOfficeKit/* ${D}${includedir}/LibreOfficeKit/
 
     # unoconv
     install -d ${D}${bindir}
     install -m 0755 ${WORKDIR}/git/unoconv/unoconv ${D}/${bindir}
+
+    # remove some unneeded files
+    rm -rf ${D}${libdir}/libreoffice/readmes
+    rm -rf ${D}${libdir}/libreoffice/share/theme_definitions/ios
+    rmdir ${D}${libdir}/libreoffice/share/theme_definitions
 }
 
 
 FILES_${PN} += " \
-    ${datadir}/mime \
-    ${datadir}/application-registry \
-    ${datadir}/mimelnk \
-    ${datadir}/icons \
     ${datadir}/appdata \
+    ${datadir}/application-registry \
+    ${datadir}/icons \
+    ${datadir}/mime \
     ${datadir}/mime-info \
-    ${datadir}/mime/packages \
 "
 
-FILES_${PN}-dev += "\
-    ${datadir}/gir-1.0 \
-"
+PACKAGES =+ "${PN}-odk ${PN}-officekit"
 
-PACKAGE_BEFORE_PN += "${PN}-odk"
-FILES_${PN}-odk = " \
-    ${libdir}/libreoffice/sdk \
-"
+FILES_${PN}-odk = "${libdir}/libreoffice/sdk"
 INSANE_SKIP_${PN}-odk += "dev-so staticdev"
+
+FILES_${PN}-officekit = " \
+    ${libdir}/girepository-1.0 \
+    ${libdir}/liblibreofficekitgtk.so \
+"
 
 # based http://pkgs.fedoraproject.org/cgit/rpms/libreoffice.git/tree/libreoffice.spec
 LO_LANGUAGE_FILES = " \

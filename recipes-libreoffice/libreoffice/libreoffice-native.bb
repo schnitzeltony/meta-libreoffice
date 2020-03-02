@@ -44,6 +44,7 @@ DEPENDS += " \
     libmspub-native \
     libmwaw-native \
     libodfgen-native \
+    mdds-1.5-native \
 "
 
 SRC_URI += " \

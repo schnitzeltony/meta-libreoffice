@@ -1,7 +1,7 @@
 SUMMARY = "A collection of multi-dimensional data structures and indexing algorithms"
 HOMEPAGE = "https://gitlab.com/mdds/mdds"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=60a6093677ded88b5e28677e52a0c011"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=60a6093677ded88b5e28677e52a0c011"
 
 inherit autotools-brokensep pkgconfig
 

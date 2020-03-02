@@ -10,6 +10,6 @@ SRC_URI[sha256sum] = "e61677e8799ce6e55b25afc11aa5339113f6a49cff031f336e32fa5863
 
 inherit autotools pkgconfig
 
-DEPENDS = "glm mdds icu lcms libxml2 librevenge liblangtag mdds-1.2"
+DEPENDS = "glm icu lcms libxml2 librevenge liblangtag mdds-1.2"
 
 BBCLASSEXTEND = "native"

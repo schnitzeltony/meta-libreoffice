@@ -137,7 +137,7 @@ PACKAGECONFIG ??= " \
 PACKAGECONFIG[gtk3] = "--enable-gtk3 , --disable-gtk3, gtk+3 cairo"
 PACKAGECONFIG[avahi] = "--enable-avahi, --disable-avahi, avahi"
 PACKAGECONFIG[odk] = "--enable-odk, --disable-odk"
-PACKAGECONFIG[mariadb] = "--with-system-mariadb, --disable-ext-mariadb-connector, mariadb"
+PACKAGECONFIG[mariadb] = "--with-system-mariadb, , mariadb"
 PACKAGECONFIG[postgresql] = "--enable-postgresql-sdbc --with-system-postgresql, --disable-postgresql-sdbc, postgresql"
 
 do_configure() {

@@ -16,6 +16,7 @@ SRC_URI += " \
     file://0008-avoid-downloading-by-git-submodules.patch \
     file://0009-Use-wrappers-for-gobject-introspection.patch \
     file://0010-Support-install-to-find-bash-completion.in.patch \
+    file://0011-Fix-build-with-poppler-0.86.patch \
 "
 
 SRC_URI[translations.md5sum] = "a2233b0924a3034249f75179a147ef35"

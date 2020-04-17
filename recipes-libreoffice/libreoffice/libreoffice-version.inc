@@ -1,9 +1,9 @@
-PV = "6.4.1.2"
-DIRV = "6.4.1"
+PV = "6.4.3.2"
+DIRV = "6.4.3"
 
 SRC_URI += " \
     http://download.documentfoundation.org/libreoffice/src/${DIRV}/libreoffice-${PV}.tar.xz \
 "
 
-SRC_URI[md5sum] = "3057676fb7f5e0d8583a7c31752dc2b2"
-SRC_URI[sha256sum] = "0d64a09d3e20140def0ce09f6d8914b83dc17f6bfa8e7923ddf3f54b1d493f0a"
+SRC_URI[md5sum] = "56ffec862a6dc2ae19d74e71260e8155"
+SRC_URI[sha256sum] = "bc14547c188efa15f4cb36cfb3da7cacb3037a7448d1bba8a58ed6a320ccabb2"

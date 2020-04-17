@@ -19,8 +19,8 @@ SRC_URI += " \
     file://0011-Fix-build-with-poppler-0.86.patch \
 "
 
-SRC_URI[translations.md5sum] = "a2233b0924a3034249f75179a147ef35"
-SRC_URI[translations.sha256sum] = "f60b2cacd10b30e141d8cafe405404d475ffc505e8ca0f9aa0a9af4e3a8e4309"
+SRC_URI[translations.md5sum] = "5b3a73f13997aea3359ada5bb4d2659b"
+SRC_URI[translations.sha256sum] = "03260badad37d1d96c9bcac79ee48ab2ab00000aba78c3a4a4accd51c987e91b"
 
 DEPENDS += " \
     ${BPN}-native \

@@ -1,0 +1,28 @@
+From 4e4e9ac5990ff2436ed127eff6690b06a68bd034 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 5 Jun 2020 17:35:01 +0200
+Subject: [PATCH] Fix build with gcc 10
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/lib/NUM3Parser.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/lib/NUM3Parser.cpp b/src/lib/NUM3Parser.cpp
+index 6dc0e9a..8290290 100644
+--- a/src/lib/NUM3Parser.cpp
++++ b/src/lib/NUM3Parser.cpp
+@@ -8,6 +8,7 @@
+  */
+ 
+ #include <functional>
++#include <algorithm>
+ 
+ #include "NUM3Parser.h"
+ 
+-- 
+2.26.2
+

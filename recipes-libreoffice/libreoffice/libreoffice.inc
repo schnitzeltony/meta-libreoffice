@@ -11,6 +11,7 @@ require libreoffice-version.inc
 SRC_URI += " \
     git://github.com/dagwieers/unoconv.git;destsuffix=git/unoconv;name=unoconv \
     file://0001-Workaround-boost-library-detection-failures.patch \
+    file://0002-replace-boost-bimap-in-sdext-pdfimport.patch \
 "
 SRCREV_unoconv = "260b815bf2c57118df439f381974f3f0987222a1"
 

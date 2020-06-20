@@ -27,14 +27,13 @@ RCONFLICTS_${PN} = "${PN}-embedded"
 SRC_URI = " \
     http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
     file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
-    file://0001-Bug-13770-Require-C-11-from-now-on.patch \
-    file://libical3.patch \
+    file://0002-Bug-13770-Require-C-11-from-now-on.patch \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
 
-SRC_URI[md5sum] = "cda6dd58c747c133b421cc7eb18f5796"
-SRC_URI[sha256sum] = "afbfd458fd02989d8b0c6362ba8a4c14686d89666f54cfdb5501bd2090cf3522"
+SRC_URI[md5sum] = "04e31887049a8c72297881bc153b77c4"
+SRC_URI[sha256sum] = "e93096cb192e5bc19d62e180fc5eda643206465315a710113ae5036bc2a1a5d7"
 
 #want 3.x from 3.x.y for the installation directory
 SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
@@ -44,7 +43,7 @@ inherit features_check autotools-brokensep pkgconfig mime-xdg
 REQUIRED_DISTRO_FEATURES = "x11"
 
 PACKAGECONFIG ??= " \
-    collab-backend-xmpp collab-backend-tcp \
+    collab-backend-xmpp \
     libical \
 "
 PACKAGECONFIG[libical] = "--with-libical,--without-libical,libical raptor2"
@@ -81,6 +80,7 @@ FILES_${PN} += " \
     ${libdir}/lib${PN}-*.so \
     ${datadir}/mime-info \
     ${datadir}/icons/* \
+    ${datadir}/appdata \
     ${datadir}/${PN}-${SHRT_VER}/glade \
     ${datadir}/${PN}-${SHRT_VER}/scripts \
     ${datadir}/${PN}-${SHRT_VER}/system.profile-en \

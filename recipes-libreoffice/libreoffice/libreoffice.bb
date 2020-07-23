@@ -16,11 +16,10 @@ SRC_URI += " \
     file://0008-avoid-downloading-by-git-submodules.patch \
     file://0009-Use-wrappers-for-gobject-introspection.patch \
     file://0010-Support-install-to-find-bash-completion.in.patch \
-    file://0011-Fix-build-with-poppler-0.86.patch \
 "
 
-SRC_URI[translations.md5sum] = "0c2c0986ee47baf2fab8a2da18e0d89f"
-SRC_URI[translations.sha256sum] = "49cd385aabe7f197447ac0645a8fcdba75b04642b38fac49342aace2055098bd"
+SRC_URI[translations.md5sum] = "58771e45d87413f96a33e35d821a8122"
+SRC_URI[translations.sha256sum] = "4f4d2d74efb4eaba0ad5440ee716150c83cb3a2e2578084d2ce357b9435598a0"
 
 DEPENDS += " \
     ${BPN}-native \

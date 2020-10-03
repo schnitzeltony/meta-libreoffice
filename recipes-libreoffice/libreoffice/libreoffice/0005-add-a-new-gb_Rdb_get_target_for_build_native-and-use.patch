@@ -27,7 +27,7 @@ index c03bbbc..40b5865 100644
 +				-env:URE_MORE_SERVICES=$(call gb_Helper_make_url,$(call gb_Rdb_get_target_for_build_native,saxparser))) && \
  		sed 's/\(^.*get[^;]*$$$$\)/SAL_DLLPUBLIC_EXPORT \1/' $$@.tmp > $$@ && \
  		rm $$@.tmp)
- 
+ 	$$(call gb_Trace_EndRange,$$(subst $(WORKDIR)/,,$$@),SAX)
 diff --git a/solenv/gbuild/TargetLocations.mk b/solenv/gbuild/TargetLocations.mk
 index 2611d94..d6a1997 100644
 --- a/solenv/gbuild/TargetLocations.mk

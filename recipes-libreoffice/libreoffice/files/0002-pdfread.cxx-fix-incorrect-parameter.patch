@@ -1,0 +1,41 @@
+From f95acefc6d069dd31bfbdd1e218e667b8d9efa70 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 8 Nov 2020 16:17:35 +0100
+Subject: [PATCH] pdfread.cxx: fix incorrect parameter
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fixes:
+libreoffice-7.0.3.1/vcl/source/filter/ipdf/pdfread.cxx: In function ‘size_t vcl::RenderPDFBitmaps(const void*, int, std::vector<Bitmap>&, size_t, int, const basegfx::B2DTuple*)’:
+libreoffice-7.0.3.1/vcl/source/filter/ipdf/pdfread.cxx:221:11: error: ‘fResolutionDPI’ was not declared in this scope
+  221 |     (void)fResolutionDPI;
+      |           ^~~~~~~~~~~~~~
+
+Upstream fix [1] does not apply
+
+[1] https://github.com/LibreOffice/core/commit/5f3f17a9c64e33fb787a79dc94d902147da77d71#diff-34bdeffbff65e730b3f48255d872d5d1c5b3936990d27448a452a769c3635e5c
+
+Upstream-Status: Backport
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ vcl/source/filter/ipdf/pdfread.cxx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vcl/source/filter/ipdf/pdfread.cxx b/vcl/source/filter/ipdf/pdfread.cxx
+index 3066c4d..bf11578 100644
+--- a/vcl/source/filter/ipdf/pdfread.cxx
++++ b/vcl/source/filter/ipdf/pdfread.cxx
+@@ -218,7 +218,7 @@ size_t RenderPDFBitmaps(const void* pBuffer, int nSize, std::vector<Bitmap>& rBi
+     (void)rBitmaps;
+     (void)nFirstPage;
+     (void)nPages;
+-    (void)fResolutionDPI;
++    (void)pSizeHint;
+     return 0;
+ #endif // HAVE_FEATURE_PDFIUM
+ }
+-- 
+2.26.2
+

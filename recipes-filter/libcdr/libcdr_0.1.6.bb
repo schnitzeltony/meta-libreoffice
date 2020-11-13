@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.MPL;md5=815ca599c9df247a0c7f619bab123dad \
 "
 SRC_URI = "https://dev-www.libreoffice.org/src/libcdr/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "3040295f7a027c5bcdffbdb5bbdfd00a"
-SRC_URI[sha256sum] = "6ace5c499a8be34ad871e825442ce388614ae2d8675c4381756a7319429e3a48"
+SRC_URI[sha256sum] = "01cd00b04a030977e544433c2d127c997205332cd9b8e35ec0ee17110da7f861"
 
 inherit autotools pkgconfig
 

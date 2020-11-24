@@ -21,7 +21,7 @@ index 09ab42e..54a6fa3 100644
    return 0;
  }
  
-+// Since icu 68.1 icu we have to sleal:
++// Since icu 68.1 icu we have to:
 +#ifndef TRUE
 +// Taken from umachibe.h:
 +/**

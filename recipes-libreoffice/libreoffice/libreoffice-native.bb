@@ -34,7 +34,6 @@ DEPENDS += " \
     libexttextcat-native \
     hyphen-native \
     unzip-native \
-    neon-native \
     liblangtag-native \
     lpsolve-native \
     libwpd-native \

@@ -19,8 +19,8 @@ index 945268b..3259d43 100644
 --- a/cppuhelper/source/defaultbootstrap.cxx
 +++ b/cppuhelper/source/defaultbootstrap.cxx
 @@ -11,6 +11,7 @@
+ #include <sal/config.h>
  
- #include <cassert>
  #include <vector>
 +#include <stdio.h>
  

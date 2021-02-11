@@ -18,7 +18,7 @@ SRC_URI += " \
     file://0010-Support-install-to-find-bash-completion.in.patch \
 "
 
-SRC_URI[translations.sha256sum] = "544b1a1b4ca795842fb0e4e5eee68f94dd16b10ca4c3c84b1be85467cabc73ec"
+SRC_URI[translations.sha256sum] = "b17e0d7c61de80526d22c11c63596c4d56aaa2b1ad0f14d29e0abdd8b3efcc54"
 
 DEPENDS += " \
     ${BPN}-native \
@@ -32,7 +32,6 @@ DEPENDS += " \
     nss \
     zlib \
     jpeg \
-    neon \
     libpng \
     apr \
     serf \
@@ -199,11 +198,9 @@ do_install() {
 
 
 FILES_${PN} += " \
-    ${datadir}/appdata \
-    ${datadir}/application-registry \
     ${datadir}/icons \
+    ${datadir}/metainfo \
     ${datadir}/mime \
-    ${datadir}/mime-info \
 "
 
 PACKAGES =+ "${PN}-odk ${PN}-officekit"

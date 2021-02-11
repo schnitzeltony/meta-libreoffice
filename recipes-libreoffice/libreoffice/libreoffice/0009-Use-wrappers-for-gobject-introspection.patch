@@ -13,25 +13,29 @@ Upstream-Status: Inappropriate [oe-specific]
 Sun, 2 Feb 2020:
 Adjusted for 6.4.0.3
 
+Mon, 8 Feb 2021
+Adjusted for 7.1.0.3
+
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  sysui/CustomTarget_share.mk | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/sysui/CustomTarget_share.mk b/sysui/CustomTarget_share.mk
-index 8af5d66..33b5d06 100644
+index 1f578f5..2a3aac5 100644
 --- a/sysui/CustomTarget_share.mk
 +++ b/sysui/CustomTarget_share.mk
-@@ -183,7 +183,7 @@ ifneq ($(INTROSPECTION_SCANNER),)
+@@ -167,7 +167,7 @@ ifneq ($(INTROSPECTION_SCANNER),)
  $(share_WORKDIR)/%/LOKDocView-0.1.gir: \
  		$(call gb_Library_get_target,libreofficekitgtk)
  	mkdir -p $(dir $@)
--	g-ir-scanner "${SRCDIR}/include/LibreOfficeKit/LibreOfficeKitGtk.h" \
-+	${INTROSPECTION_SCANNER} "${SRCDIR}/include/LibreOfficeKit/LibreOfficeKitGtk.h" \
+-	PYTHONWARNINGS=default g-ir-scanner "${SRCDIR}/include/LibreOfficeKit/LibreOfficeKitGtk.h" \
++	PYTHONWARNINGS=default ${INTROSPECTION_SCANNER} "${SRCDIR}/include/LibreOfficeKit/LibreOfficeKitGtk.h" \
  				 "${SRCDIR}/libreofficekit/source/gtk/lokdocview.cxx" \
                   `${PKG_CONFIG} --cflags gobject-introspection-1.0 gtk+-3.0` \
  				 -I"${SRCDIR}/include/" \
-@@ -194,7 +194,7 @@ $(share_WORKDIR)/%/LOKDocView-0.1.gir: \
+@@ -179,7 +179,7 @@ $(share_WORKDIR)/%/LOKDocView-0.1.gir: \
  				 --output="$@" --warn-all --no-libtool
  
  $(share_WORKDIR)/%/LOKDocView-0.1.typelib: $(share_WORKDIR)/%/LOKDocView-0.1.gir
@@ -41,5 +45,5 @@ index 8af5d66..33b5d06 100644
  endif
  
 -- 
-2.21.0
+2.26.2
 

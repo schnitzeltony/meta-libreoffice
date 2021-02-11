@@ -67,7 +67,6 @@ EXTRA_OECONF = " \
     --with-system-libvisio \
     --with-system-libexttextcat \
     --with-system-altlinuxhyph \
-    --with-system-neon \
     --with-system-librevenge \
     --with-system-libabw \
     --with-system-libcdr \

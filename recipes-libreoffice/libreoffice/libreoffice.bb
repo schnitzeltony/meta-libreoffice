@@ -18,7 +18,7 @@ SRC_URI += " \
     file://0010-Support-install-to-find-bash-completion.in.patch \
 "
 
-SRC_URI[translations.sha256sum] = "702bca8e3e3359d065a5e986f5437e1034aa617856ac83ec2769b87300da2dee"
+SRC_URI[translations.sha256sum] = "a724be1fb8895ad14d1e1e6558d1bb65037d1f15858bd48228ad0cb66828a2c8"
 
 DEPENDS += " \
     ${BPN}-native \
@@ -124,6 +124,9 @@ EXTRA_OECONF += " \
     --with-system-mythes \
     --with-system-altlinuxhyph \
     --with-system-gpgmepp \
+    \
+    --with-external-dict-dir=${datadir}/hunspell \
+    --with-system-dicts \
 "
 
 PACKAGECONFIG ??= " \
@@ -301,3 +304,5 @@ python lo_do_split_locales() {
 }
 
 PACKAGESPLITFUNCS_prepend = "lo_do_split_locales "
+
+RDEPENDS_${PN} = "hunspell-dictionaries"

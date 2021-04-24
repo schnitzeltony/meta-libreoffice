@@ -8,7 +8,7 @@ SRC_URI = " \
     https://dev-www.libreoffice.org/src/libcdr/${BPN}-${PV}.tar.xz \
     file://0001-Fix-build-with-ICU-68.patch \
 "
-SRC_URI[sha256sum] = "01cd00b04a030977e544433c2d127c997205332cd9b8e35ec0ee17110da7f861"
+SRC_URI[sha256sum] = "5666249d613466b9aa1e987ea4109c04365866e9277d80f6cd9663e86b8ecdd4"
 
 inherit autotools pkgconfig
 

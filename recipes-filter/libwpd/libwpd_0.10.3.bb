@@ -13,4 +13,6 @@ inherit autotools pkgconfig perlnative
 
 DEPENDS = "librevenge"
 
+CXXFLAGS += "-std=c++11"
+
 BBCLASSEXTEND = "native"

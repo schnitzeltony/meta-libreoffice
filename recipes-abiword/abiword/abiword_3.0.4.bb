@@ -64,6 +64,7 @@ EXTRA_OECONF = " \
     --with-libwmf-config=${STAGING_DIR} \
 "
 
+CXXFLAGS += "-std=c++11"
 LDFLAGS += "-lgmodule-2.0"
 
 do_compile() {

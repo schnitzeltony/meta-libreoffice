@@ -1,1 +1,1 @@
-PACKAGECONFIG_append = " graphite"
+PACKAGECONFIG:append = " graphite"

@@ -14,10 +14,10 @@ inherit autotools pkgconfig
 
 DEPENDS = "hunspell"
 
-do_configure_prepend() {
+do_configure:prepend() {
     touch ${S}/NEWS
 }
 
-RDEPENDS_${PN} = "perl"
+RDEPENDS:${PN} = "perl"
 
 BBCLASSEXTEND = "native"

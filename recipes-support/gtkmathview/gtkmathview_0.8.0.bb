@@ -22,7 +22,7 @@ inherit features_check autotools pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-do_configure_append() {
+do_configure:append() {
     # avoid host polution inf pkg-config files
     sed -i "s:${STAGING_DIR_HOST}::g" `find -name '*.pc'`
 }

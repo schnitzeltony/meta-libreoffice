@@ -23,7 +23,7 @@ EXTRA_OECONF = " \
     --without-man \
 "
 
-do_configure_prepend() {
+do_configure:prepend() {
     touch ${S}/README
 }
 

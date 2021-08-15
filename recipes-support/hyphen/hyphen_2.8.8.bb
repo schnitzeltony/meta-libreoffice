@@ -13,6 +13,6 @@ SRC_URI[sha256sum] = "304636d4eccd81a14b6914d07b84c79ebb815288c76fe027b9ebff6ff2
 
 inherit autotools pkgconfig
 
-RDEPENDS_${PN} = "perl"
+RDEPENDS:${PN} = "perl"
 
 BBCLASSEXTEND = "native"

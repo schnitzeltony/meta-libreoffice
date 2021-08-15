@@ -27,5 +27,5 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 EXTRA_OECONF = "--with-x --without-athena"
 EXTRA_OEMAKE = "without_doc"
 
-FILES_${PN} += " ${datadir}/t1lib/t1lib.config"
-FILES_${PN}-doc = "${datadir}/t1lib/doc/t1lib_doc.pdf"
+FILES:${PN} += " ${datadir}/t1lib/t1lib.config"
+FILES:${PN}-doc = "${datadir}/t1lib/doc/t1lib_doc.pdf"

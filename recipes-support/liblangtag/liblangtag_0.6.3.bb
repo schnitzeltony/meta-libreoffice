@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "1f12a20a02ec3a8d22e54dedb8b683a43c9c160bda1ba337bf1060607a
 
 inherit autotools pkgconfig gobject-introspection
 
-do_configure_prepend() {
+do_configure:prepend() {
     if ! grep -q ${HOST_SYS}-libtool ${S}/configure.ac; then
         # align to native libtool
         sed -i 's:libtool :${HOST_SYS}-libtool :g' ${S}/configure.ac

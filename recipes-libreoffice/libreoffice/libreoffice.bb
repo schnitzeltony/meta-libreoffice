@@ -170,7 +170,7 @@ do_configure() {
     sed -i 's:-I${includedir}/gpgme++:-I${STAGING_INCDIR}/gpgme++:g' ${B}/config_host.mk
 }
 
-do_compile_prepend() {
+do_compile:prepend() {
     # INTROSPECTION_SCANNER is exprted but INTROSPECTION_COMPILER is not. This
     # caused 'Permission denied' errors. So give a little help:
     export INTROSPECTION_COMPILER=${STAGING_BINDIR}/g-ir-compiler-wrapper
@@ -200,7 +200,7 @@ do_install() {
 }
 
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/metainfo \
     ${datadir}/mime \
@@ -208,10 +208,10 @@ FILES_${PN} += " \
 
 PACKAGES =+ "${PN}-odk ${PN}-officekit"
 
-FILES_${PN}-odk = "${libdir}/libreoffice/sdk"
-INSANE_SKIP_${PN}-odk += "dev-so staticdev"
+FILES:${PN}-odk = "${libdir}/libreoffice/sdk"
+INSANE_SKIP:${PN}-odk += "dev-so staticdev"
 
-FILES_${PN}-officekit = " \
+FILES:${PN}-officekit = " \
     ${libdir}/girepository-1.0 \
     ${libdir}/liblibreofficekitgtk.so \
 "
@@ -290,19 +290,19 @@ python lo_do_split_locales() {
             ln = legitimize_package_name(locale)
             pkg = pn + '-locale-' + ln
             packages.insert(0, pkg)
-            d.setVar('FILES_' + pkg, langfiles[locale] )
-            d.setVar('RRECOMMENDS_' + pkg, '%svirtual-locale-%s' % (mlprefix, ln))
-            d.setVar('RPROVIDES_' + pkg, '%s-locale %s%s-translation' % (pn, mlprefix, ln))
-            d.setVar('SUMMARY_' + pkg, '%s - %s translations' % (summary, l))
-            d.setVar('DESCRIPTION_' + pkg, '%s  This package contains language translation files for the %s locale.' % (description, l))
+            d.setVar('FILES:' + pkg, langfiles[locale] )
+            d.setVar('RRECOMMENDS:' + pkg, '%svirtual-locale-%s' % (mlprefix, ln))
+            d.setVar('RPROVIDES:' + pkg, '%s-locale %s%s-translation' % (pn, mlprefix, ln))
+            d.setVar('SUMMARY:' + pkg, '%s - %s translations' % (summary, l))
+            d.setVar('DESCRIPTION:' + pkg, '%s  This package contains language translation files for the %s locale.' % (description, l))
             if locale_section:
-                d.setVar('SECTION_' + pkg, locale_section)
+                d.setVar('SECTION:' + pkg, locale_section)
 
     d.setVar('PACKAGES', ' '.join(packages))
 
     return
 }
 
-PACKAGESPLITFUNCS_prepend = "lo_do_split_locales "
+PACKAGESPLITFUNCS:prepend = "lo_do_split_locales "
 
-RDEPENDS_${PN} = "hunspell-dictionaries"
+RDEPENDS:${PN} = "hunspell-dictionaries"

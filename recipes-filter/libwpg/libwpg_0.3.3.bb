@@ -12,6 +12,6 @@ SRC_URI[sha256sum] = "99b3f7f8832385748582ab8130fbb9e5607bd5179bebf9751ac1d51a53
 inherit autotools pkgconfig
 
 DEPENDS = "librevenge libwpd zlib"
-RDEPENDS_${PN} = "perl"
+RDEPENDS:${PN} = "perl"
 
 BBCLASSEXTEND = "native"

@@ -18,11 +18,11 @@ DEPENDS  = " \
     libxslt \
     redland rasqal \
 "
-RDEPENDS_${PN}_append_libc-glibc = " \
+RDEPENDS:${PN}:append:libc-glibc = " \
     glibc-gconv-ibm850 glibc-gconv-cp1252 \
     glibc-gconv-iso8859-15 glibc-gconv-iso8859-1 \
 "
-RCONFLICTS_${PN} = "${PN}-embedded"
+RCONFLICTS:${PN} = "${PN}-embedded"
 
 SRC_URI = " \
     http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
@@ -77,7 +77,7 @@ do_compile() {
 
 PACKAGES += " ${PN}-clipart ${PN}-strings ${PN}-systemprofiles ${PN}-templates "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/lib${PN}-*.so \
     ${datadir}/mime-info \
     ${datadir}/icons/* \
@@ -104,31 +104,31 @@ FILES_${PN} += " \
 
 # don't steal /usr/lib/libabiword-3.0.so from ${PN}
 # in this case it's needed in ${PN}
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     ${includedir} \
     ${libdir}/pkgconfig \
     ${libdir}/${PN}*.la \
     ${libdir}/lib${PN}*.la \
     ${libdir}/${PN}-${SHRT_VER}/plugins/*.la \
 "
-FILES_${PN}-doc += "${datadir}/${PN}-*/readme*"
+FILES:${PN}-doc += "${datadir}/${PN}-*/readme*"
 
-FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/strings"
-FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/system.profile*"
-FILES_${PN}-clipart        += "${datadir}/${PN}-${SHRT_VER}/clipart"
-FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/AbiWord/strings"
-FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/AbiWord/system.profile*"
-FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
+FILES:${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/strings"
+FILES:${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/system.profile*"
+FILES:${PN}-clipart        += "${datadir}/${PN}-${SHRT_VER}/clipart"
+FILES:${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/AbiWord/strings"
+FILES:${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/AbiWord/system.profile*"
+FILES:${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
 
 PACKAGES_DYNAMIC += "^${PN}-meta.* ^${PN}-plugin-.*"
 
-python populate_packages_prepend () {
+python populate_packages:prepend () {
     abiword_libdir    = d.expand('${libdir}/${PN}-${SHRT_VER}/plugins')
     do_split_packages(d, abiword_libdir, '(.*)\.so$', 'abiword-plugin-%s', 'Abiword plugin for %s', extra_depends='')
 
     metapkg = "abiword-meta"
-    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
-    d.setVar('FILES_' + metapkg, "")
+    d.setVar('ALLOW_EMPTY:' + metapkg, "1")
+    d.setVar('FILES:' + metapkg, "")
     blacklist = [ 'abiword-plugins-dbg', 'abiword-plugins', 'abiword-plugins-doc', 'abiword-plugins-dev', 'abiword-plugins-locale' ]
     metapkg_rdepends = []
     packages = d.getVar('PACKAGES').split()
@@ -136,10 +136,10 @@ python populate_packages_prepend () {
         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale") and not pkg.count("abiword-doc"):
             print("Modifying %s" % pkg)
             metapkg_rdepends.append(pkg)
-    d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
-    d.setVar('DESCRIPTION_' + metapkg, 'abiword-plugin meta package')
+    d.setVar('RDEPENDS:' + metapkg, ' '.join(metapkg_rdepends))
+    d.setVar('DESCRIPTION:' + metapkg, 'abiword-plugin meta package')
     packages.append(metapkg)
     d.setVar('PACKAGES', ' '.join(packages))
 }
 
-FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
+FILES:${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"

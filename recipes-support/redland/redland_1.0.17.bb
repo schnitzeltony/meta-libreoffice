@@ -7,7 +7,10 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "rasqal mariadb libtool"
 
-SRC_URI = "http://download.librdf.org/source/${BPN}-${PV}.tar.gz"
+SRC_URI = " \
+    http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
+    file://0001-redland.pc.in-remove-rdf-s-private-flags.patch \
+"
 SRC_URI[md5sum] = "e5be03eda13ef68aabab6e42aa67715e"
 SRC_URI[sha256sum] = "de1847f7b59021c16bdc72abb4d8e2d9187cd6124d69156f3326dd34ee043681"
 

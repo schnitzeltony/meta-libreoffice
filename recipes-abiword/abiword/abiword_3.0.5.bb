@@ -27,13 +27,11 @@ RCONFLICTS:${PN} = "${PN}-embedded"
 SRC_URI = " \
     http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
     file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
-    file://0002-Bug-13770-Require-C-11-from-now-on.patch \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
 
-SRC_URI[md5sum] = "04e31887049a8c72297881bc153b77c4"
-SRC_URI[sha256sum] = "e93096cb192e5bc19d62e180fc5eda643206465315a710113ae5036bc2a1a5d7"
+SRC_URI[sha256sum] = "1257247e9970508d6d1456d3e330cd1909c4b42b25e0f0a1bc32526d6f3a21b4"
 
 #want 3.x from 3.x.y for the installation directory
 SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"

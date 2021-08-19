@@ -22,7 +22,6 @@ DEPENDS += " \
     mythes-native \
     clucene-core-native \
     glm-native \
-    vigra-native \
     libexttextcat-native \
     hyphen-native \
     unzip-native \

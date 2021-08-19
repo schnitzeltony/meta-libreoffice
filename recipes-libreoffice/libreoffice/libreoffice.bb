@@ -63,7 +63,6 @@ DEPENDS += " \
     libgltf \
     libexttextcat \
     clucene-core \
-    vigra \
     hunspell \
     mythes \
     hyphen \

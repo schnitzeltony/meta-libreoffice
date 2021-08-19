@@ -26,5 +26,3 @@ EXTRA_OECONF = " \
 do_configure:prepend() {
     touch ${S}/README
 }
-
-BBCLASSEXTEND = "native"

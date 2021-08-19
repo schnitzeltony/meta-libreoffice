@@ -16,5 +16,3 @@ DEPENDS = " \
     libxml2 \
     librevenge \
 "
-
-BBCLASSEXTEND = "native"

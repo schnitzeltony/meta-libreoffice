@@ -12,5 +12,3 @@ SRC_URI[sha256sum] = "8f81cc27b63d508576a43ef7448f78bec2fde7c7349b08273400e4de89
 inherit autotools-brokensep pkgconfig
 
 DEPENDS = "librevenge"
-
-BBCLASSEXTEND = "native"

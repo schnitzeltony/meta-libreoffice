@@ -18,7 +18,7 @@ SRC_URI += " \
     file://0010-Support-install-to-find-bash-completion.in.patch \
 "
 
-SRC_URI[translations.sha256sum] = "b86740debc717bdeca918ba068ead6c7a16e70a232eeac43bbb31e2a02d0c559"
+SRC_URI[translations.sha256sum] = "e1bc3c859b3d0f33f9c29f4d66a7194eac5c06ec860006adb77a8458378f9d23"
 
 DEPENDS += " \
     ${BPN}-native \
@@ -52,7 +52,6 @@ DEPENDS += " \
     libwpd \
     libcdr \
     librevenge \
-    libcmis \
     libfreehand \
     libe-book \
     libmwaw \
@@ -91,6 +90,9 @@ export STAGING_INCDIR
 # 3. --enable-scripting-javascript / rhino meta-java
 # 4. Libreoffice Base embedded db / hsqldb meta-java
 
+# Notes:
+# * With 7.2.0.4 lo requires a tailored libcmis so we cannot use ours
+
 EXTRA_OECONF += " \
     --without-java \
     --with-lang=ALL \
@@ -113,10 +115,17 @@ EXTRA_OECONF += " \
     --with-system-glm \
     --with-system-redland \
     --with-system-libabw \
-    --with-system-libcmis \
+    --with-system-libwps \
+    --with-system-libwpg \
+    --with-system-libwpd \
+    --with-system-libcdr \
+    --with-system-librevenge \
+    --with-system-libfreehand \
     --with-system-libebook \
+    --with-system-libmwaw \
     --with-system-libetonyek \
     --with-system-libvisio \
+    --with-system-libmspub \
     --with-system-libpagemaker \
     --with-system-libodfgen \
     --with-system-libexttextcat \

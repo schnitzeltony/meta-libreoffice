@@ -18,31 +18,16 @@ DEPENDS += " \
     lcms-native \
     nss-native \
     cppunit-native \
-    libabw-native \
-    libcdr-native \
-    libe-book-native \
-    libfreehand-native \
     hunspell-native \
     mythes-native \
     clucene-core-native \
-    libcmis-native \
-    libpagemaker-native \
     glm-native \
-    libetonyek-native \
     vigra-native \
-    libvisio-native \
     libexttextcat-native \
     hyphen-native \
     unzip-native \
     liblangtag-native \
     lpsolve-native \
-    libwpd-native \
-    libwpg-native \
-    libwps-native \
-    libcdr-native \
-    libmspub-native \
-    libmwaw-native \
-    libodfgen-native \
     mdds-1.5-native \
 "
 
@@ -51,12 +36,18 @@ SRC_URI += " \
     file://0002-cppuhelper-defaultbootstrap-output-debug-information.patch \
     file://0003-add-gengal-debug-information.patch \
     file://0004-gengal-fix-path-to-redirectrc.patch \
+    file://0005-Do-not-check-download-lib-unnecessary-for-native-bui.patch \
+    file://0006-Do-not-fetch-fonts-for-native-tools.patch \
 "
 
 EXTRA_OECONF += " \
     --without-java \
     \
     --disable-gui \
+    --disable-extensions \
+    --disable-extension-integration \
+    \
+    --disable-mariadb-sdbc \
     --disable-postgresql-sdbc \
     --disable-lotuswordpro \
     --disable-firebird-sdbc \
@@ -65,6 +56,9 @@ EXTRA_OECONF += " \
     --disable-scripting-javascript \
     --disable-pdfimport \
     --disable-coinmp \
+    --disable-opencl \
+    --disable-zxing \
+    --disable-cmis \
 "
 
 do_configure() {

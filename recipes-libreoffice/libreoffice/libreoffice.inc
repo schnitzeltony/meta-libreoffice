@@ -57,7 +57,6 @@ EXTRA_OECONF = " \
     --with-system-mythes \
     --with-system-clucene \
     --with-system-glm \
-    --with-system-libexttextcat \
     --with-system-altlinuxhyph \
     --with-system-liblangtag \
     --with-system-zlib \

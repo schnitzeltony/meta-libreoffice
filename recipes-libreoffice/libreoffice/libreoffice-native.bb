@@ -22,7 +22,6 @@ DEPENDS += " \
     mythes-native \
     clucene-core-native \
     glm-native \
-    libexttextcat-native \
     hyphen-native \
     unzip-native \
     liblangtag-native \

@@ -14,7 +14,11 @@ DEPENDS += " \
     poppler \
 "
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-devel/${PV}/${BPN}-${PV}.tar.xz"
+SRC_URI = " \
+    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-devel/${PV}/${BPN}-${PV}.tar.xz \
+    file://0001-Use-new-hb-subset-api-with-harfbuzz-2.9.0-in-order-t.patch \
+    file://0002-16635-Replace-hb_subset-removed-in-harfbuzz-3.0-by-h.patch \
+"
 SRC_URI[sha256sum] = "318316b2cfc7a76191d3e0d3f8c2265147daea0570162028e243c292d826f8ce"
 
 

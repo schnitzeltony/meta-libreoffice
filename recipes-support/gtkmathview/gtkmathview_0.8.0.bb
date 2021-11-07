@@ -8,7 +8,7 @@ PR = "r3"
 PV = "0.8.0+git${SRCPV}"
 
 SRC_URI = " \
-    git://github.com/GNOME/gtkmathview.git \
+    git://github.com/GNOME/gtkmathview.git;branch=master;protocol=https \
     file://use_hostcxx.patch \
     file://0001-include-cstdio-to-get-printf-definitions.patch \
     file://0002-configure.ac-header-detection-of-hash_map-is-broken-.patch \

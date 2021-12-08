@@ -18,7 +18,7 @@ SRC_URI += " \
     file://0010-Support-install-to-find-bash-completion.in.patch \
 "
 
-SRC_URI[translations.sha256sum] = "988a63ae2d50454c6f6c547b5f9331c7c45295f6d792b37fdced7557baca1ce6"
+SRC_URI[translations.sha256sum] = "f27cc2b7bfc9ee0a893ed1cead5bbb513a27270d69c6ee1f9cb589c963941daf"
 
 DEPENDS += " \
     ${BPN}-native \

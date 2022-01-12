@@ -21,6 +21,8 @@ SRC_URI = " \
 "
 SRC_URI[sha256sum] = "318316b2cfc7a76191d3e0d3f8c2265147daea0570162028e243c292d826f8ce"
 
+# necessary since poppler 21.01.0
+EXTRA_OECMAKE = "-DWANT_CPP17=ON"
 
 FILES:${PN} += " \
     ${datadir}/icons \

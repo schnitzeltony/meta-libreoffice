@@ -27,7 +27,7 @@ index 955aea1..f310c00 100644
      AC_MSG_CHECKING([for BUILD platform configuration])
      echo
      rm -rf CONF-FOR-BUILD config_build.mk
-@@ -8334,7 +8334,7 @@ if test $enable_python = system; then
+@@ -9684,7 +9684,7 @@ if test $enable_python = system; then
          # Fallback: Accept these in the environment, or as set above
          # for MacOSX.
          :

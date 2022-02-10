@@ -17,7 +17,7 @@ diff --git a/configure.ac b/configure.ac
 index f310c00..2573cc1 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -8668,18 +8668,12 @@ if test "x$enable_postgresql_sdbc" != "xno"; then
+@@ -10048,18 +10048,12 @@ if test "x$enable_postgresql_sdbc" != "xno"; then
                  pg_supp_path="$P_SEP$d$pg_supp_path"
              done
          fi

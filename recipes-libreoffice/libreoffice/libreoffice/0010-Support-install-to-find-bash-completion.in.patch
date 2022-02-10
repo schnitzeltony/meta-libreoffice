@@ -19,7 +19,7 @@ diff --git a/bin/distro-install-desktop-integration b/bin/distro-install-desktop
 index 1da104e..42991f8 100755
 --- a/bin/distro-install-desktop-integration
 +++ b/bin/distro-install-desktop-integration
-@@ -176,10 +176,10 @@ test -f $DESTDIR/gid_Module_Root_Brand && echo "$BINDIR/soffice" >>$DESTDIR/gid_
+@@ -172,10 +172,10 @@ test -f $DESTDIR/gid_Module_Root_Brand && echo "$BINDIR/soffice" >>$DESTDIR/gid_
  
  # create bash completion
  mkdir -p $DESTDIR/usr/share/bash-completion/completions

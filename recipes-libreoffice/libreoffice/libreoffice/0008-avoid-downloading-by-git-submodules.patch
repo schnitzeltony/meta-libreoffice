@@ -17,7 +17,7 @@ diff --git a/configure.ac b/configure.ac
 index 9df3182..ccae843 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -12312,6 +12312,9 @@ if test "$enable_release_build" = "" -o "$enable_release_build" = "no"; then
+@@ -13860,6 +13860,9 @@ if test "$enable_release_build" = "" -o "$enable_release_build" = "no"; then
      test "$WITH_LANG_LIST" = "en-US" || WITH_LANG_LIST=`echo $WITH_LANG_LIST qtz`
      ALL_LANGS=`echo $ALL_LANGS qtz`
  fi

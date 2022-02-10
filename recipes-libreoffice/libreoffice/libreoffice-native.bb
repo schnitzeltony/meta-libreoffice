@@ -26,7 +26,7 @@ DEPENDS += " \
     unzip-native \
     liblangtag-native \
     lpsolve-native \
-    mdds-1.5-native \
+    mdds-2.0-native \
 "
 
 SRC_URI += " \

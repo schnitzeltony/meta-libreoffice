@@ -19,7 +19,7 @@ diff --git a/solenv/gbuild/TargetLocations.mk b/solenv/gbuild/TargetLocations.mk
 index 82857a9..0aa2cbd 100644
 --- a/solenv/gbuild/TargetLocations.mk
 +++ b/solenv/gbuild/TargetLocations.mk
-@@ -355,7 +355,7 @@ endef
+@@ -381,7 +381,7 @@ endef
  #
  # gb_Executable_get_command executable
  define gb_Executable_get_command

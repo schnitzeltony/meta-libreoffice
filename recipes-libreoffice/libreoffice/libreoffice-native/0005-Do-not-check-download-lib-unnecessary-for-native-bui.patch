@@ -8,14 +8,14 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- configure.ac | 50 --------------------------------------------------
- 1 file changed, 50 deletions(-)
+ configure.ac | 52 ----------------------------------------------------
+ 1 file changed, 52 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index b629d5a..58aa736 100644
+index d83c2db..4d780c9 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -9237,57 +9237,7 @@ else
+@@ -9353,58 +9353,6 @@ else
  fi
  AC_SUBST([ENABLE_EOT])
  
@@ -50,7 +50,7 @@ index b629d5a..58aa736 100644
 -libo_CHECK_SYSTEM_MODULE([libmspub],[MSPUB],[libmspub-0.1])
 -
 -libo_CHECK_SYSTEM_MODULE([libmwaw],[MWAW],[libmwaw-0.3 >= 0.3.1])
--libo_PKG_VERSION([MWAW], [libmwaw-0.3], [0.3.19])
+-libo_PKG_VERSION([MWAW], [libmwaw-0.3], [0.3.21])
 -
 -libo_CHECK_SYSTEM_MODULE([libetonyek],[ETONYEK],[libetonyek-0.1])
 -libo_PKG_VERSION([ETONYEK], [libetonyek-0.1], [0.1.10])
@@ -67,12 +67,13 @@ index b629d5a..58aa736 100644
 -libo_CHECK_SYSTEM_MODULE([libqxp],[QXP],[libqxp-0.0])
 -
 -libo_CHECK_SYSTEM_MODULE([libzmf],[ZMF],[libzmf-0.0])
- 
+-
 -libo_CHECK_SYSTEM_MODULE([libstaroffice],[STAROFFICE],[libstaroffice-0.0])
 -libo_PKG_VERSION([STAROFFICE], [libstaroffice-0.0], [0.0.7])
- 
+-
  dnl ===================================================================
  dnl Check for system lcms2
+ dnl ===================================================================
 -- 
-2.31.1
+2.34.1
 

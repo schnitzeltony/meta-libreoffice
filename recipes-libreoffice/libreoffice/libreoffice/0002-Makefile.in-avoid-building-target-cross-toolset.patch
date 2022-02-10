@@ -17,7 +17,7 @@ diff --git a/Makefile.in b/Makefile.in
 index f9a2644..c1a8f53 100644
 --- a/Makefile.in
 +++ b/Makefile.in
-@@ -282,7 +282,7 @@ bootstrap: check-if-root compilerplugins
+@@ -283,7 +283,7 @@ bootstrap: check-if-root compilerplugins
  # Note: this will pipe through all gbuild targets to ... gbuild
  #       with some translations like "check"->"unitcheck subsequentcheck uicheck" for historic reasons
  #

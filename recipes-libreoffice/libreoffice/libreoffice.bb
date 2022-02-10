@@ -16,9 +16,10 @@ SRC_URI += " \
     file://0008-avoid-downloading-by-git-submodules.patch \
     file://0009-Use-wrappers-for-gobject-introspection.patch \
     file://0010-Support-install-to-find-bash-completion.in.patch \
+    file://0011-Skip-isystem-check.patch \
 "
 
-SRC_URI[translations.sha256sum] = "f27cc2b7bfc9ee0a893ed1cead5bbb513a27270d69c6ee1f9cb589c963941daf"
+SRC_URI[translations.sha256sum] = "43e9d768af1a74242455741670a70bd9f3a1e01ec4599caddb16e0825614e7fe"
 
 DEPENDS += " \
     ${BPN}-native \
@@ -70,7 +71,7 @@ DEPENDS += " \
     liblangtag \
     lpsolve \
     gpgme \
-    mdds-1.5 \
+    mdds-2.0 \
 "
 
 # necessary to let the call for python-config succeed

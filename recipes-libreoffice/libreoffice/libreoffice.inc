@@ -15,7 +15,7 @@ SRC_URI += " \
 "
 SRCREV_unoconv = "260b815bf2c57118df439f381974f3f0987222a1"
 
-inherit autotools pkgconfig python3native distutils3-base perlnative
+inherit autotools pkgconfig python3native setuptools3-base perlnative
 
 DEPENDS += " \
     python3-lxml-native \

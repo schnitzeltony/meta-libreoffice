@@ -63,3 +63,5 @@ EXTRA_OECONF = " \
     --with-system-lpsolve \
     --with-system-mdds \
 "
+
+do_compile[network] = "1"

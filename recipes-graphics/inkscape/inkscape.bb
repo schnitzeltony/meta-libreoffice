@@ -3,13 +3,10 @@ HOMEPAGE = "https://inkscape.org/"
 LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d20d608cfa3a8343d722c2e69a43bbcd"
 
-PV = "1.1.1"
-SRC_URI = " \
-    https://inkscape.org/gallery/item/29255/${BP}.tar.xz \
-    file://0001-Fix-build-with-poppler-21-11-0.patch \
-"
-SRC_URI[sha256sum] = "aeca0b9d33b5b1cfa9aa70433bdee6a8c3d020ffafc2e6f0c9a60eed7a7978af"
-S = "${WORKDIR}/${BPN}-1.1.1_2021-09-20_3bf5ae0d25"
+PV = "1.1.2"
+SRC_URI = "https://inkscape.org/gallery/item/31668/${BP}.tar.xz"
+SRC_URI[sha256sum] = "3ffe54a06d0b25a4cd8b6eb424536ef1ed205be13443a39cd437c8c7b89b96d1"
+S = "${WORKDIR}/${BPN}-${PV}_2022-02-04_0a00cf5339"
 
 DEPENDS = " \
     glib-2.0-native \

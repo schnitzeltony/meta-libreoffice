@@ -1,6 +1,6 @@
 SUMMARY = "CLucene is a indexing and searching API"
 HOMEPAGE = "http://www.sourceforge.net/projects/clucene"
-LICENSE = "LGPLv2+ & Apache-2.0"
+LICENSE = "LGPL-2.0-or-later & Apache-2.0"
 LIC_FILES_CHKSUM = " \
     file://APACHE.license;md5=86d3f3a95c324c9479bd8986968f4327 \
     file://LGPL.license;md5=464215a90afcdfbae965d89feb928c7e \

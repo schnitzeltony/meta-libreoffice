@@ -1,7 +1,7 @@
 SUMMARY = "AbiWord is free word processing program similar to Microsoft(r) Word"
 HOMEPAGE = "http://www.abiword.org"
 SECTION = "x11/office"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
 DEPENDS  = " \
     perl-native \

@@ -1,5 +1,5 @@
 SUMMARY = "Libre office base"
-LICENSE = "GPLv3 & LGPLv3 & MPLv1.1"
+LICENSE = "GPL-3.0-only & LGPL-3.0-only & MPL-1.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
     file://COPYING.LGPL;md5=6a6a8e020838b23406c81b19c1d46df6 \

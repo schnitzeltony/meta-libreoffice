@@ -1,0 +1,35 @@
+From a87fba8eaa4c53fa5f2a00d751c93bbffde21ec1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 11 Mar 2022 23:15:08 +0100
+Subject: [PATCH] Fix build with poppler >= 22.03
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/extension/internal/pdfinput/pdf-input.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/extension/internal/pdfinput/pdf-input.cpp b/src/extension/internal/pdfinput/pdf-input.cpp
+index e6204f6..2cba594 100644
+--- a/src/extension/internal/pdfinput/pdf-input.cpp
++++ b/src/extension/internal/pdfinput/pdf-input.cpp
+@@ -668,8 +668,12 @@ PdfInput::open(::Inkscape::Extension::Input * /*mod*/, const gchar * uri) {
+ 
+     // poppler does not use glib g_open. So on win32 we must use unicode call. code was copied from
+     // glib gstdio.c
++#if POPPLER_CHECK_VERSION(22,03,0)
++    pdf_doc = std::make_shared<PDFDoc>(std::make_unique<GooString>(uri));   // TODO: Could ask for password
++#else
+     GooString *filename_goo = new GooString(uri);
+     pdf_doc = std::make_shared<PDFDoc>(filename_goo, nullptr, nullptr, nullptr);   // TODO: Could ask for password
++#endif
+ 
+     if (!pdf_doc->isOk()) {
+         int error = pdf_doc->getErrorCode();
+-- 
+2.34.1
+

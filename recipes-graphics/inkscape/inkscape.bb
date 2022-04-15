@@ -7,6 +7,7 @@ PV = "1.1.2"
 SRC_URI = " \
     https://inkscape.org/gallery/item/31668/${BP}.tar.xz \
     file://0001-Fix-build-with-poppler-22.03.patch \
+    file://0002-Fix-build-with-poppler-22.04.patch \
 "
 SRC_URI[sha256sum] = "3ffe54a06d0b25a4cd8b6eb424536ef1ed205be13443a39cd437c8c7b89b96d1"
 S = "${WORKDIR}/${BPN}-${PV}_2022-02-04_0a00cf5339"

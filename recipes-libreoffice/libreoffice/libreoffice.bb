@@ -27,7 +27,6 @@ DEPENDS += " \
     curl \
     icu \
     expat \
-    poppler \
     harfbuzz \
     openldap \
     nss \
@@ -101,7 +100,6 @@ EXTRA_OECONF += " \
     --with-tls=nss \
     --without-galleries \
     \
-    --with-system-poppler \
     --with-system-openldap \
     --with-system-apr \
     --with-system-serf \

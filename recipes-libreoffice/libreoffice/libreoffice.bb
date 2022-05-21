@@ -19,7 +19,7 @@ SRC_URI += " \
     file://0011-Skip-isystem-check.patch \
 "
 
-SRC_URI[translations.sha256sum] = "e9b4b8ccf89ba92ad031ab909cd1dc2419aa83948ed7bf4694215a247535124e"
+SRC_URI[translations.sha256sum] = "b91b0a482fa42d59e1605f39a3917166e7ff76bfa8e9b62d6eef0a9b04b3351c"
 
 DEPENDS += " \
     ${BPN}-native \

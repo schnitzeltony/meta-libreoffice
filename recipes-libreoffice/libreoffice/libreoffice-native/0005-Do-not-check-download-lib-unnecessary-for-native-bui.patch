@@ -8,35 +8,39 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- configure.ac | 52 ----------------------------------------------------
- 1 file changed, 52 deletions(-)
+ configure.ac | 56 ----------------------------------------------------
+ 1 file changed, 56 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index d83c2db..4d780c9 100644
+index 8babc85..8b910ff 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -9353,58 +9353,6 @@ else
- fi
- AC_SUBST([ENABLE_EOT])
+@@ -9564,62 +9564,6 @@ libo_CHECK_SYSTEM_MODULE([xmlsec], [XMLSEC], [xmlsec1-nss >= 1.2.28])
+ 
+ libo_CHECK_SYSTEM_MODULE([eot],[LIBEOT],[libeot >= 0.01],disabled)
  
 -dnl ===================================================================
 -dnl Check for DLP libs
 -dnl ===================================================================
+-REVENGE_CFLAGS_internal="-I${WORKDIR}/UnpackedTarball/librevenge/inc"
 -AS_IF([test "$COM" = "MSC"],
 -      [librevenge_libdir="${WORKDIR}/LinkTarget/Library"],
 -      [librevenge_libdir="${WORKDIR}/UnpackedTarball/librevenge/src/lib/.libs"]
 -)
--libo_CHECK_SYSTEM_MODULE([librevenge],[REVENGE],[librevenge-0.0 >= 0.0.1],["-I${WORKDIR}/UnpackedTarball/librevenge/inc"],["-L${librevenge_libdir} -lrevenge-0.0"])
+-REVENGE_LIBS_internal="-L${librevenge_libdir} -lrevenge-0.0"
+-libo_CHECK_SYSTEM_MODULE([librevenge],[REVENGE],[librevenge-0.0 >= 0.0.1])
 -
 -libo_CHECK_SYSTEM_MODULE([libodfgen],[ODFGEN],[libodfgen-0.1])
 -
 -libo_CHECK_SYSTEM_MODULE([libepubgen],[EPUBGEN],[libepubgen-0.1])
 -
+-WPD_CFLAGS_internal="-I${WORKDIR}/UnpackedTarball/libwpd/inc"
 -AS_IF([test "$COM" = "MSC"],
 -      [libwpd_libdir="${WORKDIR}/LinkTarget/Library"],
 -      [libwpd_libdir="${WORKDIR}/UnpackedTarball/libwpd/src/lib/.libs"]
 -)
--libo_CHECK_SYSTEM_MODULE([libwpd],[WPD],[libwpd-0.10],["-I${WORKDIR}/UnpackedTarball/libwpd/inc"],["-L${libwpd_libdir} -lwpd-0.10"])
+-WPD_LIBS_internal="-L${libwpd_libdir} -lwpd-0.10"
+-libo_CHECK_SYSTEM_MODULE([libwpd],[WPD],[libwpd-0.10])
 -
 -libo_CHECK_SYSTEM_MODULE([libwpg],[WPG],[libwpg-0.3])
 -
@@ -49,7 +53,7 @@ index d83c2db..4d780c9 100644
 -
 -libo_CHECK_SYSTEM_MODULE([libmspub],[MSPUB],[libmspub-0.1])
 -
--libo_CHECK_SYSTEM_MODULE([libmwaw],[MWAW],[libmwaw-0.3 >= 0.3.1])
+-libo_CHECK_SYSTEM_MODULE([libmwaw],[MWAW],[libmwaw-0.3 >= 0.3.21])
 -libo_PKG_VERSION([MWAW], [libmwaw-0.3], [0.3.21])
 -
 -libo_CHECK_SYSTEM_MODULE([libetonyek],[ETONYEK],[libetonyek-0.1])
@@ -75,5 +79,5 @@ index d83c2db..4d780c9 100644
  dnl Check for system lcms2
  dnl ===================================================================
 -- 
-2.34.1
+2.35.3
 

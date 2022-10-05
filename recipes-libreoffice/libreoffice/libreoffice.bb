@@ -17,9 +17,10 @@ SRC_URI += " \
     file://0009-Use-wrappers-for-gobject-introspection.patch \
     file://0010-Support-install-to-find-bash-completion.in.patch \
     file://0011-Skip-isystem-check.patch \
+    file://0012-Make-configure-work-with-gpgme-1.18.patch \
 "
 
-SRC_URI[translations.sha256sum] = "b91b0a482fa42d59e1605f39a3917166e7ff76bfa8e9b62d6eef0a9b04b3351c"
+SRC_URI[translations.sha256sum] = "f77a382d562b6bcebaec69321de4b6ab6daec0240216d314d0c8c6fee4c32fae"
 
 DEPENDS += " \
     ${BPN}-native \
@@ -33,8 +34,6 @@ DEPENDS += " \
     zlib \
     jpeg \
     libpng \
-    apr \
-    serf \
     libatomic-ops \
     lcms \
     harfbuzz \
@@ -89,9 +88,6 @@ export STAGING_INCDIR
 # 3. --enable-scripting-javascript / rhino meta-java
 # 4. Libreoffice Base embedded db / hsqldb meta-java
 
-# Notes:
-# * With 7.2.0.4 lo requires a tailored libcmis so we cannot use ours
-
 EXTRA_OECONF += " \
     --without-java \
     --with-lang=ALL \
@@ -101,8 +97,6 @@ EXTRA_OECONF += " \
     --without-galleries \
     \
     --with-system-openldap \
-    --with-system-apr \
-    --with-system-serf \
     --with-system-libatomic_ops \
     --with-system-icu \
     --with-system-expat \

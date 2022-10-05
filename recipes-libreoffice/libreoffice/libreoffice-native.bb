@@ -56,7 +56,6 @@ EXTRA_OECONF += " \
     --disable-coinmp \
     --disable-opencl \
     --disable-zxing \
-    --disable-cmis \
 "
 
 do_configure() {
@@ -104,7 +103,7 @@ LOBUILDTOOLS = " \
     saxparser \
     svidl \
     ulfex \
-    unoidl-write \
+    unoidl-check \
     xrmex \
 "
 
@@ -113,6 +112,7 @@ do_install() {
     for name in ${LOBUILDTOOLS} ; do
         install "${B}/workdir/LinkTarget/Executable/$name" ${D}/${bindir}
     done
+    install "${B}/workdir/Headers/Executable/unoidl-write" ${D}/${bindir}
 
     # icu creates a gendict. To avoid conflicts rename in sysroot
     install "${B}/workdir/LinkTarget/Executable/gendict" ${D}/${bindir}/gendict_libre

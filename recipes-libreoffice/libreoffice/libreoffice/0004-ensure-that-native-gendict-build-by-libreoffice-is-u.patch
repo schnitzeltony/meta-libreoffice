@@ -24,9 +24,9 @@ index dee46a3..fab7ddf 100644
 -		$(call gb_Helper_execute,gendict) $< $@ $(patsubst $(i18npool_BIDIR)/dict_%.cxx,%,$@))
 +		$(call gb_Helper_execute,gendict_libre) $< $@ $(patsubst $(i18npool_BIDIR)/dict_%.cxx,%,$@))
  	$(call gb_Trace_EndRange,$(subst $(WORKDIR)/,,$@),DIC)
- else
  
-@@ -37,7 +37,7 @@ $(i18npool_BIDIR)/dict_%.cxx : \
+ else # !iOS ANDROID
+@@ -38,7 +38,7 @@ $(i18npool_BIDIR)/dict_%.cxx : \
  	$(call gb_Output_announce,$(subst $(WORKDIR)/,,$@),$(true),DIC,1)
  	$(call gb_Trace_StartRange,$(subst $(WORKDIR)/,,$@),DIC)
  	$(call gb_Helper_abbreviate_dirs,\

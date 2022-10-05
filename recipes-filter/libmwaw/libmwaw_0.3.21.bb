@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.bz2"
-SRC_URI[sha256sum] = "8f81cc27b63d508576a43ef7448f78bec2fde7c7349b08273400e4de897f651c"
+SRC_URI[sha256sum] = "a227a454b894804683e6ce9c0880ffcdafc7fe9f4b54db2d056a5cc3dfc23634"
 
 inherit autotools-brokensep pkgconfig
 

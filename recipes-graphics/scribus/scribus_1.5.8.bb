@@ -19,9 +19,10 @@ inherit dos2unix
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-devel/${PV}/${BPN}-${PV}.tar.xz \
-    file://0001-16734-Build-break-with-poppler-22.2.0.patch \
-    file://0002-16764-Build-break-with-poppler-22.03.0.patch \
-    file://0002-16764-Build-break-with-poppler-22.04.0.patch \
+    file://0001-Build-break-with-poppler-22.2.0.patch \
+    file://0002-Build-break-with-poppler-22.03.0.patch \
+    file://0003-Build-break-with-poppler-22.04.0.patch \
+    file://0004-Build-break-with-poppler-22.09.0.patch \
 "
 SRC_URI[sha256sum] = "47816e8fcf6d05788ff16aa4499f97ff22431c777a7789149b0a88b451e16b74"
 

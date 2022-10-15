@@ -1,16 +1,15 @@
 SUMMARY = "Inkscape is a Free and open source vector graphics editor"
 HOMEPAGE = "https://inkscape.org/"
 LICENSE = "GPL-3.0-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d20d608cfa3a8343d722c2e69a43bbcd"
+LIC_FILES_CHKSUM = "file://COPYING;md5=46f815712c095f667139ef42f2270d57"
 
-PV = "1.1.2"
+PV = "1.2.1"
 SRC_URI = " \
-    https://inkscape.org/gallery/item/31668/${BP}.tar.xz \
-    file://0001-Fix-build-with-poppler-22.03.patch \
-    file://0002-Fix-build-with-poppler-22.04.patch \
+    https://inkscape.org/gallery/item/34673/${BP}.tar.xz \
+    file://0001-Fix-build-with-poppler-22.09.patch \
 "
-SRC_URI[sha256sum] = "3ffe54a06d0b25a4cd8b6eb424536ef1ed205be13443a39cd437c8c7b89b96d1"
-S = "${WORKDIR}/${BPN}-${PV}_2022-02-04_0a00cf5339"
+SRC_URI[sha256sum] = "46ce7da0eba7ca4badc1db70e9cbb67e0adf9bb342687dc6e08b5ca21b8d4c1b"
+S = "${WORKDIR}/${BPN}-${PV}_2022-07-14_9c6d41e410"
 
 DEPENDS = " \
     glib-2.0-native \

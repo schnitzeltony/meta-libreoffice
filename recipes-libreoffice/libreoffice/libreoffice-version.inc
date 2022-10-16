@@ -1,5 +1,5 @@
-PV = "7.4.1.2"
-DIRV = "7.4.1"
+PV = "7.4.2.3"
+DIRV = "7.4.2"
 
 SRC_URI += "http://download.documentfoundation.org/libreoffice/src/${DIRV}/libreoffice-${PV}.tar.xz"
-SRC_URI[sha256sum] = "92f78421bb3ffa6723f8e14c0dab5ee7bc68939fad8ff9f146ccecac02d2de84"
+SRC_URI[sha256sum] = "82c1ffe02f2ed8ee1451a9f67c35335b27a638db591f9bc539eff86ab14dd95a"

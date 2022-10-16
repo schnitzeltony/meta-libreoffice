@@ -17,10 +17,9 @@ SRC_URI += " \
     file://0009-Use-wrappers-for-gobject-introspection.patch \
     file://0010-Support-install-to-find-bash-completion.in.patch \
     file://0011-Skip-isystem-check.patch \
-    file://0012-Make-configure-work-with-gpgme-1.18.patch \
 "
 
-SRC_URI[translations.sha256sum] = "f77a382d562b6bcebaec69321de4b6ab6daec0240216d314d0c8c6fee4c32fae"
+SRC_URI[translations.sha256sum] = "c8053f863c95c31a83a079bb2eefd9b666ffd59e40c4344098c04a924a54f6e1"
 
 DEPENDS += " \
     ${BPN}-native \
@@ -42,6 +41,7 @@ DEPENDS += " \
     openssl \
     cups \
     gstreamer1.0-plugins-base \
+    tiff \
     \
     glm \
     redland \
@@ -125,6 +125,7 @@ EXTRA_OECONF += " \
     --with-system-mythes \
     --with-system-altlinuxhyph \
     --with-system-gpgmepp \
+    --with-system-libtiff \
     \
     --with-external-dict-dir=${datadir}/hunspell \
     --with-system-dicts \

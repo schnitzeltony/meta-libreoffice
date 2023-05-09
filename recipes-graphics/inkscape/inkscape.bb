@@ -3,37 +3,34 @@ HOMEPAGE = "https://inkscape.org/"
 LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=46f815712c095f667139ef42f2270d57"
 
-PV = "1.2.1"
-SRC_URI = " \
-    https://inkscape.org/gallery/item/34673/${BP}.tar.xz \
-    file://0001-Fix-build-with-poppler-22.09.patch \
-"
-SRC_URI[sha256sum] = "46ce7da0eba7ca4badc1db70e9cbb67e0adf9bb342687dc6e08b5ca21b8d4c1b"
-S = "${WORKDIR}/${BPN}-${PV}_2022-07-14_9c6d41e410"
+SRC_URI = "gitsm://gitlab.com/inkscape/inkscape.git;protocol=https;nobranch=1"
+SRCREV = "b0a8486541ac36327488da641d58a86bee2f07ad"
+S = "${WORKDIR}/git"
+PV = "1.2.2"
 
 DEPENDS = " \
-    glib-2.0-native \
-    pango \
-    gtkmm3 \
-    libsoup-2.4 \
-    harfbuzz \
-    poppler \
-    gsl \
     bdwgc \
-    lcms \
+    cairo \
+    glib-2.0-native \
+    gsl \
     gspell \
+    gtkmm3 \
+    harfbuzz \
+    lcms \
+    libsoup-2.4 \
     libxslt \
+    pango \
+    poppler \
     \
     double-conversion \
-    libwpg \
-    librevenge \
+    lib2geom \
     libcdr \
+    librevenge \
     libvisio \
+    libwpg \
     potrace \
 "
 
 inherit cmake pkgconfig gettext gtk-icon-cache bash-completion mime-xdg
 
 FILES:${PN} += "${datadir}/metainfo"
-
-INSANE_SKIP:${PN} = "useless-rpaths"
